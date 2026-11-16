@@ -5,9 +5,11 @@
 
 只做两件事：
   1. 把这个文件夹当静态网站提供（这样页面才是一个"安全来源"，能拿到写文件的权限）
-  2. 接收页面的保存请求，把内容写回 训练计划.html 本身
+  2. 接收页面的保存请求，把**你填的内容**写进旁边的数据文件
+     （训练计划.html → 训练计划.data.json）
 
-只监听 127.0.0.1，外网访问不到。除了本文件夹里的 .html，什么都写不了。
+页面 HTML 本身是模板，永远不会被改写 —— 所以它可以安全地放进 git、公开出去。
+你的个人数据（方案、体重记录、档案、自建动作）存在 .data.json 里，留在本机。
 """
 
 import http.server
@@ -18,6 +20,7 @@ import socket
 import socketserver
 import sys
 import threading
+import time
 import webbrowser
 from urllib.parse import quote, unquote
 
@@ -30,6 +33,8 @@ ROOT = os.path.dirname(os.path.abspath(__file__))
 PAGES = ['训练计划.html', '饮食计划.html']   # 要服务的页面；文件夹里还有备份和临时快照，都不算
 PAGE = PAGES[0]
 
+DATA_SUFFIX = '.data.json'      # 页面 HTML 旁边的个人数据文件
+
 
 def file_hash(path):
     """文件当前内容的指纹。页面拿它当"我上次看到的是这一版"的凭据。"""
@@ -40,6 +45,23 @@ def file_hash(path):
         return ''
 
 
+def sidecar_of(page_path):
+    """训练计划.html → 训练计划.data.json（同一目录，去掉 .html 后缀）。"""
+    base = os.path.splitext(page_path)[0]
+    return base + DATA_SUFFIX
+
+
+def resolve_page(rel):
+    """把页面传来的相对路径落到本文件夹里的某个 .html。越界一律拒绝。"""
+    rel = unquote(rel or '').lstrip('/\\')
+    if not rel.lower().endswith('.html'):
+        raise ValueError('只认识 .html 页面')
+    target = os.path.abspath(os.path.join(ROOT, rel))
+    if not target.startswith(ROOT + os.sep):        # 防目录穿越
+        raise ValueError('不允许访问这个文件夹之外')
+    return target
+
+
 class Handler(http.server.SimpleHTTPRequestHandler):
 
     def __init__(self, *args, **kwargs):
@@ -47,61 +69,113 @@ class Handler(http.server.SimpleHTTPRequestHandler):
 
     # ---------- 保存接口 ----------
     def do_POST(self):
-        if self.path != '/__save':
+        if self.path == '/__save':
+            self.save_doc()
+        elif self.path == '/__save_data':
+            self.save_data()
+        elif self.path == '/__reset_data':
+            self.reset_data()
+        else:
             self.send_json({'ok': False, 'error': '没有这个接口'}, 404)
-            return
+
+    def reset_data(self):
+        """「恢复初始」：把个人数据文件删掉，页面回到模板本来的样子。"""
         try:
             length = int(self.headers.get('Content-Length', 0))
             data = json.loads(self.rfile.read(length).decode('utf-8'))
-            rel = unquote(data.get('path', '')).lstrip('/\\')
-            html = data.get('html', '')
+            target = sidecar_of(resolve_page(data.get('path', '')))
+            if os.path.isfile(target):
+                os.remove(target)
+            self.send_json({'ok': True, 'removed': os.path.basename(target)})
+        except Exception as exc:
+            self.send_json({'ok': False, 'error': str(exc)}, 400)
 
-            if not rel.lower().endswith('.html'):
-                raise ValueError('只允许写 .html 文件')
-            target = os.path.abspath(os.path.join(ROOT, rel))
-            if not target.startswith(ROOT + os.sep):        # 防目录穿越
-                raise ValueError('不允许写到这个文件夹之外')
+    def save_doc(self):
+        """写整份 HTML。只有「导出成独立文件再导入回来」这类老用法会走到这里，
+        页面平时自动保存走的是下面的 save_data。"""
+        try:
+            length = int(self.headers.get('Content-Length', 0))
+            data = json.loads(self.rfile.read(length).decode('utf-8'))
+            target = resolve_page(data.get('path', ''))
+            html = data.get('html', '')
             if not html.lstrip()[:20].lower().startswith('<!doctype html'):
                 raise ValueError('内容不像一份完整 HTML，已拒绝，以免写坏文件')
-
-            # ---- 冲突保护：文件在页面打开之后被改过，就别盖它 ----
-            # 页面带着"我打开时文件长这样"的指纹来；对不上说明磁盘上的
-            # 已经被别人（比如我）改过，这时写回去会把新改动冲掉。
-            base = data.get('base', '')
-            if base:
-                now_hash = file_hash(target)
-                if now_hash and now_hash != base:
-                    self.send_json({'ok': False, 'conflict': True,
-                                    'hash': now_hash,
-                                    'error': '文件在页面打开之后被改过，这次保存已拦下，'
-                                             '以免覆盖别人的改动（刷新页面再改）'}, 409)
-                    return
-
-            tmp = target + '.tmp'
-            with open(tmp, 'w', encoding='utf-8', newline='') as f:
-                f.write(html)
-            os.replace(tmp, target)                          # 原子替换，避免写一半被打断
-            self.send_json({'ok': True, 'file': rel,
+            if not self.base_matches(target, data.get('base', '')):
+                return
+            self.atomic_write(target, html)
+            self.send_json({'ok': True, 'file': os.path.basename(target),
                             'hash': file_hash(target),
                             'bytes': len(html.encode('utf-8'))})
         except Exception as exc:
             self.send_json({'ok': False, 'error': str(exc)}, 400)
 
+    def save_data(self):
+        """写个人数据（方案、记录、档案、自建动作库）。页面 HTML 一个字节都不动。"""
+        try:
+            length = int(self.headers.get('Content-Length', 0))
+            data = json.loads(self.rfile.read(length).decode('utf-8'))
+            page = resolve_page(data.get('path', ''))
+            doc = data.get('data')
+            if not isinstance(doc, dict):
+                raise ValueError('数据格式不对，已拒绝')
+
+            target = sidecar_of(page)
+            if not self.base_matches(target, data.get('base', '')):
+                return
+
+            doc['savedAt'] = time.strftime('%Y-%m-%dT%H:%M:%S')
+            text = json.dumps(doc, ensure_ascii=False, indent=1)
+            self.atomic_write(target, text)
+            self.send_json({'ok': True, 'file': os.path.basename(target),
+                            'hash': file_hash(target),
+                            'bytes': len(text.encode('utf-8')),
+                            'savedAt': doc['savedAt']})
+        except Exception as exc:
+            self.send_json({'ok': False, 'error': str(exc)}, 400)
+
+    def base_matches(self, target, base):
+        """冲突保护：文件在页面打开之后被改过，就别盖它。返回 False 表示已拦下。"""
+        if not base:
+            return True
+        now_hash = file_hash(target)
+        if not now_hash or now_hash == base:
+            return True
+        self.send_json({'ok': False, 'conflict': True, 'hash': now_hash,
+                        'error': '文件在页面打开之后被改过，这次保存已拦下，'
+                                 '以免覆盖别人的改动（刷新页面再改）'}, 409)
+        return False
+
+    def atomic_write(self, target, text):
+        tmp = target + '.tmp'
+        with open(tmp, 'w', encoding='utf-8', newline='') as f:
+            f.write(text)
+        os.replace(tmp, target)                          # 原子替换，避免写一半被打断
+
     # ---------- 探活 ----------
     def do_GET(self):
         if self.path.startswith('/__ping'):
             # 页面把自己的路径带过来 —— 文件夹里有好几个 HTML，
-            # 得给它"它正在编辑的那个文件"的指纹，否则冲突保护会误判。
+            # 得给它"它正在编辑的那个页面 + 它旁边的数据文件"的指纹，
+            # 否则冲突保护会误判。
             rel = ''
             if '?' in self.path:
                 for kv in self.path.split('?', 1)[1].split('&'):
                     if kv.startswith('path='):
                         rel = unquote(kv[5:]).lstrip('/\\')
-            target = os.path.abspath(os.path.join(ROOT, rel)) if rel else os.path.join(ROOT, PAGE)
-            if not target.startswith(ROOT):
-                target = os.path.join(ROOT, PAGE)
-            self.send_json({'ok': True, 'file': os.path.basename(target),
-                            'hash': file_hash(target)})
+            if rel:
+                try:
+                    page = resolve_page(rel)
+                except ValueError:
+                    page = os.path.join(ROOT, PAGE)
+            else:
+                page = os.path.join(ROOT, PAGE)
+            side = sidecar_of(page)
+            self.send_json({'ok': True,
+                            'file': os.path.basename(page),
+                            'hash': file_hash(page),          # 页面 HTML 的指纹
+                            'dataFile': os.path.basename(side),
+                            'dataHash': file_hash(side),      # 个人数据文件的指纹
+                            'hasData': os.path.isfile(side)})
             return
         super().do_GET()
 
@@ -194,9 +268,10 @@ def main():
     for f in pages:
         print('  ' + f'{f:<18}' + 'http://127.0.0.1:%d/%s' % (port, f))
     print()
-    print('  在页面上改的任何东西，都会自动写回对应的文件本身；')
+    print('  在页面上改的任何东西，都会自动存进旁边的 训练计划.data.json；')
+    print('  页面 HTML 本身是模板，不会被改写 —— 所以它可以放心地进 git、公开出去。')
     print('  两个页面之间用左上角的「训练 / 饮食」一键切换。')
-    print('  把这个文件夹放进同步盘，两台电脑就自动同步了。')
+    print('  把这两个文件放进同步盘，两台电脑就自动同步了。')
     print()
     print('  关掉这个黑窗口 = 停止服务（网页会退回浏览器本地保存）。')
     print('=' * 60)

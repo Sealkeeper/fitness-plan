@@ -6309,7 +6309,7 @@ void main() {
  </div>`;let e=L=>a.querySelector(L),t=e(".an-list"),n=e(".an-stage"),i=e("canvas"),s=e(".an-labels"),r=e(".an-loading"),o=matchMedia("(prefers-reduced-motion: reduce)").matches,c=oi[0],l="\u5168\u90E8",u="all",d="",p="surface",b="front",g=!1,m=!0,f,h,x,y,v,w,A=[],T=!1,C=!1,E=!1,_=0,R=null,N=null,B=!1,j=0,X=0,V=null,ee=[],G=[],oe=0,de=!0,le={},Se=new Map,Be=new D,Xe=new os,Ve=new Re,$=new Set(["pec-minor","rhomboid","multifidus","cuff","brachialis","oblique-inner","transverse","ql","glute-min","hip-flex","neck-deep","splenius"]);function te(){let L=oi.filter(U=>{let z=mo(U.name),K=(z?.topics||[]).map(se=>bo.find(ue=>ue.id===se)?.name||"").join(" ");return(l==="\u5168\u90E8"||U.part===l)&&(u==="all"||z?.topics.includes(u))&&(!d||(U.name+" "+U.en+" "+U.loc+" "+U.keys.join(" ")+" "+K+" "+(z?.role||"")+" "+(z?.title||"")).toLowerCase().includes(d))});t.innerHTML=L.length?L.map(U=>`<button type="button" data-muscle="${U.id}" aria-pressed="${c.id===U.id}"><strong>${U.name}</strong><small>${U.en}</small></button>`).join(""):'<div class="an-empty">\u6CA1\u6709\u5339\u914D\u7ED3\u679C\uFF0C\u8BD5\u8BD5\u300C\u5934\u75DB\u300D\u300C\u8170\u80CC\u300D\u6216\u6E05\u9664\u7B5B\u9009\u3002</div>'}function ye(L){return typeof MUSCLES>"u"?[]:Object.entries(MUSCLES).filter(([,U])=>L.keys.some(z=>typeof muscleList=="function"?muscleList(U.p||"").some(K=>{let se=typeof MUSCLE_ALIAS>"u"?K:MUSCLE_ALIAS[K]||K;return se===z||se.startsWith(z+"\uFF08")}):String(U.p).includes(z))).map(([U])=>U).slice(0,4)}function Pe(L){e(".an-selected-badge").textContent=c.id==="raw"?"\u5DF2\u9009\u89E3\u5256\u90E8\u4EF6":"\u5DF2\u9009\u808C\u7FA4 \xB7 \u5DE6\u53F3\u4E24\u4FA7",e(".an-muscle-name").textContent=c.name,e(".an-latin").textContent=c.en,e(".an-tags").innerHTML=`<span>${Di(c.part)}</span><span>${$.has(c.id)?"\u6DF1\u5C42\u7ED3\u6784":"\u808C\u8089 / \u808C\u7FA4"}</span>`,e(".an-health-detail").innerHTML=wl(c.name),e(".an-detail-info").innerHTML=`<div class="an-detail-row"><dt>\u5728\u8EAB\u4F53\u54EA\u91CC</dt><dd>${Di(c.loc)}</dd></div><div class="an-detail-row"><dt>\u5982\u4F55\u53C2\u4E0E\u53D1\u529B</dt><dd>${Di(c.action)}</dd></div><div class="an-detail-row"><dt>\u89C2\u5BDF\u7B14\u8BB0</dt><dd>${Di(c.note)}</dd></div>`;let U=ye(c);e(".an-exercises").innerHTML='<div class="an-exercises-head">\u52A8\u4F5C\u5E93 \xB7 \u5065\u8EAB\u52A8\u4F5C\u53C2\u8003</div>'+(U.length?U.map(K=>`<button type="button" data-exercise="${Di(K)}">${Di(K)}<span aria-hidden="true">\u2197</span></button>`).join(""):'<div class="an-empty">\u73B0\u6709\u52A8\u4F5C\u5E93\u6682\u672A\u6536\u5F55\u5BF9\u5E94\u7684\u4E3B\u8981\u8BAD\u7EC3\u52A8\u4F5C\u3002</div>');let z=L?.userData.meta;e(".an-structure").textContent=z?`\u70B9\u51FB\u90E8\u4EF6\uFF1A${Ml(z.name)}${z.fmaId?" \xB7 "+z.fmaId:""} \xB7 ${z.source==="z-anatomy"?"Z-Anatomy":"BodyParts3D"}`:T?`${ee.length} \u4E2A\u5BF9\u5E94\u7F51\u683C \xB7 \u5305\u542B\u5DE6\u53F3\u4FA7\u53CA\u5404\u5206\u90E8`:"\u9009\u62E9\u5217\u8868\u6216\u76F4\u63A5\u70B9\u51FB\u6A21\u578B\u67E5\u770B"}function ve(){g=!1,y&&(y.autoRotate=!1),e(".an-auto").setAttribute("aria-pressed","false"),e(".an-auto").textContent="\u21BB \u81EA\u52A8\u65CB\u8F6C"}function ze(){if(!T)return;de=!0,N&&(delete N.userData.previousMaterial,N=null),ee=A.filter(U=>c.pattern.test(U.userData.rawName));let L=new Set(ee);for(let U of A){let z=L.has(U);U.visible=p!=="isolate"||z,U.material=z?le.selected:p==="xray"?le.ghost:U.userData.tendon?le.tendon:le.muscle,U.renderOrder=z?3:p==="xray"?1:0}w.traverse(U=>{U.isMesh&&(U.material=p==="surface"?le.bone:le.boneGhost,U.renderOrder=0)}),a.querySelectorAll("[data-mode]").forEach(U=>U.setAttribute("aria-pressed",String(U.dataset.mode===p))),Ze()}function dt(L,U,z=!0){let K=oi.find(se=>se.id===L);K&&(c=K,ve(),$.has(K.id)&&p==="surface"&&(p="xray"),te(),ze(),Pe(U),z&&T&&(B=!1,Ne(K.view)))}function k(L){if(L.id!=="raw"&&Se.has(L.id))return Se.get(L.id);let U=A.filter(K=>L.pattern.test(K.userData.rawName)),z=new At;return U.forEach(K=>z.union(K.geometry.boundingBox)),z.isEmpty()?null:(L.id!=="raw"&&Se.set(L.id,z),z)}function it(L,U){T&&(de=!0,R={started:performance.now(),fromTarget:y.target.clone(),toTarget:L,fromPosition:x.position.clone(),toPosition:U,duration:o?0:700},o&&(y.target.copy(L),x.position.copy(U),y.update(),R=null))}function Ne(L){if(b=L,a.querySelectorAll("[data-view]").forEach(se=>se.setAttribute("aria-pressed",String(se.dataset.view===b))),e(".an-view-name").textContent={front:"\u524D\u4FA7\u89C6\u56FE",back:"\u540E\u4FA7\u89C6\u56FE",side:"\u4FA7\u9762\u89C6\u56FE"}[b],!T)return;let U=B?y.target.clone():new D(0,.1,0),z=B?x.position.distanceTo(y.target):Ce(),K=b==="back"?new D(-.035,.005,-1):b==="side"?new D(1,0,.04):new D(.025,.005,1);it(U,U.clone().add(K.normalize().multiplyScalar(z))),Ze()}function Ce(){return Math.max(innerWidth<=660?50:46,22/Math.max(x?.aspect||1,.3))}function _e(){if(!T)return;ve();let L=k(c);if(!L)return;let U=L.getCenter(new D),z=L.getSize(new D),K=Math.max(7,Math.max(z.y,z.x/x.aspect)*1.7,z.z*2.5),se=x.position.clone().sub(y.target).normalize();B=!0,it(U,U.clone().add(se.multiplyScalar(K)))}function Ze(){if(de=!0,s.replaceChildren(),G=[],!T||!m)return;let L=document.createElementNS("http://www.w3.org/2000/svg","svg");L.classList.add("an-leaders"),L.setAttribute("aria-hidden","true"),s.append(L);let U=b==="back"?["traps","lat","triceps","glute-max","hamstrings","calf"]:b==="side"?["deltoid-mid","serratus","glute-med","quads","soleus"]:["deltoid-mid","chest","biceps","rectus","quads","tibialis"];p==="isolate"||B?U=[c.id]:U.includes(c.id)||(U=[c.id,...U.slice(0,5)]),U.forEach((z,K)=>{let se=oi.find(J=>J.id===z)||(z===c.id?c:null);if(!se)return;let ue=A.filter(J=>se.pattern.test(J.userData.rawName)),re=b==="back"?K%2===0?"right":"left":K%2===0?"left":"right",xe=ue.filter(J=>J.userData.rawName.includes(re)),P=new At;if((xe.length?xe:ue).forEach(J=>P.union(J.geometry.boundingBox)),P.isEmpty())return;let ie=P.getCenter(new D);ie.z=b==="back"?P.min.z:P.max.z,b==="side"&&(ie.x=P.max.x);let Z=document.createElement("button");Z.type="button",Z.className="an-callout",Z.dataset.muscle=z,Z.textContent=se.name.replace(" \xB7 "," "),Z.setAttribute("aria-pressed",String(z===c.id));let he=document.createElementNS("http://www.w3.org/2000/svg","line"),ne=document.createElementNS("http://www.w3.org/2000/svg","circle");ne.setAttribute("r","2"),L.append(he,ne),s.append(Z),G.push({point:ie,button:Z,line:he,dot:ne,index:K})})}function Me(){let L=n.clientWidth,U=n.clientHeight,z=Math.atan2(x.position.x-y.target.x,x.position.z-y.target.z),K=b==="back"?Math.PI:b==="side"?z<0?-Math.PI/2:Math.PI/2:0,se=Math.abs(Math.atan2(Math.sin(z-K),Math.cos(z-K))),ue=[];for(let re of G){Be.copy(re.point).project(x);let xe=(Be.x*.5+.5)*L,P=(-Be.y*.5+.5)*U,ie=re.index%2===0,Z=Be.z>1||Be.z<-1||P<60||P>U-42||se>1;re.button.hidden=Z,re.line.style.display=Z?"none":"",re.dot.style.display=Z?"none":"",Z||ue.push({c:re,right:ie,projectedX:xe,projectedY:P,y:P})}for(let re of[!0,!1]){let xe=ue.filter(Z=>Z.right===re).sort((Z,he)=>Z.y-he.y),P=55;for(let Z of xe)Z.y=Math.max(Z.y,P+36),P=Z.y;let ie=U-55;for(let Z of xe.reverse())Z.y=Math.min(Z.y,ie),ie=Z.y-36}for(let re of ue){let{c:xe,right:P,projectedX:ie,projectedY:Z,y:he}=re,ne=P?L-65:65;xe.button.style.left=ne+"px",xe.button.style.top=he+"px",xe.line.setAttribute("x1",String(ie)),xe.line.setAttribute("y1",String(Z)),xe.line.setAttribute("x2",String(ne+(P?-1:1)*(xe.button.offsetWidth/2+5))),xe.line.setAttribute("y2",String(he)),xe.dot.setAttribute("cx",String(ie)),xe.dot.setAttribute("cy",String(Z))}}function Fe(L){let U=L.userData.rawName,z=Gd(U);if(z){dt(z.id,L,!1);return}ve(),c={id:"raw",name:Ml(U),en:U,part:L.userData.tendon?"\u808C\u8171 / \u7ED3\u7F14\u7EC4\u7EC7":"\u89E3\u5256\u90E8\u4EF6",pattern:{test:K=>K===U},loc:"\u67E5\u770B\u6A21\u578B\u9AD8\u4EAE\uFF0C\u4E86\u89E3\u6B64\u90E8\u4EF6\u5728\u53C2\u8003\u4EBA\u4F53\u4E2D\u7684\u4E09\u7EF4\u4F4D\u7F6E\u3002",action:"\u6B64\u90E8\u4EF6\u7684\u8BE6\u7EC6\u529F\u80FD\u6682\u672A\u6536\u5F55\u3002",note:"\u53EF\u4F7F\u7528\u300C\u8FD1\u8DDD\u79BB\u89C2\u5BDF\u300D\u548C\u300C\u5355\u72EC\u300D\u67E5\u770B\u7ED3\u6784\uFF0C\u539F\u59CB\u89E3\u5256\u540D\u79F0\u4E0E\u6570\u636E\u6807\u8BC6\u89C1\u4E0B\u65B9\u3002",keys:[]},ze(),te(),Pe(L)}function bt(L){if(!T)return null;let U=i.getBoundingClientRect();return Ve.set((L.clientX-U.left)/U.width*2-1,-(L.clientY-U.top)/U.height*2+1),Xe.setFromCamera(Ve,x),Xe.intersectObjects(A.filter(z=>z.visible),!1)[0]?.object||null}function rt(){if(!f||!n.clientWidth||!n.clientHeight)return;let L=n.clientWidth,U=n.clientHeight;f.setPixelRatio(Math.min(devicePixelRatio,innerWidth<600?1.25:1.75)),f.setSize(L,U,!1),x.aspect=L/U,x.updateProjectionMatrix(),de=!0}function I(L){if(!E||document.hidden){_=0;return}_=requestAnimationFrame(I);let U=Math.min((L-j)/1e3,.1);if(L-j<1e3/30)return;if(j=L,R){let K=si.clamp((L-R.started)/Math.max(R.duration,1),0,1),se=1-Math.pow(1-K,3);y.target.lerpVectors(R.fromTarget,R.toTarget,se),x.position.lerpVectors(R.fromPosition,R.toPosition,se),K>=1&&(R=null,Ze())}let z=y.update(U);if(de||z||g||R){if(f.render(h,x),de=!1,!R&&X++%6===0){let K=Math.atan2(x.position.x-y.target.x,x.position.z-y.target.z),se=Math.abs(K)>Math.PI*.7?"back":Math.abs(K)<Math.PI*.3?"front":"side";se!==b&&(b=se,e(".an-view-name").textContent={front:"\u524D\u4FA7\u89C6\u56FE",back:"\u540E\u4FA7\u89C6\u56FE",side:"\u4FA7\u9762\u89C6\u56FE"}[b],a.querySelectorAll("[data-view]").forEach(ue=>ue.setAttribute("aria-pressed",String(ue.dataset.view===b))),Ze())}Me()}}function M(){T&&E&&!document.hidden&&!_&&(j=performance.now(),_=requestAnimationFrame(I))}function H(L){let U=atob(L),z=new Uint8Array(U.length);for(let K=0;K<U.length;K++)z[K]=U.charCodeAt(K);return z.buffer}function Q(L,U,z){v=new Bt,w=new Bt,v.add(w),L.scene.updateMatrixWorld(!0),U.scene.updateMatrixWorld(!0);let K=new At().setFromObject(L.scene),se=K.getCenter(new D),ue=30/K.getSize(new D).z,re=new Le().set(ue,0,0,-se.x*ue,0,0,ue,-se.z*ue,0,-ue,0,se.y*ue,0,0,0,1),xe=new Map(z.map(Z=>[xs(Z.name),Z])),P=(Z,he,ne={})=>new On({color:Z,roughness:he,metalness:0,side:Lt,...ne});le.muscle=P("#a5625c",.55),le.tendon=P("#d5cbb3",.7),le.bone=P("#c8c1ae",.65),le.selected=P("#78dcc0",.42,{emissive:new ke("#2d6554"),emissiveIntensity:.18}),le.hover=P("#e8b398",.45),le.ghost=P("#759492",.7,{transparent:!0,opacity:.1,depthWrite:!1}),le.boneGhost=P("#aab6a9",.8,{transparent:!0,opacity:.14,depthWrite:!1});function ie(Z){let he=Z.geometry.clone();for(let ne of["position","normal","tangent"]){let J=he.getAttribute(ne);if(!J)continue;let me=new Float32Array(J.count*J.itemSize);for(let Ae=0;Ae<J.count;Ae++)for(let Ye=0;Ye<J.itemSize;Ye++)me[Ae*J.itemSize+Ye]=J.getComponent(Ae,Ye);he.setAttribute(ne,new ft(me,J.itemSize))}return he.applyMatrix4(Z.matrixWorld).applyMatrix4(re),he.computeBoundingBox(),he.computeBoundingSphere(),he}L.scene.traverse(Z=>{if(!Z.isMesh)return;let he=xs(Z.name),ne=xe.get(he)||{name:he,source:"bp3d"},J=ie(Z),me=ne.isTendon||/tendon|ligament|retinaculum|fascia|membrane|cartilage|tendinous/.test(he),Ae=new pt(J,me?le.tendon:le.muscle);Ae.name=he,Ae.userData={rawName:he,meta:ne,tendon:me},A.push(Ae),v.add(Ae),Z.geometry.dispose()}),U.scene.traverse(Z=>{if(!Z.isMesh)return;let he=ie(Z);w.add(new pt(he,le.bone)),Z.geometry.dispose()}),h.add(v),e(".an-count").textContent=`${A.length} \u4E2A\u89E3\u5256\u90E8\u4EF6 \xB7 ${w.children.length} \u4E2A\u9AA8\u9ABC\u7F51\u683C`}function ae(){let L=document.createElement("canvas");L.width=128,L.height=128;let U=L.getContext("2d"),z=U.createRadialGradient(64,64,2,64,64,63);z.addColorStop(0,"rgba(0,8,9,.65)"),z.addColorStop(.4,"rgba(0,8,9,.35)"),z.addColorStop(1,"rgba(0,8,9,0)"),U.fillStyle=z,U.fillRect(0,0,128,128);let K=new pt(new _i(19,12),new Ht({map:new Ja(L),transparent:!0,depthWrite:!1}));K.rotation.x=-Math.PI/2,K.position.y=-15.5,h.add(K);for(let se of[6.7,7.2]){let ue=new pt(new Qa(se,se+.018,100),new Ht({color:"#6fae9a",transparent:!0,opacity:.18,side:Lt}));ue.rotation.x=-Math.PI/2,ue.position.y=-15.45,h.add(ue)}}async function Y(){if(!(T||C)){C=!0,r.hidden=!1,r.innerHTML='<div class="an-spinner"></div><span>\u8F7D\u5165\u808C\u8089\u4E0E\u9AA8\u9ABC\uFF0C\u51C6\u5907\u89E3\u5256\u5206\u5C42\u2026</span>';try{if(!f){f=new co({canvas:i,antialias:!0,alpha:!0,powerPreference:"low-power"}),f.setClearColor(0,0),f.toneMapping=yr,f.toneMappingExposure=1.05,h=new za,x=new gt(42,1,.1,180),x.position.set(1,.1,46),y=new uo(x,i),y.target.set(0,.1,0),y.enableDamping=!0,y.dampingFactor=.08,y.minDistance=5,y.maxDistance=95,y.autoRotateSpeed=.5,y.enablePan=!0,y.listenToKeyEvents(i),i.addEventListener("wheel",P=>{!P.ctrlKey&&!P.metaKey&&P.stopImmediatePropagation()},!0),y.addEventListener("start",()=>{R=null,ve()}),y.addEventListener("change",()=>{de=!0}),h.add(new ns("#c2e7e7","#29392f",1.4));let se=new An("#fff1db",2.8);se.position.set(-12,18,23),h.add(se);let ue=new An("#96cfc8",1.2);ue.position.set(12,2,16),h.add(ue);let re=new An("#acdbec",2.5);re.position.set(2,14,-18),h.add(re);let xe=new An("#8cb5ba",.7);xe.position.set(-8,-10,-10),h.add(xe),ae(),rt(),new ResizeObserver(()=>{rt(),!B&&T&&Ne(b)}).observe(n)}let L=await Kd();await _l.ready,r.querySelector("span").textContent="\u89E3\u6790\u72EC\u7ACB\u808C\u8089\u7F51\u683C\u2026";let U=new fo().setMeshoptDecoder(_l),[z,K]=await Promise.all([U.parseAsync(H(L.anatomy),""),U.parseAsync(H(L.skeleton),"")]);Q(z,K,L.mapping),T=!0,C=!1,r.hidden=!0,dt(c.id,void 0,!1),x.position.set(1,.1,Ce()),y.update(),M()}catch(L){C=!1,r.innerHTML=`<span>${Di(L.message||"\u6D4F\u89C8\u5668\u6682\u65F6\u65E0\u6CD5\u663E\u793A\u4E09\u7EF4\u6A21\u578B\u3002")}</span><button type="button" data-retry>\u91CD\u65B0\u8F7D\u5165</button><span>\u808C\u8089\u5217\u8868\u4E0E\u52A8\u4F5C\u8BE6\u60C5\u4ECD\u53EF\u4F7F\u7528\u3002</span>`}}}function Ee(L){let U=e(".an-dialog");U.querySelector("h3").textContent=L,typeof exCardHTML=="function"?U.querySelector(".an-dialog-text").innerHTML=exCardHTML(L):U.querySelector(".an-dialog-text").textContent="\u8BF7\u5728\u4E0A\u65B9\u52A8\u4F5C\u5E93\u4E2D\u67E5\u770B\u6B64\u52A8\u4F5C\u3002",typeof U.showModal=="function"?U.showModal():U.setAttribute("open","")}a.addEventListener("click",L=>{let U=L.target.closest("button");if(!U)return;if(U.dataset.muscle){dt(U.dataset.muscle);return}if(U.dataset.part){l=U.dataset.part,a.querySelectorAll("[data-part]").forEach(K=>K.setAttribute("aria-pressed",String(K.dataset.part===l))),te();return}if(U.dataset.view){ve(),Ne(U.dataset.view);return}if(U.dataset.mode){p=U.dataset.mode,ze();return}if(U.dataset.exercise){Ee(U.dataset.exercise);return}if(U.hasAttribute("data-retry")){Y();return}if(U.classList.contains("an-focus")){_e();return}if(U.classList.contains("an-dialog-close")){e(".an-dialog").close();return}if(U.classList.contains("an-auto")){if(!T)return;g=!g,y.autoRotate=g,R=null,U.setAttribute("aria-pressed",String(g)),U.textContent=g?"\u2161 \u6682\u505C\u65CB\u8F6C":"\u21BB \u81EA\u52A8\u65CB\u8F6C";return}let z=U.dataset.tool;if(z==="labels"){m=!m,U.setAttribute("aria-pressed",String(m)),Ze();return}if(z==="fullscreen"){document.fullscreenElement?document.exitFullscreen?.().catch(()=>{}):a.requestFullscreen?.().catch(()=>{});return}if(T&&(z==="reset"&&(ve(),B=!1,p="surface",ze(),Ne("front")),z==="in"||z==="out")){ve(),R=null;let K=x.position.clone().sub(y.target);K.setLength(si.clamp(K.length()*(z==="in"?.8:1.25),5,95)),x.position.copy(y.target).add(K),y.update(),de=!0}}),e(".an-health-filter select").addEventListener("change",L=>{u=L.target.value,l="\u5168\u90E8",d="",e(".an-search input").value="",a.querySelectorAll("[data-part]").forEach(z=>z.setAttribute("aria-pressed",String(z.dataset.part==="\u5168\u90E8"))),te();let U=t.querySelector("[data-muscle]");U&&dt(U.dataset.muscle)}),document.addEventListener("click",L=>{let U=L.target.closest("[data-health-muscle]");if(!U)return;let z=U.dataset.healthMuscle,K=oi.find(se=>se.name===z||se.keys.includes(z));if(K)l="\u5168\u90E8",u="all",d="",e(".an-search input").value="",e(".an-health-filter select").value="all",a.querySelectorAll("[data-part]").forEach(se=>se.setAttribute("aria-pressed",String(se.dataset.part==="\u5168\u90E8"))),dt(K.id),a.scrollIntoView({behavior:o?"instant":"smooth",block:"start"});else{let se=[...document.querySelectorAll(".mfi")].find(ue=>ue.querySelector(".mfnm")?.textContent===z);se&&se.scrollIntoView({behavior:o?"instant":"smooth",block:"center"})}}),e(".an-search input").addEventListener("input",L=>{d=L.target.value.trim().toLowerCase(),te()}),e(".an-dialog").addEventListener("click",L=>{if(L.target===e(".an-dialog")){let U=L.target.getBoundingClientRect();(L.clientX<U.left||L.clientX>U.right||L.clientY<U.top||L.clientY>U.bottom)&&L.target.close()}}),i.addEventListener("pointerdown",L=>{V?V.count++:V={x:L.clientX,y:L.clientY,id:L.pointerId,count:1}}),i.addEventListener("pointerup",L=>{if(V?.id===L.pointerId&&V.count===1&&L.button===0&&Math.hypot(L.clientX-V.x,L.clientY-V.y)<5){let U=bt(L);U&&Fe(U)}V=null}),i.addEventListener("pointercancel",()=>{V=null}),i.addEventListener("pointermove",L=>{!T||V||L.pointerType==="touch"||performance.now()-oe<90||(oe=performance.now(),N&&N.userData.previousMaterial&&(N.material=N.userData.previousMaterial,delete N.userData.previousMaterial),N=bt(L),i.style.cursor=N?"pointer":"grab",N&&N.material!==le.selected&&p==="surface"&&(N.userData.previousMaterial=N.material,N.material=le.hover),de=!0)}),i.addEventListener("pointerleave",()=>{N?.userData.previousMaterial&&(N.material=N.userData.previousMaterial,delete N.userData.previousMaterial),N=null,de=!0}),i.addEventListener("keydown",L=>{T&&["+","=","-","0"].includes(L.key)&&(L.preventDefault(),a.querySelector(`[data-tool="${L.key==="0"?"reset":L.key==="-"?"out":"in"}"]`).click())}),i.addEventListener("webglcontextlost",L=>{L.preventDefault(),r.hidden=!1,r.innerHTML="<span>\u4E09\u7EF4\u663E\u793A\u5DF2\u6682\u505C\uFF0C\u6062\u590D\u540E\u4F1A\u7EE7\u7EED\u3002\u808C\u8089\u5217\u8868\u4ECD\u53EF\u4F7F\u7528\u3002</span>"}),i.addEventListener("webglcontextrestored",()=>{r.hidden=!0,rt(),M()}),document.addEventListener("visibilitychange",M),te(),Pe(),new IntersectionObserver(L=>{E=L[0].isIntersecting,E&&(Y(),M())},{rootMargin:"160px"}).observe(a)}document.readyState==="loading"?document.addEventListener("DOMContentLoaded",Xd,{once:!0}):Xd();})();
 </script>
 
-<script id="userlib" type="application/json">{"颈部":["颈部上左右(三块肌肉)","后颈报头","后颈抱头"],"核心":["卷腹（收腿卷腹）"],"肩部":["点亮月光，你96853个0613个0349434947不是有病吧，我他妈是的是的是的"]}</script>
+<script id="userlib" type="application/json">{}</script>
 
 <script>
 /* ==================== 动作库（下拉可选，也可自由输入） ==================== */
@@ -7217,10 +7217,14 @@ const UKEY = 'train_plan_userlib_v1';
 let userLib = {};
 try { userLib = JSON.parse(document.getElementById('userlib').textContent || '{}') || {}; } catch(e){ userLib = {}; }
 try { const s = localStorage.getItem(UKEY); if(s) userLib = JSON.parse(s) || userLib; } catch(e){}
+function syncUserLibDom(){
+  const el = document.getElementById('userlib');
+  if(el) el.textContent = JSON.stringify(userLib);
+}
 function saveUserLib(){
   try { localStorage.setItem(UKEY, JSON.stringify(userLib)); } catch(e){}
-  const el = document.getElementById('userlib');       // 同步进 DOM，导出文件时一并带走
-  if(el) el.textContent = JSON.stringify(userLib);
+  syncUserLibDom();       // 同步进 DOM，导出文件时一并带走
+  if(typeof scheduleSave === 'function' && userTouched) scheduleSave();
 }
 function isBuiltin(cat, v){ return (LIB[cat] || []).includes(v); }
 function rememberEx(input){
@@ -8116,12 +8120,13 @@ function saveLocal(silent){
   if(!storageOK || noSaveOnUnload) return;
   try{
     syncInputs(docEl);
-    localStorage.setItem(KEY, JSON.stringify({f: lastDocPrint, html: docEl.innerHTML}));
+    localStorage.setItem(KEY, JSON.stringify(
+      {t: Date.now(), doc: docForSave(), userlib: userLib}));
     // 没连上本地服务时，改动只落在浏览器里 —— 这一句必须说实话。
     // 写「已保存」会让人以为已经进了文件，而实际上换个浏览器就什么都没有。
     const t = new Date().toTimeString().slice(0,5);
     if(SERVER_OK) markSaved(true, '已保存 ' + t);
-    else markSaved(false, '⚠️ 只存在浏览器里 · 未写回文件 · ' + t);
+    else markSaved(false, '⚠️ 只存在浏览器里 · 没进数据文件 · ' + t);
     if(!silent) flash('已保存到本机浏览器');
   }catch(e){
     markSaved(false, '⚠️ 保存失败');
@@ -8197,29 +8202,25 @@ function restoreBackup(){
   markTouched();              // 触发一次保存，把找回的内容写回文件
   flash('已找回 ' + when + ' 那份编辑');
 }
-function loadLocal(){
+/* 浏览器里那份只是"服务没开时的兜底"，不再是唯一副本 ——
+   所以模板更新后不用再弹「文件已经更新过」，直接读就好。 */
+function readLocal(){
   try{
     const raw = localStorage.getItem(KEY);
-    if(!raw) return false;
-    let o = null;
-    try{ o = JSON.parse(raw); }catch(e){ /* 旧格式是裸 HTML，认不出，忽略 */ }
-    if(!o || typeof o.html !== 'string') return false;
-    if(o.f === FILE_PRINT || o.f === lastDocPrint){ docEl.innerHTML = o.html; return true; }   // 文件没变，直接还原
-    // 文件被更新过了。本机这份编辑还留着，别默默丢掉 —— 问一句。
-    const msg = '这个文件已经更新过（可能是新版本），' + NL +
-                '但本机还存着一份你之前的编辑。' + NL + NL +
-                '【确定】保留你之前的编辑' + NL +
-                '【取消】改用文件里的新内容' + NL + NL +
-                '不管选哪个，本机那份都会先备份一份；' + NL +
-                '选错了可以用工具栏的「找回上次丢弃的编辑」拿回来。';
-    if(confirm(msg)){ docEl.innerHTML = o.html; needWriteBack = true; return true; }
-    stashLocal(raw, '改用文件里的新内容');    // 丢弃之前先留底
-    return false;
-  }catch(e){}
-  return false;
+    if(!raw) return null;
+    const o = JSON.parse(raw);
+    if(!o) return null;
+    const doc = typeof o.doc === 'string' ? o.doc : (typeof o.html === 'string' ? o.html : '');
+    return {doc: doc, t: o.t || 0, lib: o.userlib || null};
+  }catch(e){ return null; }
 }
-
-/* ==================== 导出 / 导入：把"自己的一份"拿出来和放回去 ==================== */
+function loadLocal(){
+  const o = readLocal();
+  if(!o || !o.doc) return false;
+  docEl.innerHTML = o.doc;
+  if(o.lib && typeof o.lib === 'object'){ userLib = o.lib; syncUserLibDom(); }
+  return true;
+}
 function pickImport(){
   const f = document.getElementById('importFile');
   f.value = '';                       // 允许重复选同一个文件
@@ -8241,6 +8242,7 @@ function importHTML(file){
       document.querySelectorAll('input.exname').forEach(i=>{ i.dataset.last = i.value.trim(); });
       calc();
       saveLocal(true);
+      markTouched();          // 导入的东西也要进数据文件
       flash('已导入');
     }catch(err){ flash('导入失败：' + (err && err.message || err)); }
   };
@@ -8263,7 +8265,13 @@ function scheduleSave(){
    保存时把内容 POST 过去，由它写进 训练计划.html 本身。
    于是"文件就是文档本身"—— 放进同步盘，两台电脑自动同步。
    直接双击 HTML（没走 .bat）时这条路不通，自动退回浏览器本地保存。 */
-let SERVER_OK = false, pushTimer = null, SERVER_HASH = '';
+/* ==================== 本地服务：个人数据写进旁边的 .data.json ====================
+   页面 HTML 本身是模板（所以可以放进 git、公开出去）；
+   你填的东西 —— 方案、体重记录、个人档案、自建动作 —— 存在同目录的数据文件里：
+       训练计划.html  ↔  训练计划.data.json
+   双击「启动.bat」时页面连上本机服务，保存就写那个数据文件，HTML 一个字节都不动。
+   直接双击 HTML（没走 .bat）时这条路不通，退回浏览器本地保存。 */
+let SERVER_OK = false, pushTimer = null, SERVER_HASH = '', DATA_HASH = '', DATA_NAME = '';
 function isLocalHost(){
   return /^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname) &&
          /^https?:$/.test(location.protocol);
@@ -8273,10 +8281,61 @@ async function detectServer(){
   try{
     const r = await fetch('/__ping?path=' + encodeURIComponent(decodeURIComponent(location.pathname)), {cache:'no-store'});
     const j = await r.json();
-    if(j && j.hash) SERVER_HASH = j.hash;   // 记下"我打开时文件长这样"
+    if(j && j.hash) SERVER_HASH = j.hash;           // 模板文件"我打开时长这样"
+    if(j && j.dataHash) DATA_HASH = j.dataHash;     // 数据文件"我打开时长这样"
+    if(j && j.dataFile) DATA_NAME = j.dataFile;
     return !!(j && j.ok);
   }catch(e){ return false; }
 }
+/* 读旁边的数据文件。没有就是第一次用，返回 null。 */
+async function fetchData(){
+  if(!SERVER_OK || !DATA_NAME) return null;
+  try{
+    const r = await fetch('/' + encodeURIComponent(DATA_NAME) + '?t=' + Date.now(), {cache:'no-store'});
+    if(!r.ok) return null;
+    const j = await r.json();
+    return (j && typeof j === 'object') ? j : null;
+  }catch(e){ return null; }
+}
+/* 要存的东西：整份 #doc（剥掉运行时生成的部分）+ 自建动作库（饮食页是自建食物）。
+   不剥的话，肌肉库/动作库/折叠统计这些由代码画出来的 DOM 会被一起存进去，
+   越存越大，而且下次载入会重复渲染。 */
+function docForSave(){
+  syncInputs(docEl);
+  const clone = docEl.cloneNode(true);
+  clone.querySelectorAll('[contenteditable]').forEach(el=>el.removeAttribute('contenteditable'));
+  clone.querySelectorAll('[data-last]').forEach(el=>el.removeAttribute('data-last'));
+  clone.querySelectorAll('td.rowtools').forEach(td=>{ td.innerHTML = ''; delete td.dataset.init; });
+  clone.querySelectorAll('tr.alt,tr.hid,tr.hit').forEach(tr=>{
+    tr.classList.remove('alt','hid','hit');
+  });
+  clone.querySelectorAll('.msc,.tipmore,.lv').forEach(el=>el.remove());   // 肌肉信息 / 详情入口 / 难度徽章，载入时重建
+  clone.querySelectorAll('td.wcell').forEach(td=>td.classList.remove('wcell','nokg'));  // 重量格的 kg 是运行时加的
+  clone.querySelectorAll('.fold-hint').forEach(el=>{ el.textContent = ''; });   // 折叠栏统计
+  const lb = clone.querySelector('#libBody');       if(lb) lb.innerHTML = '';      // 动作库由代码生成
+  const mb = clone.querySelector('#muscleLibBody'); if(mb) mb.innerHTML = '';      // 肌肉库同上
+  const fb = clone.querySelector('#foodLibBody');   if(fb) fb.innerHTML = '';      // 食物库同上
+  clone.querySelectorAll('.total,.total.stat').forEach(el=>{ el.textContent = ''; });  // 合计是运行时算的
+  clone.querySelectorAll('.mac').forEach(el=>{ el.textContent = '—'; });
+  clone.querySelectorAll('.meal-kcal').forEach(el=>{ el.textContent = '—'; });
+  clone.removeAttribute('data-view');                 // 单屏浏览状态是运行时的
+  clone.querySelectorAll('.sec-on').forEach(el=>el.classList.remove('sec-on'));
+  return clone.innerHTML;
+}
+function collectData(){
+  return {v: 1, t: Date.now(), doc: docForSave(), userlib: userLib};
+}
+function applyData(o){
+  if(!o) return false;
+  let hit = false;
+  if(typeof o.doc === 'string' && o.doc.trim()){ docEl.innerHTML = o.doc; hit = true; LAST_SENT = o.doc; }
+  if(o.userlib && typeof o.userlib === 'object'){ userLib = o.userlib; syncUserLibDom(); hit = true; }
+  return hit;
+}
+/* 上一次写进数据文件的那份内容。只是打开页面、什么都没改的时候，
+   不该把同一份再写一遍 —— 那会每次都改 .data.json 的修改时间，
+   和同步盘、和 git 都没完没了地打架。 */
+let LAST_SENT = null;
 function scheduleServerPush(){
   if(!SERVER_OK) return;
   clearTimeout(pushTimer);
@@ -8285,53 +8344,56 @@ function scheduleServerPush(){
 async function pushToServer(){
   if(!SERVER_OK) return;
   try{
-    const html = buildDocument();
-    const r = await fetch('/__save', {
+    const data = collectData();
+    if(LAST_SENT === data.doc) return;          // 内容没变，不重复写
+    const r = await fetch('/__save_data', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({path: location.pathname, html, base: SERVER_HASH})
+      body: JSON.stringify({path: location.pathname, data: data, base: DATA_HASH})
     });
     const j = await r.json();
     if(j && j.ok){
-      if(j.hash) SERVER_HASH = j.hash;      // 更新基准，供下次保存比对
-      // 文件里现在装的就是这份 —— 存档也跟着换指纹，否则下次打开又误判成「文件更新过」
-      if(lastBuiltDocInner){
-        lastDocPrint = printAfterRoundtrip(lastBuiltDocInner);
-        try{
-          const o = JSON.parse(localStorage.getItem(KEY) || 'null');
-          if(o && typeof o.html === 'string'){
-            o.f = lastDocPrint;
-            localStorage.setItem(KEY, JSON.stringify(o));
-          }
-        }catch(e){}
-      }
-      markSaved(true, '已写回文件 ' + new Date().toTimeString().slice(0,5));
+      if(j.hash) DATA_HASH = j.hash;      // 更新基准，供下次保存比对
+      LAST_SENT = data.doc;
+      markSaved(true, '已保存 ' + new Date().toTimeString().slice(0,5));
     }else if(j && j.conflict){
-      // 磁盘上的文件被别处改过了。再写就把人家冲掉 —— 停手，让用户刷新。
+      // 数据文件被别处改过了（另一个标签页、或同步盘）。再写就把人家冲掉 —— 停手。
       SERVER_OK = false;
-      markSaved(false, '⚠️ 文件已被别处改过 · 刷新页面再改');
+      markSaved(false, '⚠️ 数据文件已被别处改过 · 刷新页面再改');
       if(saveStateEl) saveStateEl.title =
-        '这个页面打开之后，磁盘上的 训练计划.html 又被改过一次。\n' +
+        '这个页面打开之后，磁盘上的 训练计划.data.json 又被改过一次（比如另一个标签页）。\n' +
         '现在这次保存被拦下了，以免把新的改动覆盖掉。\n' +
         '处理办法：刷新页面（F5）重新打开，再继续改。';
-      flash('文件被别处改过了，这次没有写回去 —— 按 F5 刷新后接着改');
+      flash('数据文件被别处改过了，这次没有写进去 —— 按 F5 刷新后接着改');
     }else{
-      markSaved(false, '⚠️ 写回失败：' + ((j && j.error) || '未知错误'));
+      markSaved(false, '⚠️ 保存失败：' + ((j && j.error) || '未知错误'));
     }
   }catch(e){
     SERVER_OK = false;
     markSaved(false, '⚠️ 本地服务已断开 · 已退回浏览器本地保存');
   }
 }
+/* 清空数据文件：把页面退回模板本来的样子。 */
+async function resetServerData(){
+  if(!SERVER_OK) return;
+  try{
+    const r = await fetch('/__reset_data', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({path: location.pathname})
+    });
+    await r.json();
+  }catch(e){}
+}
 /* 用文件里的内容重载：把浏览器里那份旧存档放到一边（可找回），再从文件读一遍。
    页面卡在旧内容、怎么刷都不变的时候，用这个。 */
 function reloadFromFile(){
-  if(!confirm('用文件里的内容重新加载？\n\n' +
-      '浏览器里存的那份会先放进备份（之后可以用「↩ 找回」拿回来），' +
-      '然后页面从文件重新读取。')) return;
+  if(!confirm('重新把数据文件读一遍？\n\n' +
+      '页面会重新从旁边的 .data.json 载入内容 —— 别处改过数据文件' +
+      '（另一个标签页、同步盘）之后用这个。浏览器里那份先放进备份，可用「↩ 找回」拿回来。')) return;
   try{
     const raw = localStorage.getItem(KEY);
-    if(raw) stashLocal(raw, '用文件内容重载');
+    if(raw) stashLocal(raw, '用数据文件重载');
     localStorage.removeItem(KEY);
   }catch(e){}
   noSaveOnUnload = true;
@@ -8344,7 +8406,7 @@ function resetAll(){
   stashLocal(JSON.stringify({f: FILE_PRINT, html: docEl.innerHTML}), '恢复初始');
   noSaveOnUnload = true;    // 别让卸载时又把内容写回去（这是之前「恢复初始」失效的原因）
   try{ localStorage.removeItem(KEY); }catch(e){}
-  location.reload();
+  Promise.resolve(resetServerData()).then(()=>location.reload());
 }
 async function exportHTML(){
   let html;
@@ -8653,31 +8715,48 @@ if(storageOK){
 /* 检测本地服务：双击「启动.bat」时才有。
    连不上的时候一定要说出来 —— 原来这里直接 return，页面右上角照样写着
    「自动保存已开启」，看着像存进文件了，其实只进了浏览器本地存储。 */
-detectServer().then(ok=>{
+detectServer().then(async ok=>{
   SERVER_OK = ok;
-  if(ok){
-    markSaved(true, '本地服务已连接 · 改动会写回文件');
+  if(!ok){
+    markSaved(false, isLocalHost() ? '⚠️ 本地服务未连接 · 改动只存在浏览器里'
+                                   : '⚠️ 没走本地服务 · 改动只存在浏览器里');
     if(saveStateEl){
       saveStateEl.title =
-        '当前通过本地服务运行。\n' +
-        '每处改动都会自动写回 训练计划.html 文件本身。\n' +
-        '把这个文件夹放进同步盘（坚果云 / OneDrive），两台电脑就自动同步了。';
+        '这个页面没有连上本地服务，所以改动只保存在浏览器里，\n' +
+        '不会写进 训练计划.data.json —— 换台电脑、换个浏览器就看不到，\n' +
+        '清一次浏览数据也会没。\n\n' +
+        '要存进文件：双击文件夹里的「启动.bat」，用它新开出来的页面改东西。';
     }
-    // 刚才在确认框里选了「保留你之前的编辑」：把那份写回文件，
-    // 不然文件一直是旧的，下次打开还要再问一遍
-    if(needWriteBack){ needWriteBack = false; userTouched = true; scheduleSave(); }
     return;
   }
-  markSaved(false, isLocalHost() ? '⚠️ 本地服务未连接 · 改动不会写回文件'
-                                 : '⚠️ 没走本地服务 · 改动不会写回文件');
+  markSaved(true, '本地服务已连接 · 改动会存进数据文件');
   if(saveStateEl){
     saveStateEl.title =
-      '这个页面没有连上本地服务，所以改动只保存在浏览器里，\n' +
-      '训练计划.html 文件本身不会更新 —— 换台电脑、换个浏览器就看不到，\n' +
-      '清一次浏览数据也会没。\n\n' +
-      '要写回文件：关掉这个页面，双击文件夹里的「启动.bat」，\n' +
-      '用它新开出来的页面改东西。';
+      '当前通过本地服务运行。\n' +
+      '每处改动都会自动存进 训练计划.data.json —— 页面的 HTML 是模板，不会被改。\n' +
+      '把这两个文件放进同步盘（坚果云 / OneDrive），两台电脑就自动同步了。';
   }
+  // 数据文件是准的；浏览器里那份只在「服务没开的时候改过、而且更新」时才优先
+  const tpl = docEl.innerHTML;
+  const local = readLocal();
+  const data = await fetchData();
+  let applied = false;
+  if(data && typeof data.doc === 'string' && data.doc.trim()){
+    const localNewer = local && local.t && data.t && local.t > data.t + 5000 &&
+                       local.doc && local.doc !== data.doc;
+    if(localNewer){
+      applyData(local);
+      applied = true;
+      userTouched = true; scheduleSave();     // 把离线那份补写回数据文件
+    }else{
+      applied = applyData(data);
+    }
+  }else if(local && local.doc && local.doc.trim() && local.doc !== tpl){
+    applied = applyData(local);               // 还没数据文件：拿浏览器里那份建一份
+    userTouched = true; scheduleSave();
+  }
+  if(applied) refreshAfterRestore();
+  else if(needWriteBack){ needWriteBack = false; }
 });
 window.addEventListener('beforeunload', ()=>saveLocal(true));
 </script></body></html>

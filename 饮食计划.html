@@ -1749,11 +1749,12 @@ function saveLocal(silent){
   if(!storageOK || noSaveOnUnload) return;
   try{
     syncInputs(docEl);
-    localStorage.setItem(KEY, JSON.stringify({f: FILE_PRINT, html: docEl.innerHTML}));
+    localStorage.setItem(KEY, JSON.stringify(
+      {t: Date.now(), doc: docForSave(), userfood: userFood}));
     // 没连上本地服务时，改动只落在浏览器里 —— 这一句必须说实话。
     // 写「已保存」会让人以为已经进了文件，而实际上换个浏览器就什么都没有。
     if(!SERVER_OK)
-      markSaved(false, '⚠️ 只存在浏览器里 · 未写回文件 · ' + new Date().toTimeString().slice(0,5));
+      markSaved(false, '⚠️ 只存在浏览器里 · 没进数据文件 · ' + new Date().toTimeString().slice(0,5));
     if(!silent) flash('已保存到本机浏览器');
   }catch(e){ markSaved(false, '⚠️ 保存失败'); }
 }
@@ -1825,25 +1826,24 @@ function restoreBackup(){
   markTouched();              // 触发一次保存，把找回的内容写回文件
   flash('已找回 ' + when + ' 那份编辑');
 }
-function loadLocal(){
+/* 浏览器里那份只是"服务没开时的兜底"，不再是唯一副本 ——
+   所以模板更新后不用再弹「文件已经更新过」，直接读就好。 */
+function readLocal(){
   try{
     const raw = localStorage.getItem(KEY);
-    if(!raw) return false;
-    let o = null;
-    try{ o = JSON.parse(raw); }catch(e){}
-    if(!o || typeof o.html !== 'string') return false;
-    if(o.f === FILE_PRINT){ docEl.innerHTML = o.html; return true; }
-    const msg = '这个文件已经更新过（可能是新版本），' + NL +
-                '但本机还存着一份你之前的编辑。' + NL + NL +
-                '【确定】保留你之前的编辑' + NL +
-                '【取消】改用文件里的新内容' + NL + NL +
-                '不管选哪个，本机那份都会先备份一份；' + NL +
-                '选错了可以用工具栏的「找回上次丢弃的编辑」拿回来。';
-    if(confirm(msg)){ docEl.innerHTML = o.html; return true; }
-    stashLocal(raw, '改用文件里的新内容');    // 丢弃之前先留底
-    return false;
-  }catch(e){}
-  return false;
+    if(!raw) return null;
+    const o = JSON.parse(raw);
+    if(!o) return null;
+    const doc = typeof o.doc === 'string' ? o.doc : (typeof o.html === 'string' ? o.html : '');
+    return {doc: doc, t: o.t || 0, lib: o.userfood || null};
+  }catch(e){ return null; }
+}
+function loadLocal(){
+  const o = readLocal();
+  if(!o || !o.doc) return false;
+  docEl.innerHTML = o.doc;
+  if(o.lib && typeof o.lib === 'object'){ userFood = o.lib; try{ localStorage.setItem(UKEY, JSON.stringify(userFood)); }catch(e){} }
+  return true;
 }
 function scheduleSave(){
   if(!userTouched) return;
@@ -1854,7 +1854,13 @@ function scheduleSave(){
 
 /* ---------- 本地服务：把内容写回文件本身 ----------
    双击「启动.bat」时才有。直接双击 HTML 时自动退回浏览器本地保存。 */
-let SERVER_OK = false, pushTimer = null, SERVER_HASH = "";
+/* ==================== 本地服务：个人数据写进旁边的 .data.json ====================
+   页面 HTML 本身是模板（所以可以放进 git、公开出去）；
+   你填的东西 —— 方案、体重记录、个人档案、自建动作 —— 存在同目录的数据文件里：
+       训练计划.html  ↔  训练计划.data.json
+   双击「启动.bat」时页面连上本机服务，保存就写那个数据文件，HTML 一个字节都不动。
+   直接双击 HTML（没走 .bat）时这条路不通，退回浏览器本地保存。 */
+let SERVER_OK = false, pushTimer = null, SERVER_HASH = '', DATA_HASH = '', DATA_NAME = '';
 function isLocalHost(){
   return /^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname) &&
          /^https?:$/.test(location.protocol);
@@ -1864,53 +1870,118 @@ async function detectServer(){
   try{
     const r = await fetch('/__ping?path=' + encodeURIComponent(decodeURIComponent(location.pathname)), {cache:'no-store'});
     const j = await r.json();
-    if(j && j.hash) SERVER_HASH = j.hash;
+    if(j && j.hash) SERVER_HASH = j.hash;           // 模板文件"我打开时长这样"
+    if(j && j.dataHash) DATA_HASH = j.dataHash;     // 数据文件"我打开时长这样"
+    if(j && j.dataFile) DATA_NAME = j.dataFile;
     return !!(j && j.ok);
   }catch(e){ return false; }
 }
+/* 读旁边的数据文件。没有就是第一次用，返回 null。 */
+async function fetchData(){
+  if(!SERVER_OK || !DATA_NAME) return null;
+  try{
+    const r = await fetch('/' + encodeURIComponent(DATA_NAME) + '?t=' + Date.now(), {cache:'no-store'});
+    if(!r.ok) return null;
+    const j = await r.json();
+    return (j && typeof j === 'object') ? j : null;
+  }catch(e){ return null; }
+}
+/* 要存的东西：整份 #doc（剥掉运行时生成的部分）+ 自建动作库（饮食页是自建食物）。
+   不剥的话，肌肉库/动作库/折叠统计这些由代码画出来的 DOM 会被一起存进去，
+   越存越大，而且下次载入会重复渲染。 */
+function docForSave(){
+  syncInputs(docEl);
+  const clone = docEl.cloneNode(true);
+  clone.querySelectorAll('[contenteditable]').forEach(el=>el.removeAttribute('contenteditable'));
+  clone.querySelectorAll('[data-last]').forEach(el=>el.removeAttribute('data-last'));
+  clone.querySelectorAll('td.rowtools').forEach(td=>{ td.innerHTML = ''; delete td.dataset.init; });
+  clone.querySelectorAll('tr.alt,tr.hid,tr.hit').forEach(tr=>{
+    tr.classList.remove('alt','hid','hit');
+  });
+  clone.querySelectorAll('.msc,.tipmore,.lv').forEach(el=>el.remove());   // 肌肉信息 / 详情入口 / 难度徽章，载入时重建
+  clone.querySelectorAll('td.wcell').forEach(td=>td.classList.remove('wcell','nokg'));  // 重量格的 kg 是运行时加的
+  clone.querySelectorAll('.fold-hint').forEach(el=>{ el.textContent = ''; });   // 折叠栏统计
+  const lb = clone.querySelector('#libBody');       if(lb) lb.innerHTML = '';      // 动作库由代码生成
+  const mb = clone.querySelector('#muscleLibBody'); if(mb) mb.innerHTML = '';      // 肌肉库同上
+  const fb = clone.querySelector('#foodLibBody');   if(fb) fb.innerHTML = '';      // 食物库同上
+  clone.querySelectorAll('.total,.total.stat').forEach(el=>{ el.textContent = ''; });  // 合计是运行时算的
+  clone.querySelectorAll('.mac').forEach(el=>{ el.textContent = '—'; });
+  clone.querySelectorAll('.meal-kcal').forEach(el=>{ el.textContent = '—'; });
+  clone.removeAttribute('data-view');                 // 单屏浏览状态是运行时的
+  clone.querySelectorAll('.sec-on').forEach(el=>el.classList.remove('sec-on'));
+  return clone.innerHTML;
+}
+function collectData(){
+  return {v: 1, t: Date.now(), doc: docForSave(), userfood: userFood};
+}
+function applyData(o){
+  if(!o) return false;
+  let hit = false;
+  if(typeof o.doc === 'string' && o.doc.trim()){ docEl.innerHTML = o.doc; hit = true; LAST_SENT = o.doc; }
+  if(o.userfood && typeof o.userfood === 'object'){ userFood = o.userfood; try{ localStorage.setItem(UKEY, JSON.stringify(userFood)); }catch(e){} hit = true; }
+  return hit;
+}
+/* 上一次写进数据文件的那份内容。只是打开页面、什么都没改的时候，
+   不该把同一份再写一遍 —— 那会每次都改 .data.json 的修改时间，
+   和同步盘、和 git 都没完没了地打架。 */
+let LAST_SENT = null;
 function scheduleServerPush(){
   if(!SERVER_OK) return;
   clearTimeout(pushTimer);
-  pushTimer = setTimeout(pushToServer, 1200);
+  pushTimer = setTimeout(pushToServer, 1200);   // 比本地存档再慢一点，少写几次盘
 }
 async function pushToServer(){
   if(!SERVER_OK) return;
   try{
-    const html = buildDocument();
-    const r = await fetch('/__save', {
+    const data = collectData();
+    if(LAST_SENT === data.doc) return;          // 内容没变，不重复写
+    const r = await fetch('/__save_data', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({path: location.pathname, html, base: SERVER_HASH})
+      body: JSON.stringify({path: location.pathname, data: data, base: DATA_HASH})
     });
     const j = await r.json();
     if(j && j.ok){
-      if(j.hash) SERVER_HASH = j.hash;
-      markSaved(true, '已写回文件 ' + new Date().toTimeString().slice(0,5));
+      if(j.hash) DATA_HASH = j.hash;      // 更新基准，供下次保存比对
+      LAST_SENT = data.doc;
+      markSaved(true, '已保存 ' + new Date().toTimeString().slice(0,5));
     }else if(j && j.conflict){
+      // 数据文件被别处改过了（另一个标签页、或同步盘）。再写就把人家冲掉 —— 停手。
       SERVER_OK = false;
-      markSaved(false, '⚠️ 文件已被别处改过 · 刷新页面再改');
+      markSaved(false, '⚠️ 数据文件已被别处改过 · 刷新页面再改');
       if(saveStateEl) saveStateEl.title =
-        '这个页面打开之后，磁盘上的 饮食计划.html 又被改过一次。\n' +
-        '这次保存被拦下了，以免覆盖掉新的改动。\n' +
+        '这个页面打开之后，磁盘上的 饮食计划.data.json 又被改过一次（比如另一个标签页）。\n' +
+        '现在这次保存被拦下了，以免把新的改动覆盖掉。\n' +
         '处理办法：刷新页面（F5）重新打开，再继续改。';
-      flash('文件被别处改过了，这次没有写回去 —— 按 F5 刷新后接着改');
+      flash('数据文件被别处改过了，这次没有写进去 —— 按 F5 刷新后接着改');
     }else{
-      markSaved(false, '⚠️ 写回失败：' + ((j && j.error) || '未知错误'));
+      markSaved(false, '⚠️ 保存失败：' + ((j && j.error) || '未知错误'));
     }
   }catch(e){
     SERVER_OK = false;
     markSaved(false, '⚠️ 本地服务已断开 · 已退回浏览器本地保存');
   }
 }
-
+/* 清空数据文件：把页面退回模板本来的样子。 */
+async function resetServerData(){
+  if(!SERVER_OK) return;
+  try{
+    const r = await fetch('/__reset_data', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({path: location.pathname})
+    });
+    await r.json();
+  }catch(e){}
+}
 /* 用文件里的内容重载：把浏览器里那份旧存档放到一边（可找回），再从文件读一遍。 */
 function reloadFromFile(){
-  if(!confirm('用文件里的内容重新加载？\n\n' +
-      '浏览器里存的那份会先放进备份（之后可以用「↩ 找回」拿回来），' +
-      '然后页面从文件重新读取。')) return;
+  if(!confirm('重新把数据文件读一遍？\n\n' +
+      '页面会重新从旁边的 .data.json 载入内容 —— 别处改过数据文件' +
+      '（另一个标签页、同步盘）之后用这个。浏览器里那份先放进备份，可用「↩ 找回」拿回来。')) return;
   try{
     const raw = localStorage.getItem(KEY);
-    if(raw) stashLocal(raw, '用文件内容重载');
+    if(raw) stashLocal(raw, '用数据文件重载');
     localStorage.removeItem(KEY);
   }catch(e){}
   noSaveOnUnload = true;
@@ -1921,7 +1992,7 @@ function resetAll(){
   stashLocal(JSON.stringify({f: FILE_PRINT, html: docEl.innerHTML}), '恢复初始');
   noSaveOnUnload = true;
   try{ localStorage.removeItem(KEY); }catch(e){}
-  location.reload();
+  Promise.resolve(resetServerData()).then(()=>location.reload());
 }
 /* ---------- 导出 / 导入：把"自己的一份"拿出来和放回去 ---------- */
 function exportHTML(){
@@ -1956,6 +2027,7 @@ function importHTML(file){
       injectRowTools();
       calc();
       saveLocal(true);
+      markTouched();
       flash('已导入');
     }catch(err){ flash('导入失败：' + (err && err.message || err)); }
   };
@@ -1980,6 +2052,7 @@ let userFood = {};
 try { userFood = JSON.parse(localStorage.getItem(UKEY) || '{}') || {}; } catch(e){ userFood = {}; }
 function saveUserFood(){
   try{ localStorage.setItem(UKEY, JSON.stringify(userFood)); }catch(e){}
+  if(typeof scheduleSave === 'function' && userTouched) scheduleSave();
 }
 
 function foodOptions(){
@@ -2679,25 +2752,42 @@ if(storageOK){
 }
 /* 连不上的时候一定要说出来 —— 原来这里直接 return，页面右上角照样写着
    「自动保存已开启」，看着像存进文件了，其实只进了浏览器本地存储。 */
-detectServer().then(ok=>{
+detectServer().then(async ok=>{
   SERVER_OK = ok;
-  if(ok){
-    markSaved(true, '本地服务已连接 · 改动会写回文件');
+  if(!ok){
+    markSaved(false, isLocalHost() ? '⚠️ 本地服务未连接 · 改动只存在浏览器里'
+                                   : '⚠️ 没走本地服务 · 改动只存在浏览器里');
     if(saveStateEl) saveStateEl.title =
-      '当前通过本地服务运行。\n每处改动都会自动写回 饮食计划.html 文件本身。\n' +
-      '把这个文件夹放进同步盘（坚果云 / OneDrive），两台电脑就自动同步了。';
+      '这个页面没有连上本地服务，所以改动只保存在浏览器里，\n' +
+      '不会写进 饮食计划.data.json —— 换台电脑、换个浏览器就看不到，\n' +
+      '清一次浏览数据也会没。\n\n' +
+      '要存进文件：双击文件夹里的「启动.bat」，用它新开出来的页面改东西。';
     return;
   }
-  markSaved(false, isLocalHost() ? '⚠️ 本地服务未连接 · 改动不会写回文件'
-                                 : '⚠️ 没走本地服务 · 改动不会写回文件');
+  markSaved(true, '本地服务已连接 · 改动会存进数据文件');
   if(saveStateEl) saveStateEl.title =
-    '这个页面没有连上本地服务，所以改动只保存在浏览器里，\n' +
-    '饮食计划.html 文件本身不会更新 —— 换台电脑、换个浏览器就看不到，\n' +
-    '清一次浏览数据也会没。\n\n' +
-    '要写回文件：关掉这个页面，双击文件夹里的「启动.bat」，\n' +
-    '用它新开出来的页面改东西。';
+    '当前通过本地服务运行。\n每处改动都会自动存进 饮食计划.data.json —— 页面的 HTML 是模板，不会被改。\n' +
+    '把这两个文件放进同步盘（坚果云 / OneDrive），两台电脑就自动同步了。';
+  const tpl = docEl.innerHTML;
+  const local = readLocal();
+  const data = await fetchData();
+  let applied = false;
+  if(data && typeof data.doc === 'string' && data.doc.trim()){
+    const localNewer = local && local.t && data.t && local.t > data.t + 5000 &&
+                       local.doc && local.doc !== data.doc;
+    if(localNewer){
+      applyData(local);
+      applied = true;
+      userTouched = true; scheduleSave();
+    }else{
+      applied = applyData(data);
+    }
+  }else if(local && local.doc && local.doc.trim() && local.doc !== tpl){
+    applied = applyData(local);
+    userTouched = true; scheduleSave();
+  }
+  if(applied){ injectRowTools(); calc(); }
 });
-
 /* 回到顶部按钮 */
 window.addEventListener('scroll', ()=>{
   const b = document.getElementById('toTop');
