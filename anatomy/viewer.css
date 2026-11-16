@@ -1,0 +1,140 @@
+#anatomy-explorer{max-width:1240px;margin:0 auto 72px;padding:0 24px;color:#ebf1f1;--an-accent:#81e5c8;--an-line:rgba(204,230,225,.12);--an-muted:#a1b3b8;color-scheme:dark}
+#anatomy-explorer *{box-sizing:border-box}
+#anatomy-explorer button,#anatomy-explorer input{font:inherit}
+#anatomy-explorer button{background:transparent;color:#cedbdc;border:1px solid var(--an-line);border-radius:8px;cursor:pointer;transition:background .18s,color .18s,border-color .18s;line-height:1.5}
+#anatomy-explorer button:hover{color:#fff;background:#243936;border-color:#638579}
+#anatomy-explorer button:focus-visible,#anatomy-explorer input:focus-visible,#anatomy-explorer summary:focus-visible{outline:2px solid var(--an-accent);outline-offset:3px}
+#anatomy-explorer button:disabled{opacity:.45;cursor:wait}
+#anatomy-explorer button[aria-pressed=true]{color:#b0f6df;background:rgba(129,229,200,.11);border-color:rgba(129,229,200,.4)}
+#anatomy-explorer .an-shell{overflow:hidden;background:#111e23;border:1px solid #24353b;border-radius:22px;box-shadow:0 22px 65px rgba(13,30,37,.14)}
+#anatomy-explorer .an-heading{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:31px 32px 26px;border-bottom:1px solid var(--an-line);background:linear-gradient(105deg,rgba(100,192,160,.055),transparent 70%)}
+#anatomy-explorer .an-eyebrow{color:var(--an-accent);font-size:10px;letter-spacing:2.5px;font-weight:600;display:flex;align-items:center;gap:9px}
+#anatomy-explorer .an-eyebrow::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--an-accent);box-shadow:0 0 10px #81e5c844}
+#anatomy-explorer h2{border:0;padding:0;margin:8px 0 6px;color:#f0f5f3;font-size:27px;letter-spacing:1px;font-weight:650;line-height:1.4}
+#anatomy-explorer .an-subtitle{font-size:12px;color:var(--an-muted);margin:0;line-height:1.7}
+#anatomy-explorer .an-badge{display:flex;flex-direction:column;gap:4px;align-items:flex-end;white-space:nowrap;font-size:11px;color:#b2c6c7}
+#anatomy-explorer .an-badge strong{font-size:13px;color:#dfebe6;letter-spacing:.5px;font-weight:500}
+#anatomy-explorer .an-badge small{font-size:10px;color:#829a9d}
+#anatomy-explorer .an-body{display:grid;grid-template-columns:230px minmax(0,1fr) 285px;min-height:680px}
+#anatomy-explorer .an-browser{padding:20px 16px;border-right:1px solid var(--an-line);background:#132127}
+#anatomy-explorer .an-label{font-size:10px;letter-spacing:1.7px;text-transform:uppercase;color:#829b9e;margin-bottom:12px}
+#anatomy-explorer .an-search{display:flex;align-items:center;gap:8px;border:1px solid #33464b;border-radius:8px;padding:8px 10px;margin-bottom:13px;color:#81989e}
+#anatomy-explorer .an-search input{width:100%;min-width:0;color:#d8e5e5;font-size:12px;background:transparent;border:0;outline:none;padding:0;line-height:1.6}
+#anatomy-explorer .an-search input::placeholder{color:#879a9f}
+#anatomy-explorer .an-tabs{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:14px}
+#anatomy-explorer .an-tabs button{padding:5px 9px;font-size:11px;border-color:transparent;background:#1e3035}
+#anatomy-explorer .an-list{height:493px;overflow-y:auto;scrollbar-width:thin;scrollbar-color:#37504f transparent;padding-right:4px}
+#anatomy-explorer .an-list button{display:block;width:100%;text-align:left;border:0;border-radius:7px;padding:10px 11px;margin-bottom:3px;background:transparent;position:relative}
+#anatomy-explorer .an-list button[aria-pressed=true]{background:#243b38;color:#a3f0d4}
+#anatomy-explorer .an-list button[aria-pressed=true]::before{content:'';position:absolute;left:0;top:14px;height:20px;width:2px;background:var(--an-accent)}
+#anatomy-explorer .an-list button strong{font-size:12px;font-weight:500;display:block}
+#anatomy-explorer .an-list button small{font-size:9px;line-height:1.5;color:#8ca3a7;display:block;letter-spacing:.1px;margin-top:3px}
+#anatomy-explorer .an-empty{font-size:12px;color:var(--an-muted);padding:12px 4px}
+#anatomy-explorer .an-center{min-width:0;position:relative;background:radial-gradient(ellipse at 50% 40%,#263c40 0%,#16272e 44%,#101c22 85%);display:flex;flex-direction:column}
+#anatomy-explorer .an-stage{position:relative;flex:1;min-height:590px;overflow:hidden}
+#anatomy-explorer .an-stage::before{content:'';position:absolute;inset:0;pointer-events:none;opacity:.12;background-image:linear-gradient(#a0c4c21a 1px,transparent 1px),linear-gradient(90deg,#a0c4c21a 1px,transparent 1px);background-size:46px 46px;mask-image:radial-gradient(ellipse at center,#000,transparent 75%)}
+#anatomy-explorer canvas{position:absolute;inset:0;width:100%;height:100%;display:block;touch-action:none}
+#anatomy-explorer .an-viewport-tag{position:absolute;top:20px;left:20px;font-size:9px;letter-spacing:1.7px;color:#8babae;pointer-events:none;z-index:2}
+#anatomy-explorer .an-viewport-tag span{display:block;font-size:11px;letter-spacing:0;color:#d5e5e0;margin-top:5px}
+#anatomy-explorer .an-tools{position:absolute;right:13px;top:17px;z-index:3;display:flex;gap:7px}
+#anatomy-explorer .an-tools button{padding:0;width:32px;height:32px;font-size:17px;line-height:1;background:rgba(17,30,35,.8)}
+#anatomy-explorer .an-labels{position:absolute;inset:0;pointer-events:none;z-index:2}
+#anatomy-explorer .an-callout{position:absolute;pointer-events:auto;font-size:10px!important;white-space:nowrap;padding:4px 8px!important;background:#142b2dee!important;border-color:#507c7166!important;box-shadow:0 2px 12px #00191b66;transform:translate(-50%,-50%);max-width:130px}
+#anatomy-explorer .an-leaders{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none}
+#anatomy-explorer .an-leaders line{stroke:#9dccb9;stroke-width:.7;opacity:.55}
+#anatomy-explorer .an-leaders circle{fill:#c7f5e4;opacity:.8}
+#anatomy-explorer .an-callout[aria-pressed=true]{color:#aef6df!important;border-color:#81e5c880!important}
+#anatomy-explorer .an-loading{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:32px;gap:12px;background:#14242bcc;z-index:5;text-align:center;font-size:12px;color:#c2d9d4}
+#anatomy-explorer .an-loading[hidden]{display:none}
+#anatomy-explorer .an-spinner{width:30px;height:30px;border-radius:50%;border:1px solid #81e5c822;border-top-color:#81e5c8;animation:an-spin 1s linear infinite}
+@keyframes an-spin{to{transform:rotate(360deg)}}
+#anatomy-explorer .an-hint{position:absolute;bottom:16px;left:12px;right:12px;text-align:center;font-size:10px;color:#a0b4b9;pointer-events:none;letter-spacing:.4px}
+#anatomy-explorer .an-controls{padding:13px 16px;border-top:1px solid var(--an-line);display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;background:#142229}
+#anatomy-explorer .an-view-buttons{display:flex;gap:4px}
+#anatomy-explorer .an-view-buttons button{font-size:11px;padding:5px 10px}
+#anatomy-explorer .an-auto{font-size:10px;padding:5px 9px}
+#anatomy-explorer .an-detail{padding:25px 22px;background:#142228;border-left:1px solid var(--an-line);min-width:0}
+#anatomy-explorer .an-selected-badge{font-size:10px;color:var(--an-accent);display:flex;align-items:center;gap:7px;margin-bottom:12px}
+#anatomy-explorer .an-selected-badge::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--an-accent)}
+#anatomy-explorer h3{font-size:23px;line-height:1.4;margin:0;color:#e7f3ee;font-weight:550;letter-spacing:.5px}
+#anatomy-explorer .an-latin{font-size:11px;color:#96afb4;margin:5px 0 15px;line-height:1.6;overflow-wrap:anywhere}
+#anatomy-explorer .an-tags{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:19px}
+#anatomy-explorer .an-tags span{font-size:10px;padding:3px 7px;border:1px solid #36484c;border-radius:5px;color:#aec3c4}
+#anatomy-explorer .an-detail-row{margin:0 0 17px}
+#anatomy-explorer .an-detail-row dt{color:#829c9f;font-size:10px;letter-spacing:1px;margin-bottom:5px}
+#anatomy-explorer .an-detail-row dd{font-size:12px;line-height:1.85;color:#ccdadc;margin:0}
+#anatomy-explorer .an-focus{width:100%;font-size:12px;padding:9px 12px;margin-bottom:20px;border-color:#568a77!important;color:#abefd5!important;background:#213a33!important}
+#anatomy-explorer .an-mode-label{margin-top:5px;font-size:10px;color:#829c9f}
+#anatomy-explorer .an-modes{display:flex;gap:5px;margin:7px 0 20px}
+#anatomy-explorer .an-modes button{flex:1;padding:6px 4px;font-size:10px}
+#anatomy-explorer .an-exercises{border-top:1px solid var(--an-line);padding-top:18px}
+#anatomy-explorer .an-exercises-head{font-size:10px;color:#829c9f;margin-bottom:9px;letter-spacing:.6px}
+#anatomy-explorer .an-exercises button{width:100%;display:flex;justify-content:space-between;align-items:center;gap:6px;padding:8px 0;font-size:11px;border:0;border-bottom:1px solid #b7ddce0a;border-radius:0;text-align:left}
+#anatomy-explorer .an-exercises button span{color:#a2cdb9;font-size:13px}
+#anatomy-explorer .an-structure{margin-top:18px;font-size:9px;color:#91aaac;line-height:1.7;overflow-wrap:anywhere}
+#anatomy-explorer .an-footer{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 22px;border-top:1px solid var(--an-line);font-size:10px;color:#90a9ac;background:#111e23}
+#anatomy-explorer .an-legend{display:flex;align-items:center;gap:15px;flex-wrap:wrap}
+#anatomy-explorer .an-legend span{display:flex;align-items:center;gap:5px}
+#anatomy-explorer .an-dot{height:5px;width:5px;border-radius:50%;background:#c7847b;display:inline-block}
+#anatomy-explorer .an-dot.selected{background:#81e5c8}
+#anatomy-explorer .an-dot.bone{background:#d3ccb4}
+#anatomy-explorer .an-sources{padding:13px 22px;font-size:10px;color:#8ba3a7;border-top:1px solid var(--an-line);line-height:1.8;background:#101b21}
+#anatomy-explorer .an-sources summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:12px;color:#9fb6b8}
+#anatomy-explorer .an-sources summary::-webkit-details-marker{display:none}
+#anatomy-explorer .an-sources summary::after{content:'＋';color:#a3c4b7}
+#anatomy-explorer .an-sources[open] summary::after{content:'−'}
+#anatomy-explorer .an-sources p{margin:10px 0 0;font-size:10px;color:#a0b4b9}
+#anatomy-explorer a{color:#a1dfca;text-decoration:underline;text-underline-offset:3px}
+#anatomy-explorer .an-dialog{max-width:520px;width:calc(100% - 32px);max-height:80vh;overflow-y:auto;color:#d5e4e0;background:#18292e;border:1px solid #406158;border-radius:16px;padding:26px;font-size:13px;line-height:1.8}
+#anatomy-explorer .an-dialog::backdrop{background:#061319aa;backdrop-filter:blur(5px)}
+#anatomy-explorer .an-dialog h3{font-size:20px;margin-bottom:15px}
+#anatomy-explorer .an-dialog .an-dialog-close{float:right;padding:2px 8px}
+#anatomy-explorer .an-dialog .an-dialog-text{clear:both;margin:16px 0 0;white-space:pre-line}
+#anatomy-explorer .an-dialog .an-dialog-text p{margin:10px 0}
+#anatomy-explorer:fullscreen{max-width:none;margin:0;width:100%;height:100%;padding:14px;background:#0c171d;overflow:auto}
+#anatomy-explorer:fullscreen .an-shell{min-height:calc(100vh - 28px)}
+#anatomy-explorer:fullscreen .an-body{min-height:calc(100vh - 225px)}
+@media(min-width:1060px){#anatomy-explorer .an-stage{min-height:614px}}
+@media(max-width:1059px){#anatomy-explorer .an-body{grid-template-columns:180px minmax(0,1fr) 240px}#anatomy-explorer .an-browser{padding:17px 12px}#anatomy-explorer .an-detail{padding:22px 16px}#anatomy-explorer .an-stage{min-height:600px}#anatomy-explorer .an-heading{padding:25px}}
+@media(max-width:800px){#anatomy-explorer .an-body{grid-template-columns:minmax(0,1fr) 260px}#anatomy-explorer .an-browser{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr;gap:0 16px;border-right:0;border-bottom:1px solid var(--an-line);padding:15px 20px}#anatomy-explorer .an-browser>.an-label{display:none}#anatomy-explorer .an-search{margin:0}#anatomy-explorer .an-tabs{margin:0;align-items:center}#anatomy-explorer .an-list{grid-column:1/-1;height:85px;display:flex;gap:5px;overflow:auto;margin-top:12px;padding-bottom:5px}#anatomy-explorer .an-list button{flex:0 0 auto;width:140px;margin:0}#anatomy-explorer .an-stage{min-height:580px}#anatomy-explorer .an-detail{padding-top:23px}#anatomy-explorer .an-badge{display:none}#anatomy-explorer .an-viewport-tag{font-size:0;letter-spacing:0}#anatomy-explorer .an-viewport-tag span{margin-top:3px}}
+@media(max-width:660px){#anatomy-explorer{padding:0 12px;margin-bottom:32px}#anatomy-explorer .an-shell{border-radius:16px}#anatomy-explorer .an-heading{padding:24px 20px}#anatomy-explorer h2{font-size:24px}#anatomy-explorer .an-subtitle{font-size:11px}#anatomy-explorer .an-body{display:flex;flex-direction:column}#anatomy-explorer .an-browser{grid-template-columns:1fr;padding:15px}.an-browser .an-tabs{margin-top:10px!important}#anatomy-explorer .an-list{height:72px;margin-top:10px}#anatomy-explorer .an-list button{padding:8px 11px;width:132px}#anatomy-explorer .an-stage{height:580px;min-height:580px;flex:none}#anatomy-explorer .an-detail{border-left:0;border-top:1px solid var(--an-line);padding:22px}#anatomy-explorer .an-detail-info{display:grid;grid-template-columns:1fr 1fr;gap:0 20px}#anatomy-explorer .an-detail-info .an-detail-row:last-child{grid-column:1/-1}#anatomy-explorer .an-exercises{margin-top:0}#anatomy-explorer .an-footer{padding:13px 16px;flex-wrap:wrap;gap:8px}#anatomy-explorer .an-sources{padding:13px 16px}#anatomy-explorer .an-hint{font-size:9px}#anatomy-explorer .an-controls{padding:12px 14px}}
+@media(prefers-reduced-motion:reduce){#anatomy-explorer *{animation:none!important;transition:none!important}}
+@media print{#anatomy-explorer{display:none!important}}
+/* Shared health content in the library and anatomy detail panel. */
+.mh-health{font-size:12px;line-height:1.85;color:#344253}
+.mh-health p,.mh-topic p{margin:9px 0}
+.mh-health p b,.mh-topic p b{display:block;font-size:10px;letter-spacing:.5px;color:#68798c;font-weight:600}
+.mh-goal{font-size:11px;font-weight:600;color:#176959;padding:5px 8px;background:#edf7f3;border-radius:5px;margin-top:8px}
+.mh-evidence{border-top:1px solid #e4eaf0;padding-top:8px;margin-top:11px}
+.mh-evidence summary{cursor:pointer;font-size:11px;color:#397467;line-height:1.8}
+.mh-source-links{display:flex;flex-direction:column;gap:4px;margin:9px 0 2px;overflow-wrap:anywhere}
+.mh-source-links a{font-size:10px;line-height:1.7;color:#367c72;text-decoration:none}
+.mh-source-links a:hover{text-decoration:underline}
+.mh-overview{margin:15px 0 25px;padding:20px;background:linear-gradient(125deg,#f0f8f5,#f4f7fc);border:1px solid #dce9e3;border-radius:12px}
+.mh-overview-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:14px}
+.mh-overview-heading>span{font-size:16px;font-weight:650;color:#235648}
+.mh-overview-heading small{font-size:10px;color:#6f8290}
+.mh-topic-grid{columns:2;column-gap:10px}
+.mh-topic{display:inline-block;width:100%;break-inside:avoid;margin-bottom:10px;min-width:0;border:1px solid #dbe6e1;border-radius:8px;background:#ffffffc9;padding:12px 14px;font-size:12px;line-height:1.85;color:#344253}
+.mh-topic>summary{font-size:13px;font-weight:600;cursor:pointer;color:#2b5e50}
+.mh-topic>summary>span{display:block;margin:3px 0 0 15px;color:#81948b;font-size:10px;font-weight:400}
+.mh-topic[open]>summary{padding-bottom:8px;border-bottom:1px solid #e1ebe6}
+.mh-muscle-chips{display:flex;flex-wrap:wrap;gap:6px;margin:12px 0}
+.mh-muscle-chips button{font:inherit;font-size:11px;border:1px solid #bfd9cf;border-radius:20px;padding:4px 9px;background:#f0f8f4;color:#256950;cursor:pointer}
+.mh-muscle-chips button:hover{background:#dceee6}
+.mh-topic .mh-caution{font-size:11px;color:#82714c;border-left:2px solid #c1ac78;padding-left:8px}
+.mh-overview-note{font-size:11px;line-height:1.8;color:#718376;margin:14px 0 0}
+#anatomy-explorer .an-health-filter{display:block;font-size:10px;color:#91a9aa;margin:0 0 14px;line-height:1.7}
+#anatomy-explorer .an-health-filter select{display:block;width:100%;margin-top:5px;font:inherit;font-size:12px;color:#c9e9df;background:#213533;border:1px solid #3c5951;border-radius:7px;padding:8px 6px}
+#anatomy-explorer .an-health-filter select:focus-visible{outline:2px solid var(--an-accent);outline-offset:2px}
+#anatomy-explorer .an-list{height:415px}
+#anatomy-explorer .an-detail{max-height:900px;overflow-y:auto;scrollbar-width:thin;scrollbar-color:#37504f transparent}
+#anatomy-explorer .an-health-detail{margin:0 0 22px}
+#anatomy-explorer .mh-health{color:#ccdadc}
+#anatomy-explorer .mh-health p b{color:#8eb4a9}
+#anatomy-explorer .mh-goal{color:#b0eed7;background:#233d35;border:1px solid #35584b}
+#anatomy-explorer .mh-evidence{border-color:var(--an-line)}
+#anatomy-explorer .mh-evidence summary,#anatomy-explorer .mh-source-links a{color:#90ccba}
+@media(max-width:800px){#anatomy-explorer .an-health-filter{grid-column:1/-1;display:flex;align-items:center;gap:12px;margin:10px 0 0}#anatomy-explorer .an-health-filter select{width:auto;flex:1;margin:0;min-width:0}#anatomy-explorer .an-list{height:85px}}
+@media(max-width:660px){.mh-topic-grid{columns:1}.mh-overview{padding:14px}#anatomy-explorer .an-list{height:72px}#anatomy-explorer .an-detail{max-height:none;overflow:visible}}
+@media print{.mh-evidence,.mh-topic{break-inside:avoid}.mh-muscle-chips button{border:0;padding:0}.mh-source-links a{color:#333}}

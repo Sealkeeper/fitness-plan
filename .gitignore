@@ -1,0 +1,28 @@
+# 本地版本备份，不上传
+*.备份*.html
+训练计划.V4左列.html
+训练计划_*.html
+
+# 数据恢复材料、个人填写的副本、工作会话目录：只留在本机
+_恢复_*/
+_会话_*/
+_*.txt
+
+# 调试时的临时快照 / 脚本，不上传
+_pre_*.html
+_log*.js
+
+# 本地服务写文件时的临时文件
+*.html.tmp
+
+# Claude Code / 编辑器本地配置
+.claude/
+.vscode/
+.idea/
+__pycache__/
+node_modules/
+
+# 系统文件
+Thumbs.db
+desktop.ini
+.DS_Store

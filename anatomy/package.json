@@ -1,0 +1,12 @@
+{
+  "private": true,
+  "type": "module",
+  "scripts": { "build": "node build.mjs" },
+  "dependencies": { "three": "0.180.0", "meshoptimizer": "0.25.0" },
+  "devDependencies": {
+    "esbuild": "0.25.10",
+    "@gltf-transform/core": "4.5.1",
+    "@gltf-transform/extensions": "4.5.1",
+    "@gltf-transform/functions": "4.5.1"
+  }
+}

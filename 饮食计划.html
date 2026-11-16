@@ -1,0 +1,2719 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>饮食计划 · 可编辑</title>
+<style id="app-style">  /* ===== 主题：原色（默认） ===== */
+:root{
+    --bg:#f6f7f9;
+    --card:#fff;
+    --ink:#1a1d21;
+    --muted:#6b7280;
+    --line:#e3e6ea;
+    --accent:#2f6df6;
+    --warn:#b45309;
+    --warnbg:#fdf3e6;
+    --danger:#b91c1c;
+    --dangerbg:#fdf0ef;
+    --okbg:#edf7f0;
+    --chip:#eef2f7;
+    --blue:#2f5bb7;
+    --bluebg:#eff6ff;
+    --k00:#fff;
+    --k01:#fafbfc;
+    --k02:#cfe8de;
+    --k03:#fcfefd;
+    --k04:#f3fbf7;
+    --k05:#065f46;
+    --k06:#b8e0d2;
+    --k07:#b91c1c;
+    --k08:#fecaca;
+    --k09:#f0faf6;
+    --k10:#6ee7b7;
+    --k11:#d6ece3;
+    --k12:#6b8f80;
+    --k13:#cfdcef;
+    --k14:#e1e7ee;
+    --k15:#fcfdfe;
+    --k16:#1d4ed8;
+    --k17:#b45309;
+    --k18:#9d174d;
+    --k19:#f2f7ff;
+    --k20:#e6f7f0;
+    --k21:#8d9bad;
+    --k22:#eef2f7;
+    --k23:#dde5f0;
+    --k24:#d8dfe8;
+    --k25:#eef1f5;
+    --k26:#465063;
+    --k27:#f2f6fa;
+    --k28:#eefaf6;
+    --k29:#047857;
+    --k30:#a3aebd;
+    --k31:#0f9d76;
+    --k32:#26313f;
+    --k33:#fff3bf;
+    --k34:#64748b;
+    --k35:#7c3aed;
+    --k36:#f3e8ff;
+    --k37:#f8fafc;
+    --k38:#1f2b3a;
+    --k39:#fff7d6;
+    --k40:#fbfcfe;
+    --k41:#1a1d21;
+    --k42:#e6f7f1;
+    --k43:#dbeafe;
+    --k44:#1e40af;
+    --k45:#fef3c7;
+    --k46:#92400e;
+    --k47:#fce7f3;
+    --k48:#5b6b80;
+    --k49:#6b7280;
+    --k50:#eef4ff;
+    --k51:#f2f6fb;
+    --k52:#c9d8f5;
+    --k53:#374151;
+    --k54:#f1f5f9;
+    --k55:#e3e8ef;
+    --k56:#7a8699;
+    --k57:#94a3b8;
+    --k58:#dc2626;
+    --k59:#2f5bb7;
+    --k60:#e2ebfd;
+    --k61:#b6cbf0;
+    --k62:#fff4ec;
+    --k63:#f0c9a0;
+    --k64:#8a4b12;
+    --k65:#ffe9d8;
+    --k66:#e0b184;
+    --k67:#f2f5f9;
+    --k68:#7f1d1d;
+    --k69:#fed7aa;
+    --k70:#7c2d12;
+    --k71:#a7f3d0;
+    --k72:#064e3b;
+    --k73:#bfdbfe;
+    --k74:#1e3a8a;
+    --k75:#475569;
+    --k76:#fffdf0;
+    --k77:#d9c98a;
+    --k78:#f0fdf9;
+}
+  /* ===== 主题：纸墨 ===== */
+body[data-theme="paper"]{
+    --bg:#f7f5f1;
+    --card:#fffefc;
+    --ink:#1a1917;
+    --muted:#6f6a61;
+    --line:#e6e1d8;
+    --accent:#0f6b5f;
+    --warn:#b45309;
+    --warnbg:#fdf3e6;
+    --danger:#b91c1c;
+    --dangerbg:#fdf0ef;
+    --okbg:#edf7f0;
+    --chip:#f0ece4;
+    --blue:#12665c;
+    --bluebg:#eef7f3;
+    --k00:#fffefc;
+    --k01:#faf8f4;
+    --k02:#cfe8de;
+    --k03:#fcfefd;
+    --k04:#f3fbf7;
+    --k05:#065f46;
+    --k06:#b8e0d2;
+    --k07:#b91c1c;
+    --k08:#fecaca;
+    --k09:#f0faf6;
+    --k10:#6ee7b7;
+    --k11:#d6ece3;
+    --k12:#6b8f80;
+    --k13:#cfdcef;
+    --k14:#e7e2d9;
+    --k15:#fdfbf7;
+    --k16:#0b5a50;
+    --k17:#b45309;
+    --k18:#9d174d;
+    --k19:#f1f7f3;
+    --k20:#e6f7f0;
+    --k21:#918a80;
+    --k22:#f0ece4;
+    --k23:#e3ded4;
+    --k24:#e0dbd1;
+    --k25:#f2eee7;
+    --k26:#465063;
+    --k27:#f2f6fa;
+    --k28:#eefaf6;
+    --k29:#15803d;
+    --k30:#a8a197;
+    --k31:#0f9d76;
+    --k32:#2a251f;
+    --k33:#fff3bf;
+    --k34:#6b665e;
+    --k35:#7c3aed;
+    --k36:#f3e8ff;
+    --k37:#f7f4ef;
+    --k38:#24201a;
+    --k39:#fff7d6;
+    --k40:#fbf9f5;
+    --k41:#1a1917;
+    --k42:#e6f7f1;
+    --k43:#dbeafe;
+    --k44:#1e40af;
+    --k45:#fef3c7;
+    --k46:#92400e;
+    --k47:#fce7f3;
+    --k48:#5f5a52;
+    --k49:#6f6a61;
+    --k50:#e8f2ef;
+    --k51:#f3efe8;
+    --k52:#bcd8d2;
+    --k53:#3b362f;
+    --k54:#f5f1ea;
+    --k55:#e8e3da;
+    --k56:#7e786e;
+    --k57:#9a948a;
+    --k58:#dc2626;
+    --k59:#12665c;
+    --k60:#dceee9;
+    --k61:#b4d3cc;
+    --k62:#fff4ec;
+    --k63:#f0c9a0;
+    --k64:#8a4b12;
+    --k65:#ffe9d8;
+    --k66:#e0b184;
+    --k67:#f2f5f9;
+    --k68:#7f1d1d;
+    --k69:#fed7aa;
+    --k70:#7c2d12;
+    --k71:#a7f3d0;
+    --k72:#064e3b;
+    --k73:#bcded7;
+    --k74:#14504a;
+    --k75:#4a453d;
+    --k76:#fffdf0;
+    --k77:#d9c98a;
+    --k78:#f0fdf9;
+}
+  /* ===== 主题：护眼 ===== */
+body[data-theme="eye"]{
+    --bg:#f0efed;
+    --card:#f6f6f6;
+    --ink:#1b1d20;
+    --muted:#6d727c;
+    --line:#e2dfdb;
+    --accent:#638eed;
+    --warn:#ae6a37;
+    --warnbg:#f4ece3;
+    --danger:#b34545;
+    --dangerbg:#f4eee7;
+    --okbg:#eeeae5;
+    --chip:#eeeae6;
+    --blue:#5271b1;
+    --bluebg:#f6efe7;
+    --k00:#f6f6f6;
+    --k01:#f3f2f1;
+    --k02:#e0d9d0;
+    --k03:#f5f4f3;
+    --k04:#f2efea;
+    --k05:#1e5c4a;
+    --k06:#bcd8ce;
+    --k07:#b34545;
+    --k08:#f5d1d1;
+    --k09:#f1ede8;
+    --k10:#8bdfbe;
+    --k11:#e4dcd4;
+    --k12:#718a80;
+    --k13:#e7dfd6;
+    --k14:#e6e0d9;
+    --k15:#f5f4f3;
+    --k16:#4f71d0;
+    --k17:#ae6a37;
+    --k18:#983a60;
+    --k19:#f6f0ea;
+    --k20:#eee7de;
+    --k21:#919aa7;
+    --k22:#eeeae6;
+    --k23:#e8e0d7;
+    --k24:#e0d9d0;
+    --k25:#ece9e6;
+    --k26:#4b5260;
+    --k27:#f1eeea;
+    --k28:#f1ece6;
+    --k29:#23745d;
+    --k30:#b6b1aa;
+    --k31:#35987c;
+    --k32:#2b333d;
+    --k33:#f6eeca;
+    --k34:#6b7686;
+    --k35:#9668e5;
+    --k36:#f6eee5;
+    --k37:#f3f1ef;
+    --k38:#252e38;
+    --k39:#f6f1da;
+    --k40:#f5f4f2;
+    --k41:#1b1d20;
+    --k42:#eee7de;
+    --k43:#f5ede4;
+    --k44:#445ca9;
+    --k45:#f5edcf;
+    --k46:#8d5431;
+    --k47:#f3ebe2;
+    --k48:#626d7c;
+    --k49:#6d727c;
+    --k50:#f6efe6;
+    --k51:#f2eeea;
+    --k52:#ced8ec;
+    --k53:#3c434e;
+    --k54:#f0ede9;
+    --k55:#e7e1db;
+    --k56:#7e8694;
+    --k57:#99a3b2;
+    --k58:#d45656;
+    --k59:#5271b1;
+    --k60:#f4ece3;
+    --k61:#bfcee8;
+    --k62:#f6eee5;
+    --k63:#e8cdb0;
+    --k64:#855932;
+    --k65:#f6e7db;
+    --k66:#d8b898;
+    --k67:#f0edea;
+    --k68:#7b3636;
+    --k69:#f5dabb;
+    --k70:#78412e;
+    --k71:#b6ead2;
+    --k72:#194b3e;
+    --k73:#c9ddf5;
+    --k74:#3a4e85;
+    --k75:#4e5765;
+    --k76:#f6efe8;
+    --k77:#d1c69b;
+    --k78:#f4eee8;
+}
+  /* ===== 主题：黑夜 ===== */
+body[data-theme="dark"]{
+    --bg:#252526;
+    --card:#252525;
+    --ink:#d4d7db;
+    --muted:#7b7c7f;
+    --line:#262727;
+    --accent:#252526;
+    --warn:#4b3625;
+    --warnbg:#252524;
+    --danger:#462323;
+    --dangerbg:#252424;
+    --okbg:#252625;
+    --chip:#252526;
+    --blue:#243048;
+    --bluebg:#242425;
+    --k00:#252525;
+    --k01:#252525;
+    --k02:#272828;
+    --k03:#252525;
+    --k04:#242525;
+    --k05:#50a08a;
+    --k06:#313332;
+    --k07:#462323;
+    --k08:#252424;
+    --k09:#252625;
+    --k10:#272828;
+    --k11:#262727;
+    --k12:#6d706f;
+    --k13:#262627;
+    --k14:#262627;
+    --k15:#252525;
+    --k16:#1a2033;
+    --k17:#4b3625;
+    --k18:#623145;
+    --k19:#242425;
+    --k20:#252626;
+    --k21:#505152;
+    --k22:#252526;
+    --k23:#262627;
+    --k24:#272728;
+    --k25:#252626;
+    --k26:#97999c;
+    --k27:#252526;
+    --k28:#252625;
+    --k29:#448774;
+    --k30:#404142;
+    --k31:#316255;
+    --k32:#8aacd8;
+    --k33:#252524;
+    --k34:#717274;
+    --k35:#262627;
+    --k36:#242425;
+    --k37:#252525;
+    --k38:#8aadd8;
+    --k39:#252524;
+    --k40:#252525;
+    --k41:#d4d7db;
+    --k42:#252626;
+    --k43:#242425;
+    --k44:#283150;
+    --k45:#252524;
+    --k46:#6d4b37;
+    --k47:#252425;
+    --k48:#7b7d7f;
+    --k49:#7b7c7f;
+    --k50:#242425;
+    --k51:#242525;
+    --k52:#252526;
+    --k53:#91acd6;
+    --k54:#252526;
+    --k55:#262627;
+    --k56:#636466;
+    --k57:#454647;
+    --k58:#331a1a;
+    --k59:#243048;
+    --k60:#242425;
+    --k61:#262627;
+    --k62:#252424;
+    --k63:#272626;
+    --k64:#75563b;
+    --k65:#252424;
+    --k66:#33281e;
+    --k67:#252526;
+    --k68:#804040;
+    --k69:#252524;
+    --k70:#835242;
+    --k71:#252626;
+    --k72:#89d6c2;
+    --k73:#242425;
+    --k74:#3b4a75;
+    --k75:#657996;
+    --k76:#252524;
+    --k77:#332f20;
+    --k78:#242525;
+}
+
+  
+  html{scroll-behavior:smooth}
+  [id]{scroll-margin-top:74px}
+  /* ---------- 折叠块 ---------- */
+  details.fold{border:1px solid var(--line);border-radius:11px;background:var(--k00);margin:0 0 16px;overflow:hidden}
+  details.fold > summary{cursor:pointer;padding:13px 18px;font-weight:700;font-size:15.5px;list-style:none;
+    display:flex;gap:10px;align-items:baseline;flex-wrap:wrap;user-select:none}
+  details.fold > summary::-webkit-details-marker{display:none}
+  details.fold > summary::before{content:'▸';font-size:13.5px;color:var(--muted);transition:transform .18s;display:inline-block}
+  details.fold[open] > summary::before{transform:rotate(90deg)}
+  details.fold > summary:hover{background:var(--k01)}
+  details.fold .fold-hint{font-weight:400;font-size:13.5px;color:var(--muted)}
+  details.fold .fold-body{padding:2px 18px 18px}
+  /* ---------- 「我的一天」里的方案块 ---------- */
+  #mealPlans{display:block}
+  details.fold.plan-block{margin-bottom:12px;border-color:var(--k02);background:var(--k03)}
+  details.fold.plan-block > summary{padding:10px 14px;font-size:14.5px;gap:8px}
+  details.fold.plan-block > summary:hover{background:var(--k04)}
+  details.fold.plan-block .fold-body{padding:2px 14px 14px}
+  input.planname{font:inherit;font-weight:700;font-size:15px;color:var(--k05);flex:0 1 auto;
+    border:1px solid transparent;background:transparent;border-radius:7px;
+    padding:2px 7px;min-width:64px;max-width:190px}
+  input.planname:hover{border-color:var(--k06);background:var(--k00)}
+  input.planname:focus{outline:none;border-color:var(--accent);background:var(--k00)}
+  .plan-del{margin-left:auto;padding:2px 8px;opacity:.35;flex:0 0 auto}
+  .plan-del:hover{opacity:1;color:var(--k07);border-color:var(--k08)}
+  .plan-block .tplbar{display:flex;flex-wrap:wrap;gap:6px;align-items:center;
+    margin:0 0 10px;font-size:13.5px;color:var(--muted)}
+  .plan-block .tplbar button{font-size:13px;padding:5px 11px;border-radius:999px}
+  /* ---------- 「我的一天」餐表 ---------- */
+  td.meal-cell{width:1%;white-space:nowrap;text-align:center;vertical-align:middle;
+    background:var(--k09);border-left:3px solid var(--k10);border-right:1px solid var(--k11);padding:11px 8px}
+  td.meal-cell .mealname{display:block;margin:0 auto;width:100%;max-width:88px;text-align:center;
+    font:inherit;font-weight:700;font-size:15px;border:1px solid transparent;background:transparent;
+    color:var(--k05);padding:2px 3px;border-radius:7px}
+  td.meal-cell .mealname:hover{border-color:var(--k06);background-color:var(--k00)}
+  td.meal-cell .mealname:focus{outline:none;border-color:var(--accent);background-color:var(--k00)}
+  td.meal-cell select.mealname{cursor:pointer;appearance:none;-webkit-appearance:none;
+    text-align-last:center;padding-right:16px;
+    background-image:linear-gradient(45deg,transparent 50%,var(--k12) 50%),
+                     linear-gradient(135deg,var(--k12) 50%,transparent 50%);
+    background-position:calc(100% - 10px) calc(50% + 1px),calc(100% - 6px) calc(50% + 1px);
+    background-size:4px 4px,4px 4px;background-repeat:no-repeat,no-repeat}
+  td.meal-cell .meal-kcal{display:block;width:fit-content;margin:7px auto 0;padding:2px 9px;border-radius:999px;
+    background:var(--k00);border:1px solid var(--k13);color:var(--accent);font-size:12px;font-weight:700;
+    font-variant-numeric:tabular-nums}
+  td.meal-cell .meal-btns{margin-top:8px;display:flex;gap:4px;justify-content:center}
+  td.meal-cell .meal-btns button.mini{padding:2px 7px;opacity:.35}
+  td.meal-cell .meal-btns button.mini:hover{opacity:1}
+  input.fname,td.calc input.qty{font:inherit;font-size:14.5px;border:1px solid transparent;
+    border-radius:7px;background:transparent;color:var(--ink);padding:4px 6px}
+  input.fname{font-weight:600;flex:1;min-width:0}
+  td.calc input.qty{width:100%;min-width:56px;text-align:center;font-weight:600}
+  input.fname:hover,td.calc input.qty:hover{border-color:var(--k14);background:var(--k15)}
+  input.fname:focus,td.calc input.qty:focus{outline:none;border-color:var(--accent);background:var(--k00)}
+  td.mac{text-align:center;font-weight:700;font-variant-numeric:tabular-nums;font-size:14px;white-space:nowrap}
+  td.mac.kcal{color:var(--accent)}
+  td.mac.p{color:var(--k16)}
+  td.mac.c{color:var(--k17)}
+  td.mac.f{color:var(--k18)}
+  tr.alt td{background:var(--k01)}
+  tr.alt td.meal-cell{background:var(--k09)}
+  tbody tr:hover td{background:var(--k19)}
+  tbody tr:hover td.meal-cell{background:var(--k20)}
+  /* ---------- 下拉（和训练计划同一套） ---------- */
+  .combo{position:relative;display:flex;align-items:center;gap:2px}
+  .combo-caret{flex:0 0 auto;width:22px;height:26px;padding:0;border:1px solid transparent;
+    background:transparent;border-radius:7px;cursor:pointer;color:var(--k21);opacity:.5;
+    transition:opacity .15s,background .15s,color .15s}
+  .combo-caret::before{content:'';display:block;width:0;height:0;margin:0 auto;
+    border-left:4px solid transparent;border-right:4px solid transparent;border-top:5px solid currentColor}
+  .combo:hover .combo-caret{opacity:1}
+  .combo-caret:hover{background:var(--k22);color:var(--accent);border-color:var(--k23)}
+  .combo-pop{position:fixed;z-index:300;background:var(--k00);border:1px solid var(--k24);border-radius:12px;
+    box-shadow:0 14px 36px rgba(16,24,40,.16);padding:5px;font-size:14px;line-height:1.5}
+  /* 左栏类型 / 右栏食物，两栏各自滚动 */
+  .cwrap{display:flex;gap:5px;align-items:stretch}
+  .ccats{flex:0 0 112px;max-height:264px;overflow-y:auto;border-right:1px solid var(--k25);padding-right:4px}
+  .cfoods{flex:1 1 auto;min-width:120px;max-height:264px;overflow-y:auto}
+  .combo-pop .cat{display:flex;align-items:center;gap:6px;padding:6px 8px;border-radius:8px;
+    cursor:pointer;color:var(--k26);font-size:13.5px;white-space:nowrap}
+  .combo-pop .cat:hover{background:var(--k27)}
+  .combo-pop .cat.on{background:var(--k28);color:var(--k29);font-weight:700}
+  .combo-pop .cat .cat-n{flex:1 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis}
+  .combo-pop .cat .n{flex:0 0 auto;font-size:12.5px;color:var(--k30);font-variant-numeric:tabular-nums}
+  .combo-pop .cat.on .n{color:var(--k31)}
+  .combo-pop .opt{display:flex;align-items:center;gap:8px;padding:7px 11px;border-radius:8px;
+    cursor:pointer;color:var(--k32)}
+  .combo-pop .opt .opt-t{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .combo-pop .opt:hover,.combo-pop .opt.on{background:var(--k28);color:var(--k29)}
+  .combo-pop .opt mark{background:var(--k33);color:inherit;padding:0 1px;border-radius:3px}
+  .combo-pop .opt .eq{flex:0 0 auto;font-size:12px;font-weight:600;padding:1px 6px;border-radius:999px;
+    background:var(--k22);color:var(--k34);white-space:nowrap}
+  .combo-pop .opt .mine{flex:0 0 auto;font-size:12px;font-weight:600;color:var(--k35);
+    background:var(--k36);padding:1px 6px;border-radius:999px}
+  .combo-pop .empty{padding:10px 11px;color:var(--muted);font-size:13.5px}
+  .combo-pop .foot{position:sticky;bottom:-5px;margin:5px -5px -5px;padding:7px 12px;
+    background:var(--k37);border-top:1px solid var(--k25);font-size:12.5px;color:var(--muted);
+    border-radius:0 0 11px 11px}
+  /* ---------- 每日营养记录 ---------- */
+  .tplbar .logmonth{font-weight:700;color:var(--accent);font-size:13.5px;min-width:96px;text-align:center}
+  .tplbar .logcount{margin-left:auto;color:var(--muted)}
+  .tplbar button.seg.on{background:var(--accent);color:var(--k00);border-color:var(--accent)}
+  tr.hid{display:none}
+  input.dt{font:inherit;font-size:13.5px;width:100%;min-width:112px;padding:5px 6px;
+    border:1px solid transparent;border-radius:7px;background:transparent;color:var(--ink)}
+  input.numv{font:inherit;font-size:14px;font-weight:600;width:100%;min-width:58px;
+    padding:5px 6px;text-align:center;border:1px solid transparent;border-radius:7px;
+    background:transparent;color:var(--k38);font-variant-numeric:tabular-nums}
+  input.dt:hover,input.numv:hover{border-color:var(--k14);background:var(--k15)}
+  input.dt:focus,input.numv:focus{outline:none;border-color:var(--accent);background:var(--k00)}
+  tr.hit td{background:var(--k39)!important;transition:background .4s}
+  /* ---------- 食物库卡片 ---------- */
+  .libcat{font-size:14.5px;margin:22px 0 10px;padding-left:9px;border-left:3px solid var(--accent);color:var(--k05)}
+  .libgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:10px}
+  .libcard{background:var(--k40);border:1px solid var(--line);border-radius:11px;padding:12px 14px}
+  .libname{font-size:15px;font-weight:700;color:var(--k41);margin-bottom:7px}
+  .libmacro{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:7px}
+  .libmacro span{font-size:12px;font-weight:700;padding:2px 8px;border-radius:999px}
+  .libmacro .k{background:var(--k42);color:var(--k29)}
+  .libmacro .p{background:var(--k43);color:var(--k44)}
+  .libmacro .c{background:var(--k45);color:var(--k46)}
+  .libmacro .f{background:var(--k47);color:var(--k18)}
+  .libcard p{margin:0;font-size:13.5px;line-height:1.65;color:var(--k48)}
+  /* ---------- 状态位 / 回到顶部 ---------- */
+
+
+  /* ==================== 版面：左侧目录 + 内容 ==================== */
+  .shell{display:grid;grid-template-columns:196px minmax(0,1fr);max-width:1440px;margin:0 auto}
+  #toc{position:sticky;top:62px;align-self:start;max-height:calc(100vh - 78px);overflow:auto;
+    margin:20px 8px 24px 14px;padding:14px 9px 12px;font-size:14.5px;line-height:1.7;
+    background:var(--card);border:1px solid var(--line);border-radius:11px;
+    box-shadow:0 1px 3px rgba(16,24,40,.05)}
+  #toc .toc-t{font-size:12px;font-weight:800;letter-spacing:.16em;color:var(--ink);
+    margin:0 0 8px;padding:0 13px 10px;border-bottom:1px solid var(--line)}
+  #toc a{display:block;padding:9px 13px;border-radius:7px;color:var(--muted);text-decoration:none;
+    font-weight:500;border-left:2px solid transparent;margin-bottom:2px;
+    transition:color .15s,background .15s}
+  #toc a:hover{color:var(--ink);background:var(--chip)}
+  #toc a.on{background:var(--k50);color:var(--accent);font-weight:700;border-left-color:var(--accent)}
+  .shell > .wrap{max-width:none;margin:0;padding:24px 24px 90px 8px}
+  @media (max-width:1080px){
+    .shell{grid-template-columns:1fr}
+    #toc{display:none}
+    .shell > .wrap{padding:20px 20px 80px}
+  }
+  @media print{ .shell{display:block} #toc{display:none} .shell > .wrap{padding:0} }
+
+  /* ==================== 顶部栏：只留常用的 ==================== */
+  .barl{display:flex;align-items:center;gap:10px;margin-right:auto;min-width:0}
+  .bar .brand{font-weight:700;letter-spacing:.2px;font-size:14px;white-space:nowrap}
+  .bar .savestate{margin-left:2px}
+  details.more{position:relative}
+  details.more > summary{list-style:none;cursor:pointer;width:34px;height:34px;
+    display:flex;align-items:center;justify-content:center;padding-bottom:7px;
+    border:1px solid var(--line);border-radius:8px;background:var(--k00);
+    font-size:17px;line-height:1;color:var(--k49);user-select:none}
+  details.more > summary::-webkit-details-marker{display:none}
+  details.more > summary:hover{background:var(--k51);color:var(--accent)}
+  details.more[open] > summary{background:var(--k50);color:var(--accent);border-color:var(--k52)}
+  .moremenu{position:absolute;right:0;top:calc(100% + 7px);z-index:60;
+    display:flex;flex-direction:column;gap:2px;min-width:176px;padding:6px;
+    background:var(--k00);border:1px solid var(--line);border-radius:10px;
+    box-shadow:0 12px 30px rgba(16,24,40,.14)}
+  .moremenu button{width:100%;text-align:left;border:0;background:transparent;
+    padding:8px 10px;border-radius:7px;font-size:13.5px;color:var(--k53)}
+  .moremenu button:hover{background:var(--k51)}
+  .moremenu button.danger{color:var(--danger)}
+  .moremenu button.danger:hover{background:var(--dangerbg)}
+
+  /* 四套主题的核心底色：自动推导的层次不够，这里显式定一层 */
+  body[data-theme="dark"]{
+    --bg:#0f0f10; --card:#1a1a1c; --ink:#ededed; --muted:#a1a1a3;
+    --line:#2b2b2e; --chip:#232325; --catbg:#1d1d20; --catline:#333336;
+    --accent:#e8e8e8; --accentbg:#262626;
+  }
+  body[data-theme="eye"]{
+    --bg:#edece3; --card:#f7f6ef; --ink:#2b2a24; --muted:#6c6a5f;
+    --line:#dedccd; --chip:#e6e4d8;
+    --accent:#2f6b57;
+  }
+  body[data-theme="paper"]{
+    --bg:#f7f5f1; --card:#fffefc; --ink:#1a1917; --muted:#6f6a61;
+    --line:#e6e1d8; --chip:#f0ece4; --accent:#0f6b5f;
+  }
+
+  /* ==================== 单屏浏览：一次只显示一个小节 ==================== */
+  #doc[data-view="single"] > :not(h1):not(.sub):not(.sec-on){display:none}
+  @media print{ #doc[data-view="single"] > *{display:block} }
+
+  /* 模板填充：收成下拉 */
+  .tplbar{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:0 0 10px}
+  .tplmenu{position:relative}
+  .tplmenu > summary{list-style:none;cursor:pointer;display:inline-flex;align-items:center;gap:7px;
+    padding:6px 12px;border:1px solid var(--line);border-radius:8px;background:var(--card);
+    font-size:12.5px;font-weight:600;color:var(--ink);user-select:none}
+  .tplmenu > summary::-webkit-details-marker{display:none}
+  .tplmenu > summary::after{content:'▾';font-size:10px;color:var(--muted);line-height:1}
+  .tplmenu > summary:hover{background:var(--chip)}
+  .tplmenu[open] > summary{background:var(--chip);border-color:var(--accent)}
+  .tplmenu-pop{position:absolute;left:0;top:calc(100% + 6px);z-index:60;display:flex;flex-direction:column;
+    gap:2px;min-width:210px;padding:6px;background:var(--card);border:1px solid var(--line);
+    border-radius:10px;box-shadow:0 14px 34px rgba(16,24,40,.16)}
+  .tplmenu-pop button{width:100%;text-align:left;border:0;background:transparent;padding:8px 11px;
+    border-radius:6px;font-size:12.5px;color:var(--ink);cursor:pointer}
+  .tplmenu-pop button:hover{background:var(--chip)}
+
+  /* 主题选择 */
+  .themepick{display:flex;flex-wrap:wrap;gap:4px;padding:8px 10px 9px;
+    border-top:1px solid var(--line);margin-top:4px}
+  .themepick .tp-t{width:100%;font-size:12px;font-weight:700;letter-spacing:.14em;
+    color:var(--muted);margin-bottom:2px}
+  .moremenu .themepick button{padding:5px 9px;border-radius:6px;font-size:13px;
+    border:1px solid var(--line);background:var(--card);color:var(--ink);width:auto}
+  .moremenu .themepick button:hover{background:var(--chip)}
+  .moremenu .themepick button.on{background:var(--accent);color:var(--k00);border-color:var(--accent)}
+
+  /* 训练 / 饮食 切换：紧凑分段控件，选中项白底蓝字 */
+  .pageswitch{display:inline-flex;align-items:center;gap:2px;padding:2px;
+    background:var(--k54);border:1px solid var(--k55);border-radius:7px;vertical-align:middle}
+  .pageswitch a,.pageswitch span{font-size:12.5px;line-height:1;padding:5px 9px;
+    border-radius:5px;text-decoration:none;color:var(--k56);white-space:nowrap}
+  .pageswitch .on{background:var(--k00);color:var(--accent);font-weight:700;
+    box-shadow:0 1px 2px rgba(16,24,40,.10)}
+  .pageswitch a:hover{color:var(--accent)}
+  .savestate{font-size:13px;color:var(--k57);margin-left:6px;white-space:nowrap;transition:color .2s}
+  .savestate.ok{color:var(--k29)}
+  .savestate.err{color:var(--k58);font-weight:600}
+  /* 「找回上次丢弃的编辑」：只在存在备份时才出现 */
+  /* 「撤回」：只在有快照时才出现 */
+  #undoBtn{background:var(--k50);border-color:var(--k52);color:var(--k59)}
+  #undoBtn:hover{background:var(--k60);border-color:var(--k61)}
+  #restoreBtn{background:var(--k62);border-color:var(--k63);color:var(--k64)}
+  #restoreBtn:hover{background:var(--k65);border-color:var(--k66)}
+  #toTop{position:fixed;right:26px;bottom:26px;z-index:45;width:40px;height:40px;padding:0;
+    border-radius:50%;font-size:17px;line-height:1;box-shadow:0 4px 14px rgba(16,24,40,.16);
+    background:var(--k00);color:var(--k34);opacity:0;pointer-events:none;transition:opacity .2s}
+  #toTop.show{opacity:.9;pointer-events:auto}
+  #toTop:hover{color:var(--accent);border-color:var(--accent)}
+  @media print{ details.fold{border:none} .bar,#toTop,.noprint{display:none!important} }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font:15.5px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;}
+  .bar{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.94);backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);padding:10px 24px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+  .bar .brand{font-weight:700;margin-right:auto;letter-spacing:.3px}
+  button{font:inherit;font-size:13.5px;padding:7px 13px;border-radius:8px;border:1px solid var(--line);
+    background:var(--k00);cursor:pointer;color:var(--ink);transition:.15s}
+  button:hover{border-color:var(--accent);color:var(--accent)}
+  button.primary{background:var(--accent);color:var(--k00);border-color:var(--accent)}
+  button.primary:hover{opacity:.88;color:var(--k00)}
+  button.danger:hover{border-color:var(--danger);color:var(--danger)}
+  .wrap{max-width:1080px;margin:0 auto;padding:26px 24px 90px}
+  h1{font-size:26px;margin:0 0 4px}
+  .sub{color:var(--muted);font-size:13.5px;margin-bottom:24px}
+  h2{font-size:18px;margin:34px 0 12px;padding-left:11px;border-left:4px solid var(--accent)}
+  h3{font-size:15.5px;margin:22px 0 8px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:11px;padding:18px 20px;margin-bottom:16px}
+  table{width:100%;border-collapse:collapse;font-size:14.5px;background:var(--k00)}
+  th,td{padding:9px 11px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+  th{background:var(--k67);font-size:13px;color:var(--k53);font-weight:600;white-space:nowrap}
+  tr:last-child td{border-bottom:none}
+  tbody tr:hover{background:var(--k01)}
+  .tw{overflow-x:auto;border:1px solid var(--line);border-radius:10px}
+  .box{border-radius:12px;padding:14px 17px;margin:14px 0;border:1px solid}
+  .box.danger{background:var(--dangerbg);border-color:var(--k08);color:var(--k68)}
+  .box.warn{background:var(--warnbg);border-color:var(--k69);color:var(--k70)}
+  .box.ok{background:var(--okbg);border-color:var(--k71);color:var(--k72)}
+  .box.info{background:var(--bluebg);border-color:var(--k73);color:var(--k74)}
+  .box h3{margin:0 0 7px;font-size:15.5px}
+  .box ul{margin:6px 0 0;padding-left:20px}
+  .box li{margin:3px 0}
+  .tag{display:inline-block;font-size:12px;padding:2px 8px;border-radius:999px;background:var(--chip);
+    color:var(--k75);margin-left:6px;font-weight:600}
+  .tag.p{background:var(--k43);color:var(--k44)}
+  .tag.c{background:var(--k45);color:var(--k46)}
+  .tag.f{background:var(--k47);color:var(--k18)}
+  .muted{color:var(--muted);font-size:13.5px}
+  [contenteditable="true"]{outline:none}
+  body.editing [contenteditable="true"]{background:var(--k76)}
+  body.editing table td,body.editing .editbox{outline:1px dashed var(--k77);border-radius:4px}
+  .rowtools{display:none}
+  body.editing .rowtools{display:table-cell;white-space:nowrap}
+  .thtools{display:none}
+  body.editing .thtools{display:table-cell}
+  .mini{padding:2px 7px;font-size:12px;border-radius:6px}
+  .calc{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;align-items:end}
+  .calc label{display:block;font-size:12px;color:var(--muted);letter-spacing:.4px;margin-bottom:4px}
+  .calc input,.calc select{width:100%;font:inherit;font-size:15.5px;font-weight:600;padding:8px 10px;
+    border:1px solid var(--line);border-radius:9px;background:var(--k00);color:var(--ink)}
+  .out{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-top:16px}
+  .ocell{background:var(--k00);border:1px solid var(--line);border-radius:11px;padding:12px 14px}
+  .ocell .k{font-size:12px;color:var(--muted);letter-spacing:.5px}
+  .ocell .n{font-size:21px;font-weight:700;margin-top:2px}
+  .ocell .u{font-size:13px;color:var(--muted);font-weight:500}
+  .ocell.hi{border-color:var(--accent);background:var(--k78)}
+  .macro{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+  .macro span{font-size:13px;padding:3px 10px;border-radius:999px;background:var(--chip);font-weight:600}
+  .chk{width:15px;height:15px;cursor:pointer;accent-color:var(--accent)}
+  @media print{
+    .bar,.rowtools,.thtools,.noprint{display:none!important}
+    body{background:var(--k00)} .wrap{padding:0;max-width:none}
+    .card,.box,.tw{break-inside:avoid;border-radius:0}
+    h2{break-after:avoid}
+  }
+
+  body[data-theme="dark"]{color-scheme:dark}
+  body[data-theme="dark"] .bar{background:rgba(20,22,26,.94)}
+  body[data-theme="dark"] .moremenu,body[data-theme="dark"] .combo-pop,body[data-theme="dark"] .expop{box-shadow:0 16px 40px rgba(0,0,0,.5)}
+</style>
+</head>
+<body>
+<script>try{var __t=localStorage.getItem("theme_v2");if(__t&&__t!=="orig")document.body.dataset.theme=__t;}catch(e){}</script>
+
+<div class="bar noprint">
+  <span class="barl">
+    <span class="brand" title="饮食计划 · 电煮锅版">🥗 饮食计划</span>
+    <span class="pageswitch"><a href="训练计划.html" title="切到训练计划" onclick="location.href='训练计划.html?t='+Date.now();return false">训练</a><span class="on">饮食</span></span>
+  </span>
+  <span id="saveState" class="savestate"></span>
+  <button id="undoBtn" onclick="undoLast()" style="display:none" title="撤回上一步">↩ 撤回</button>
+  <button id="restoreBtn" onclick="restoreBackup()" style="display:none" title="把上一次被丢弃的那份本机编辑拿回来">↩ 找回</button>
+  <button id="btnEdit" class="primary" onclick="toggleEdit()">✏️ 编辑</button>
+  <details class="more">
+    <summary title="更多操作">⋯</summary>
+    <div class="moremenu">
+      <button onclick="toggleAllFold()">🔽 展开 / 折叠全部</button>
+      <button onclick="exportHTML()" title="把当前内容存成一个独立文件，可以拷到别的电脑上打开">⬇️ 导出</button>
+      <button onclick="pickImport()" title="从导出的文件里读回内容（会覆盖当前页面上的内容）">⬆️ 导入</button>
+      <button onclick="reloadFromFile()" title="舍弃浏览器里存的旧内容，从文件重新读一遍">🔄 用文件内容重载</button>
+      <div class="themepick">
+        <div class="tp-t">配色</div>
+        <button data-theme="orig" onclick="setTheme('orig')">原色</button>
+        <button data-theme="paper" onclick="setTheme('paper')">纸墨</button>
+        <button data-theme="eye" onclick="setTheme('eye')">护眼</button>
+        <button data-theme="dark" onclick="setTheme('dark')">黑夜</button>
+      </div>
+      <button class="danger" onclick="resetAll()">↺ 恢复初始</button>
+    </div>
+  </details>
+</div>
+<input type="file" id="importFile" accept=".html,.htm" hidden="">
+<button id="toTop" class="noprint" title="回到顶部" onclick="scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<div class="shell">
+<aside id="toc" class="noprint" aria-label="页面目录"></aside>
+<div class="wrap" id="doc">
+
+  <h1>饮食计划</h1>
+  <div class="sub">年龄 · 性别 · 身高 · 体重 · 器材： 电煮锅 · 目标：薄肌（精瘦有线条）</div>
+
+  <!-- ================= 我的一天 ================= -->
+  <details class="fold" id="myday" open="">
+    <summary>
+      <span>⭐ 我的一天 · 自由搭配</span>
+      <span class="fold-hint stat"></span>
+    </summary>
+    <div class="fold-body">
+      <div id="mealPlans"><details class="fold plan-block" open="">
+        <summary>
+          <input class="planname" type="text" value="方案 A" onclick="event.stopPropagation()">
+          <span class="fold-hint stat"></span>
+          <button class="mini plan-del" onclick="delMealPlan(event,this)" title="删除方案">✕</button>
+        </summary>
+        <div class="fold-body">
+          <div class="tplbar">
+            <details class="tplmenu">
+              <summary>从模板填充</summary>
+              <div class="tplmenu-pop">
+                <button class="mini" onclick="fillMealTemplate('A',this)">塑形 / 重组</button>
+                <button class="mini" onclick="fillMealTemplate('B',this)">减脂</button>
+                <button class="mini" onclick="fillMealTemplate('C',this)">增肌</button>
+                <button class="mini" onclick="fillMealTemplate('D',this)">训练日 · 高碳</button>
+                <button class="mini" onclick="fillMealTemplate('E',this)">休息日 · 低碳</button>
+                <button class="mini" onclick="fillMealTemplate('F',this)">16:8 轻断食</button>
+                <button class="mini" onclick="fillMealTemplate('G',this)">电煮锅一锅出</button>
+              </div>
+            </details>
+            <button class="mini" onclick="clearMeals(this)">清空</button>
+            <button class="mini" onclick="recordToday(this)">📥 记下今天</button>
+          </div>
+          <div class="tw">
+            <table data-key="MEALS">
+              <thead><tr>
+                <th style="width:1%" class="catcol thops">餐次</th>
+                <th style="width:26%">食物</th>
+                <th class="ctr" style="width:9%">份量<span class="thsub">克</span></th>
+                <th class="ctr" style="width:10%">热量<span class="thsub">kcal</span></th>
+                <th class="ctr" style="width:9%">蛋白<span class="thsub">克</span></th>
+                <th class="ctr" style="width:9%">碳水<span class="thsub">克</span></th>
+                <th class="ctr" style="width:9%">脂肪<span class="thsub">克</span></th>
+                <th class="thops" style="width:8%">操作</th>
+              </tr></thead>
+              <tbody><tr><td class="meal-cell" rowspan="1"><select class="mealname"><option value="" selected="">餐次</option><option>早餐</option><option>午餐</option><option>加餐</option><option>晚餐</option><option>睡前</option></select><div class="meal-kcal">—</div><div class="meal-btns"><button class="mini" onclick="addFood(this)" title="加食物">＋</button><button class="mini" onclick="delMeal(this)" title="删餐次">✕</button></div></td><td class="nm"><div class="combo"><input class="fname" type="text" autocomplete="off" value="" placeholder="食物名"><button type="button" class="combo-caret" tabindex="-1"></button></div></td><td class="calc"><input class="qty" type="number" min="0" step="1" value="" placeholder="g" oninput="calcMeals();markTouched()"></td><td class="mac kcal">—</td><td class="mac p">—</td><td class="mac c">—</td><td class="mac f">—</td><td class="tools"><button class="mini" onclick="dupRow(this)" title="复制">⧉</button><button class="mini" onclick="delRow(this)" title="删除">✕</button></td></tr></tbody>
+              <tfoot><tr><td colspan="8"><button class="mini" onclick="addMeal(this)">＋ 添加餐次</button></td></tr></tfoot>
+            </table>
+          </div>
+          <div class="total stat"></div>
+        </div>
+      </details></div>
+      <div class="tplbar" style="margin-top:12px"><button class="mini" onclick="addMealPlan()">＋ 添加方案</button></div>
+      <p class="muted">餐次从左边的下拉里选。食物名也可以下拉选（每 100 克的营养数据在下面「食物库」里），也可以直接写别的。填上份量，右边四列自动算。每个方案各自算自己的合计。</p>
+    </div>
+  </details>
+<!-- ============ 计算器 ============ -->
+  <h2>第一步：算出你的数字</h2>
+  <div class="card noprint">
+    <div class="calc">
+      <div><label>体重 (kg)</label><input id="iw" type="number" value="70" step="0.1" oninput="calc()"></div>
+      <div><label>身高 (cm)</label><input id="ih" type="number" value="170" step="0.5" oninput="calc()"></div>
+      <div><label>年龄</label><input id="ia" type="number" value="25" step="1" oninput="calc()"></div>
+      <div><label>活动水平</label>
+        <select id="iaf" onchange="calc()">
+          <option value="1.375">久坐（几乎不运动）</option>
+          <option value="1.5" selected="">轻度（每周练 2–3 次）</option>
+          <option value="1.55">中度（每周练 3–5 次）</option>
+          <option value="1.725">高度（每周练 6–7 次）</option>
+        </select>
+      </div>
+    </div>
+    <div class="out" id="out">
+  </div>
+    <p class="muted" style="margin:12px 0 0">公式：Mifflin-St Jeor（男性）BMR = 10×体重 + 6.25×身高 − 5×年龄 + 5。这只是起点估算，<b>真正的校准器是每周体重趋势</b>，见下方「动态调整」。</p>
+  </div>
+
+  <!-- ============ 目标 ============ -->
+  <h2>第二步：选一个目标</h2>
+  <div class="tw">
+    <table>
+      <thead><tr><th style="width:20%">模式</th><th style="width:22%">热量</th><th>适合谁 / 预期速度</th><th class="thtools">操作</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><b>塑形 / 重组</b><span class="tag">推荐</span></td>
+          <td>维持热量<br><span class="muted">约 TDEE</span></td>
+          <td>BMI 正常、想「同时掉一点脂 + 长一点肌肉」。增重慢但镜子里的变化最明显，最适合「薄肌」这个目标。体重基本不动，但腰围会降、围度会涨。</td>
+          <td class="rowtools"></td>
+        </tr>
+        <tr>
+          <td><b>增肌优先</b></td>
+          <td>+12%<br><span class="muted">约 TDEE × 1.12</span></td>
+          <td>体脂已经不高、只想变壮。<b>每周涨 0.25%–0.5% 体重</b>（如 70kg → 0.18–0.35 kg/周）。再快基本就是长脂肪。</td>
+          <td class="rowtools"></td>
+        </tr>
+        <tr>
+          <td><b>减脂优先</b></td>
+          <td>−18%<br><span class="muted">约 TDEE × 0.82</span></td>
+          <td>想先把腰腹的肉减掉再练线条。<b>每周掉 0.5%–1% 体重</b>。不要低于约 1800 kcal，蛋白拉到 2.0–2.2 g/kg 保住肌肉。</td>
+          <td class="rowtools"></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="box info">
+    <h3>蛋白质：证据怎么说</h3>
+    <ul>
+      <li><b>1.6–2.2 g/kg 体重/天</b>。按体重 <b>1.6–2.2 g/kg</b> 换算，如 70kg 就是 <b>112–154g</b>，建议目标 <b>140g 左右</b>。</li>
+      <li>依据：Morton 等 2018 年发表于《British Journal of Sports Medicine》的荟萃分析（49 项 RCT）显示，蛋白质补充带来的额外增肌收益在约 <b>1.6 g/kg/天</b> 处达到拐点，置信区间上限约 2.2 g/kg/天，再往上收益趋于平坦。</li>
+      <li><b>每餐约 0.4 g/kg（≈28g）、每天 3–4 餐</b> 是比较优的分配；但全天总量比"训练后窗口期"重要得多。</li>
+      <li>训练后 2 小时内吃不吃，只要全天蛋白和总热量达标，差别很小。<b>不必为窗口期焦虑。</b></li>
+    </ul>
+  </div>
+
+  <!-- ============ 每日模板 ============ -->
+  <h2>第三步：照着一日模板吃</h2>
+  <p class="muted">下面六套模板都只是骨架 —— 每个餐位给多个选项，挑一个做即可。先看 <b>A / B</b>（通用），需要更细的再往下看 <b>D–G</b>（薄肌进阶）。所有数字都是<b>估算</b>，不同品牌差异很大，以包装营养成分表为准。</p>
+
+  <h3>模板 A · 塑形 / 重组（约 2500–2600 kcal，蛋白约 150g）</h3>
+  <div class="tw">
+    <table>
+      <thead><tr><th style="width:14%">餐次</th><th>内容（任选一种组合）</th><th style="width:11%">热量</th><th style="width:9%">蛋白</th><th class="thtools">操作</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>早餐</td>
+          <td>燕麦 60g + 全脂牛奶 300ml + 鸡蛋 2 个 + 蓝莓 100g</td>
+          <td>≈620</td><td>30g</td><td class="rowtools"></td>
+        </tr>
+        <tr>
+          <td>午餐</td>
+          <td>水煮鸡胸 150g + 杂粮饭（生米 100g）+ 西兰花 200g + 橄榄油 8g</td>
+          <td>≈700</td><td>40g</td><td class="rowtools"></td>
+        </tr>
+        <tr>
+          <td>加餐</td>
+          <td>无糖希腊酸奶 200g + 混合坚果 25g</td>
+          <td>≈330</td><td>24g</td><td class="rowtools"></td>
+        </tr>
+        <tr>
+          <td>晚餐</td>
+          <td>水煮虾 150g + 蒸红薯 250g + 菠菜 200g + 杂粮饭（生米 60g）+ 橄榄油 8g</td>
+          <td>≈700</td><td>44g</td><td class="rowtools"></td>
+        </tr>
+        <tr>
+          <td>睡前</td>
+          <td>全脂牛奶 250ml（或 无糖酸奶 150g）</td>
+          <td>≈165</td><td>8g</td><td class="rowtools"></td>
+        </tr>
+        <tr style="background:#f0fdf9">
+          <td><b>合计</b></td><td class="muted">数值为估算</td>
+          <td><b>≈2515</b></td><td><b>≈146g</b></td><td class="rowtools"></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>模板 B · 减脂（约 2100–2200 kcal，蛋白约 150g）</h3>
+  <div class="tw">
+    <table>
+      <thead><tr><th style="width:14%">餐次</th><th>内容（任选一种组合）</th><th style="width:11%">热量</th><th style="width:9%">蛋白</th><th class="thtools">操作</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>早餐</td>
+          <td>燕麦 40g + 低脂牛奶 250ml + 鸡蛋 2 个 + 蛋白 2 个 + 蓝莓 100g</td>
+          <td>≈490</td><td>33g</td><td class="rowtools"></td>
+        </tr>
+        <tr>
+          <td>午餐</td>
+          <td>水煮鸡胸 180g + 杂粮饭（生米 80g）+ 西兰花 250g + 橄榄油 5g</td>
+          <td>≈610</td><td>52g</td><td class="rowtools"></td>
+        </tr>
+        <tr>
+          <td>加餐</td>
+          <td>无糖希腊酸奶 150g + 苹果 1 个（或 混合坚果 15g）</td>
+          <td>≈315</td><td>15g</td><td class="rowtools"></td>
+        </tr>
+        <tr>
+          <td>晚餐</td>
+          <td>水煮虾 200g + 蒸红薯 250g + 菠菜 250g + 橄榄油 8g</td>
+          <td>≈550</td><td>50g</td><td class="rowtools"></td>
+        </tr>
+        <tr>
+          <td>睡前</td>
+          <td>低脂牛奶 200ml</td>
+          <td>≈90</td><td>7g</td><td class="rowtools"></td>
+        </tr>
+        <tr style="background:#f0fdf9">
+          <td><b>合计</b></td><td class="muted">数值为估算</td>
+          <td><b>≈2055</b></td><td><b>≈157g</b></td><td class="rowtools"></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="muted">想从模板 A 切到<b>增肌模式</b>（+300 kcal）：加 香蕉 1 根 + 坚果 15g，或 蛋白粉 1 勺 + 燕麦 30g 就够了。不用重做整张表。</p>
+
+
+  <div class="box info">
+    <h3>薄肌 · 四套进阶模板（D–G）</h3>
+    <p style="margin:0 0 8px">上面的 A / B / C 是<b>通用</b>模板：不管练几天、练什么都照这个吃就行。下面这四套是往「薄肌」方向再推一步的用法，<b>按训练安排挑，不要四套一起上</b>。</p>
+    <ul style="margin:0 0 8px;padding-left:20px">
+      <li><b>D + E 成对用</b> —— 训练日走高碳、休息日走低碳。一周平均才落在塑形区间，单看某一天没意义。这是四套里最值得先试的一组。</li>
+      <li><b>F（16:8）</b> —— 不是为了「燃脂窗口」，而是少做两顿决策。早上没胃口、或社交饭局集中在晚上的人最合适。</li>
+      <li><b>G（一锅出）</b> —— 只有一个电煮锅时的执行方案。热量和 A 接近，胜在能一次煮两顿、分盒带走。</li>
+    </ul>
+    <p style="margin:0">四套加起来蛋白都在 <b>2.1–2.3 g/kg</b>，比「练到就行」的最低需求（1.6 g/kg）高一截。多出来的部分主要是为了<b>减脂期的饱腹感</b>，不是增肌必需 —— 健康肾脏吃这个量没问题，但别当成硬指标去凑。</p>
+  </div>
+
+  <h3>模板 D · 训练日 · 高碳水（约 2680 kcal，蛋白约 161g）</h3>
+  <p class="muted">练腿臀或代谢循环的那天用。<b>把一天大部分的碳水压在训练前后</b>，训练时有劲、练完恢复快；同理，休息日（模板 E）就要把这些碳水砍掉。这两个是<b>一套</b>，要成对用，不要只挑一个。</p>
+  <div class="tw">
+    <table>
+      <thead><tr><th style="width:14%">餐次</th><th>内容</th><th style="width:11%">热量</th><th style="width:9%">蛋白</th><th class="thtools">操作</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>早餐</td>
+          <td>燕麦 80g + 全脂牛奶 300ml + 鸡蛋 2 个 + 蓝莓 100g</td>
+          <td>≈706</td><td>36g</td><td class="rowtools"></td>
+        </tr>
+        <tr>
+          <td>午餐</td>
+          <td>鸡胸 150g + 杂粮饭（生米 130g）+ 西兰花 200g + 橄榄油 6g</td>
+          <td>≈756</td><td>52g</td><td class="rowtools"></td>
+        </tr>
+        <tr>
+          <td>加餐</td>
+          <td><b>练前 1 小时</b>：全麦面包 60g + 香蕉 1 根 + 蜂蜜 10g</td>
+          <td>≈285</td><td>9g</td><td class="rowtools"></td>
+        </tr>
+        <tr>
+          <td>晚餐</td>
+          <td>虾 150g + 红薯 250g + 菠菜 200g + 杂粮饭（生米 80g）+ 橄榄油 8g</td>
+          <td>≈757</td><td>43g</td><td class="rowtools"></td>
+        </tr>
+        <tr>
+          <td>睡前</td>
+          <td>无糖希腊酸奶 200g</td>
+          <td>≈176</td><td>20g</td><td class="rowtools"></td>
+        </tr>
+        <tr style="background:#f0fdf9">
+          <td><b>合计</b></td><td class="muted">数值为估算</td>
+          <td><b>≈2680</b></td><td><b>≈161g</b></td><td class="rowtools"></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>模板 E · 休息日 · 低碳高蛋白（约 1941 kcal，蛋白约 165g）</h3>
+  <p class="muted">不训练的日子用。碳水砍到 120g 左右，用<b>鸡蛋、豆腐、牛油果、坚果</b>把热量和饱腹感补回来。和模板 D 配对，一周的平均热量才落在塑形区间 —— 单看某一天都没意义。</p>
+  <div class="tw">
+    <table>
+      <thead><tr><th style="width:14%">餐次</th><th>内容</th><th style="width:11%">热量</th><th style="width:9%">蛋白</th><th class="thtools">操作</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>早餐</td>
+          <td>鸡蛋 3 个 + 菠菜 150g + 牛油果 100g + 全麦面包 40g</td>
+          <td>≈508</td><td>30g</td><td class="rowtools"></td>
+        </tr>
+        <tr>
+          <td>午餐</td>
+          <td>鸡胸 180g + 老豆腐 100g + 西兰花 250g + 杂粮饭（生米 40g）+ 橄榄油 10g</td>
+          <td>≈645</td><td>65g</td><td class="rowtools"></td>
+        </tr>
+        <tr>
+          <td>加餐</td>
+          <td>无糖希腊酸奶 200g + 核桃 20g</td>
+          <td>≈307</td><td>23g</td><td class="rowtools"></td>
+        </tr>
+        <tr>
+          <td>晚餐</td>
+          <td>瘦牛肉 150g + 冬瓜 300g + 菌菇 150g + 白菜 200g + 橄榄油 6g</td>
+          <td>≈351</td><td>40g</td><td class="rowtools"></td>
+        </tr>
+        <tr>
+          <td>睡前</td>
+          <td>全脂牛奶 200ml</td>
+          <td>≈130</td><td>6g</td><td class="rowtools"></td>
+        </tr>
+        <tr style="background:#f0fdf9">
+          <td><b>合计</b></td><td class="muted">数值为估算</td>
+          <td><b>≈1941</b></td><td><b>≈165g</b></td><td class="rowtools"></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>模板 F · 16:8 轻断食（约 1867 kcal，蛋白约 151g）</h3>
+  <p class="muted">把进食压缩在 <b>12:00–20:00 这 8 小时</b>里，剩下 16 小时只喝水、茶、黑咖啡。好处是<b>少做两顿决策</b>，而不是「燃脂窗口」那套说法 —— 断食本身不额外烧脂肪，控制住总量才有意义。社交饭局多、早上没胃口的人尤其适合。</p>
+  <div class="tw">
+    <table>
+      <thead><tr><th style="width:14%">餐次</th><th>内容</th><th style="width:11%">热量</th><th style="width:9%">蛋白</th><th class="thtools">操作</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>早餐</td>
+          <td><b>12:00 第一餐</b>：鸡胸 200g + 杂粮饭（生米 100g）+ 西兰花 200g + 牛油果 50g + 橄榄油 5g</td>
+          <td>≈782</td><td>63g</td><td class="rowtools"></td>
+        </tr>
+        <tr>
+          <td>加餐</td>
+          <td><b>15:30</b>：无糖希腊酸奶 200g + 蓝莓 100g + 混合坚果 30g</td>
+          <td>≈413</td><td>26g</td><td class="rowtools"></td>
+        </tr>
+        <tr>
+          <td>晚餐</td>
+          <td><b>19:00 最后一餐</b>：三文鱼 120g + 红薯 250g + 菠菜 200g + 菌菇 150g</td>
+          <td>≈558</td><td>38g</td><td class="rowtools"></td>
+        </tr>
+        <tr>
+          <td>睡前</td>
+          <td><b>20:00 窗口关闭前</b>：乳清蛋白粉 1 勺（约 30g）</td>
+          <td>≈114</td><td>24g</td><td class="rowtools"></td>
+        </tr>
+        <tr style="background:#f0fdf9">
+          <td><b>合计</b></td><td class="muted">数值为估算</td>
+          <td><b>≈1867</b></td><td><b>≈151g</b></td><td class="rowtools"></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>模板 G · 电煮锅一锅出（约 2164 kcal，蛋白约 157g）</h3>
+  <p class="muted">只有一个电煮锅时的做法：<b>肉 + 豆腐 + 两三种菜 + 一份主食，一锅煮完</b>。番茄和菌菇负责出味，基本不用另外调味。一次煮两顿的量、分盒冷藏，比每天开火省事得多。</p>
+  <div class="tw">
+    <table>
+      <thead><tr><th style="width:14%">餐次</th><th>内容</th><th style="width:11%">热量</th><th style="width:9%">蛋白</th><th class="thtools">操作</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>早餐</td>
+          <td>燕麦 60g + 鸡蛋 2 个 + 蓝莓 100g + 全脂牛奶 250ml</td>
+          <td>≈596</td><td>31g</td><td class="rowtools"></td>
+        </tr>
+        <tr>
+          <td>午餐</td>
+          <td>鸡胸 150g + 番茄 200g + 老豆腐 100g + 杂粮饭（生米 90g）+ 白菜 200g 一锅煮</td>
+          <td>≈717</td><td>60g</td><td class="rowtools"></td>
+        </tr>
+        <tr>
+          <td>加餐</td>
+          <td>无糖希腊酸奶 200g + 苹果 1 个</td>
+          <td>≈254</td><td>20g</td><td class="rowtools"></td>
+        </tr>
+        <tr>
+          <td>晚餐</td>
+          <td>巴沙鱼 180g + 冬瓜 300g + 菌菇 150g + 红薯 220g 一锅煮</td>
+          <td>≈490</td><td>36g</td><td class="rowtools"></td>
+        </tr>
+        <tr>
+          <td>睡前</td>
+          <td>低脂牛奶 250ml</td>
+          <td>≈108</td><td>8g</td><td class="rowtools"></td>
+        </tr>
+        <tr style="background:#f0fdf9">
+          <td><b>合计</b></td><td class="muted">数值为估算</td>
+          <td><b>≈2164</b></td><td><b>≈157g</b></td><td class="rowtools"></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ============ 调整 ============ -->
+  <h2>第四步：每周按体重微调</h2>
+  <div class="box ok">
+    <p style="margin:0 0 8px"><b>每周固定时间称重 3–4 次（早上空腹、上完厕所、穿同样衣服），取平均值比较。单日波动全是水分，不用管。</b></p>
+    <ul>
+      <li><b>塑形/重组：</b>体重基本不动是正常的，看的是<b>腰围</b>和镜子。腰围降、围度涨 = 成功。</li>
+      <li><b>增肌：</b>连续 2 周平均体重没涨 → 每天加 <b>150 kcal</b>（约等于加 30g 燕麦 + 1 勺蛋白粉）。涨太快（&gt;0.5%/周）→ 减 150 kcal。</li>
+      <li><b>减脂：</b>连续 2 周平均体重没降 → 每天减 <b>150 kcal</b>，或每天多加 20–30 分钟步行。<b>先动有氧再砍热量</b>。</li>
+    </ul>
+  </div>
+
+  <!-- ============ 电煮锅食谱 ============ -->
+  <details class="fold" id="recipes">
+    <summary>
+      <span>🍳 电煮锅食谱库</span>
+      <span class="fold-hint"></span>
+    </summary>
+    <div class="fold-body">
+  <p class="muted">电煮锅火力弱、不能爆炒，所以思路是<b>煮、蒸、焖、涮</b>。下面每条都标了"关键点"—— 那些才是决定好不好吃的部分。</p>
+
+  <div class="card">
+    <h3>① 水煮鸡胸（不柴版）<span class="tag p">蛋白 34g/150g</span></h3>
+    <p style="margin:4px 0"><b>做法：</b>鸡胸横切成 1.5cm 厚片。冷水下锅，加姜片、葱段。水开后<b>立刻转最小火煮 8 分钟，然后关火焖 5–8 分钟</b>。捞出趁热撕成条。</p>
+    <p style="margin:4px 0"><b>关键点：</b>① <b>关火焖</b>是鸡胸不柴的核心，一直大火煮必柴；② 冷水下锅比热水下锅更嫩；③ 切片比整块熟得快、更嫩；④ 趁热撕条、趁热调味，凉了纤维会收紧密实。</p>
+    <p style="margin:4px 0"><b>调味：</b>盐 + 黑胡椒 + 生抽 + 蒜末 + 辣椒粉（几滴香油也行）。想换口味：藤椒油／孜然／咖喱粉／腐乳。</p>
+  </div>
+
+  <div class="card">
+    <h3>② 蒸蛋羹<span class="tag p">蛋白 12g/2 个蛋</span></h3>
+    <p style="margin:4px 0"><b>做法：</b>鸡蛋 2 个打散，加 <b>1.5 倍温水</b>（约 150ml）和一点盐，搅匀后<b>过筛</b>去泡沫。碗上盖保鲜膜或倒扣一个盘子。水开后<b>中火</b>蒸 8–10 分钟，关火再焖 2 分钟。淋生抽 + 几滴香油。</p>
+    <p style="margin:4px 0"><b>关键点：</b><b>温水 + 过筛 + 盖盖子 + 中火</b>，四件事做齐就是布丁口感。少任何一项都会出蜂窝。想加蛋白可以丢几只虾仁或鸡胸丁进去一起蒸。</p>
+  </div>
+
+  <div class="card">
+    <h3>③ 白煮蛋 / 水波蛋<span class="tag p">蛋白 6g/个</span></h3>
+    <p style="margin:4px 0"><b>做法：</b>冷水下锅，水开后 <b>7 分钟</b>（溏心）或 <b>10 分钟</b>（全熟），立刻捞出来泡冷水。</p>
+    <p style="margin:4px 0"><b>关键点：</b>捞出马上过冷水，壳好剥且不会继续变老。一次煮 6–8 个放冰箱，是最省事的蛋白质。</p>
+  </div>
+
+  <div class="card">
+    <h3>④ 杂粮饭<span class="tag c">碳水</span></h3>
+    <p style="margin:4px 0"><b>做法：</b>米:水 ≈ 1:1.2。水开后小火 20–25 分钟，关火焖 10 分钟。糙米／燕麦米／藜麦要先泡 1 小时。</p>
+    <p style="margin:4px 0"><b>关键点：</b>一次煮 2–3 天的量，分装冷藏。<b>冷藏过的米饭会形成抗性淀粉，升糖更平缓</b>，对减脂期更友好。杂粮比例从 1/3 起步，全杂粮口感很硬。</p>
+  </div>
+
+  <div class="card">
+    <h3>⑤ 水煮虾<span class="tag p">蛋白 30g/150g</span></h3>
+    <p style="margin:4px 0"><b>做法：</b>水开后下锅，加姜片，<b>3–4 分钟</b>，变红卷曲就捞。</p>
+    <p style="margin:4px 0"><b>关键点：</b>宁可早捞不可晚捞，多煮 1 分钟就柴。捞出过一下冷水，肉更弹。虾是这份计划里<b>蛋白密度最高、最省事</b>的动物蛋白之一。</p>
+  </div>
+
+  <div class="card">
+    <h3>⑥ 水煮蔬菜（西兰花 / 菠菜 / 秋葵）</h3>
+    <p style="margin:4px 0"><b>做法：</b>水开下锅 —— 西兰花 2–3 分钟、菠菜 1 分钟、秋葵 3 分钟。</p>
+    <p style="margin:4px 0"><b>关键点：</b>捞出<b>立刻过凉水或冰水</b>，颜色、脆度、维生素都能保住。拌蒜末 + 生抽 + 几滴香油。<b>别煮到发黄</b>，那样维生素基本没了。</p>
+  </div>
+
+  <div class="card">
+    <h3>⑦ 蒸红薯 / 玉米 / 南瓜<span class="tag c">碳水</span></h3>
+    <p style="margin:4px 0"><b>做法：</b>整块放蒸屉，水开后红薯 20–25 分钟、玉米 15 分钟、南瓜块 15 分钟。</p>
+    <p style="margin:4px 0"><b>关键点：</b>同样是"一次蒸多点、冷藏分装"。红薯冷藏后抗性淀粉增加，是减脂期的好碳水。</p>
+  </div>
+
+  <div class="card">
+    <h3>⑧ 番茄豆腐汤 / 菌菇汤 / 冬瓜虾仁汤</h3>
+    <p style="margin:4px 0"><b>做法：</b>番茄切块先煮出沙（加一点油更容易出色），加水煮开，下豆腐块煮 2–3 分钟，加盐、白胡椒。想加蛋白就打个蛋花或最后 2 分钟下虾仁。</p>
+    <p style="margin:4px 0"><b>关键点：</b>汤是<b>补水和增加蔬菜摄入</b>最省力的方式，饱腹感强、热量低。减脂期晚餐先喝一碗汤，主食自然就吃得少了。</p>
+  </div>
+
+  <div class="card">
+    <h3>⑨ 手撕鸡拌黄瓜 <span class="tag">完全免开火</span></h3>
+    <p style="margin:4px 0"><b>做法：</b>提前煮好的鸡胸撕条 + 黄瓜丝 + 生抽 + 醋 + 蒜末 + 几滴辣椒油，拌匀。</p>
+    <p style="margin:4px 0"><b>关键点：</b>夏天最省事的一餐。<b>鸡胸可以一次煮 3 天的量</b>，冷藏分装，随取随用 —— 这是能否坚持下去的关键。</p>
+  </div>
+
+  <div class="card">
+    <h3>⑩ 金枪鱼酸奶沙拉 <span class="tag">完全免开火</span></h3>
+    <p style="margin:4px 0"><b>做法：</b>水浸金枪鱼罐头 1 罐沥干 + 无糖希腊酸奶 2 勺 + 洋葱碎 + 黑胡椒 + 一点点芥末，拌匀。涂全麦面包或直接吃。</p>
+    <p style="margin:4px 0"><b>关键点：</b>用<b>希腊酸奶替代蛋黄酱</b>，同样顺滑但热量只有约 1/5、蛋白还高。选<b>水浸</b>不选油浸。</p>
+  </div>
+
+  <div class="card">
+    <h3>⑪ 番茄鸡胸荞麦面</h3>
+    <p style="margin:4px 0"><b>做法：</b>番茄煮出沙后加水煮开，下荞麦面和提前煮好的鸡胸丝，煮 2–3 分钟。</p>
+    <p style="margin:4px 0"><b>关键点：</b>荞麦面比普通挂面蛋白略高、饱腹感更强。这是"想吃面"时最合理的解法。</p>
+  </div>
+
+  <div class="card">
+    <h3>⑫ 燕麦蛋饼<span class="tag">电煮锅也能做</span></h3>
+    <p style="margin:4px 0"><b>做法：</b>燕麦 40g + 鸡蛋 2 个 + 少量水，搅拌成糊。锅底刷薄薄一层油，小火，<b>盖上盖子</b> 3–4 分钟，翻面再 2 分钟。</p>
+    <p style="margin:4px 0"><b>关键点：</b>电煮锅火力弱、锅底薄，<b>必须盖盖子</b>否则上下受热不均。翻面时用盘子扣住锅口倒扣，比用铲子好翻。</p>
+  </div>
+    </div>
+  </details>
+
+<!-- ============ 备餐 ============ -->
+  <details class="fold" id="prep">
+    <summary>
+      <span>📦 每周备餐流程（约 60 分钟）</span>
+      <span class="fold-hint"></span>
+    </summary>
+    <div class="fold-body">
+  <div class="card">
+    <p style="margin:0 0 10px"><b>能不能坚持，90% 取决于这一步。</b>把"每天做饭"变成"每周做一次"。</p>
+    <div class="tw">
+      <table>
+        <thead><tr><th style="width:16%">顺序</th><th style="width:32%">做什么</th><th>要点</th><th class="thtools">操作</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td>煮 3 天量的鸡胸（约 500g）</td><td>切薄片、冷水下锅、关火焖。熟了立刻撕条调味，分 3 盒冷藏</td><td class="rowtools"></td></tr>
+          <tr><td>2</td><td>煮 6–8 个鸡蛋</td><td>全熟 10 分钟，过冷水，带壳冷藏可存 5–7 天</td><td class="rowtools"></td></tr>
+          <tr><td>3</td><td>蒸 2–3 天量的红薯／玉米</td><td>和米饭错开，避免吃腻</td><td class="rowtools"></td></tr>
+          <tr><td>4</td><td>煮一锅杂粮饭</td><td>分装冷藏，微波或上锅蒸 1 分钟就能吃</td><td class="rowtools"></td></tr>
+          <tr><td>5</td><td>洗好蔬菜，切好放保鲜盒</td><td>西兰花、菠菜建议<b>当天现煮</b>，但洗好能省 10 分钟</td><td class="rowtools"></td></tr>
+          <tr><td>6</td><td>分装坚果、酸奶</td><td>坚果按 25g 一包分好，避免"抓一把"变成抓三把</td><td class="rowtools"></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="muted" style="margin:10px 0 0">冷藏熟食建议 <b>3 天内</b>吃完；如果想一次做一周，把后 3 天的<b>冷冻</b>起来，吃前提前一晚放冷藏解冻。<b>减脂期建议买一个厨房秤</b> —— 目测和实际差 30% 是常事，前两周称一称建立手感，之后就不用了。</p>
+  </div>
+    </div>
+  </details>
+
+<!-- ============ 采购 ============ -->
+  <details class="fold" id="shopping">
+    <summary>
+      <span>🛒 每周采购清单</span>
+      <span class="fold-hint"></span>
+    </summary>
+    <div class="fold-body">
+  <div class="tw">
+    <table>
+      <thead><tr><th style="width:16%">类别</th><th>物品</th><th style="width:9%">✓</th><th class="thtools">操作</th></tr></thead>
+      <tbody>
+        <tr><td>蛋白质</td><td>鸡胸、鸡蛋、鲜虾／虾仁、瘦牛肉、水浸金枪鱼罐头、无糖希腊酸奶、牛奶、北豆腐、毛豆、蛋白粉（可选）</td><td><input type="checkbox" class="chk"></td><td class="rowtools"></td></tr>
+        <tr><td>碳水</td><td>燕麦、糙米／杂粮米、红薯、玉米、荞麦面、全麦面包、香蕉、苹果、蓝莓</td><td><input type="checkbox" class="chk"></td><td class="rowtools"></td></tr>
+        <tr><td>脂肪</td><td>混合坚果、橄榄油、无糖花生酱</td><td><input type="checkbox" class="chk"></td><td class="rowtools"></td></tr>
+        <tr><td>蔬菜</td><td>西兰花、菠菜、番茄、黄瓜、冬瓜、菌菇、洋葱、胡萝卜、秋葵、生菜</td><td><input type="checkbox" class="chk"></td><td class="rowtools"></td></tr>
+        <tr><td>调味</td><td>生抽、醋、黑胡椒、蒜、姜、辣椒粉、香油、盐、咖喱粉、孜然</td><td><input type="checkbox" class="chk"></td><td class="rowtools"></td></tr>
+      </tbody>
+    </table>
+  </div>
+    </div>
+  </details>
+
+<!-- ============ 交换表 ============ -->
+  <details class="fold" id="exchange">
+    <summary>
+      <span>🔁 食物交换表（替换用）</span>
+      <span class="fold-hint"></span>
+    </summary>
+    <div class="fold-body">
+  <p class="muted">吃腻了就换，别破坏宏量结构。下面每一份大约是<b>等量营养</b>，可以直接对换。</p>
+  <div class="tw">
+    <table>
+      <thead><tr><th style="width:38%">≈ 20g 蛋白质</th><th>≈ 25g 碳水</th><th class="thtools">操作</th></tr></thead>
+      <tbody>
+        <tr><td>鸡胸 100g</td><td>熟米饭 100g</td><td class="rowtools"></td></tr>
+        <tr><td>鲜虾 120g</td><td>燕麦 35g（生重）</td><td class="rowtools"></td></tr>
+        <tr><td>瘦牛肉 90g</td><td>红薯 110g</td><td class="rowtools"></td></tr>
+        <tr><td>鸡蛋 3 个（约 18g）</td><td>小玉米 1 根</td><td class="rowtools"></td></tr>
+        <tr><td>无糖希腊酸奶 200g</td><td>香蕉 1 根（中）</td><td class="rowtools"></td></tr>
+        <tr><td>北豆腐 250g</td><td>全麦面包 1 片</td><td class="rowtools"></td></tr>
+        <tr><td>水浸金枪鱼罐头 1 罐</td><td>荞麦面 35g（生重）</td><td class="rowtools"></td></tr>
+        <tr><td>乳清蛋白粉 1 勺（约 24g）</td><td>苹果 1 个（大）</td><td class="rowtools"></td></tr>
+      </tbody>
+    </table>
+  </div>
+    </div>
+  </details>
+
+<!-- ============ 补剂 ============ -->
+  <details class="fold" id="supps">
+    <summary>
+      <span>💊 补剂</span>
+      <span class="fold-hint"></span>
+    </summary>
+    <div class="fold-body">
+  <div class="tw">
+    <table>
+      <thead><tr><th style="width:20%">补剂</th><th style="width:18%">建议</th><th>说明</th><th class="thtools">操作</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><b>肌酸一水合物</b><span class="tag">推荐</span></td>
+          <td>3–5 g / 天<br>任意时间</td>
+          <td>证据最强、最便宜的增力增肌补剂，不需要"冲击期"。约 2–4 周见效，会让体重涨 0.5–1kg（是肌肉里的水，不是脂肪）。选最便宜的一水合物即可，其他花哨形式没有优势。</td>
+          <td class="rowtools"></td>
+        </tr>
+        <tr>
+          <td>乳清蛋白粉</td>
+          <td>可选</td>
+          <td>它只是<b>方便的食物</b>，不是必需品。如果靠鸡胸、鸡蛋、虾、酸奶已经吃够 140g 蛋白，完全不买也没损失。好处是省时间、好携带。</td>
+          <td class="rowtools"></td>
+        </tr>
+        <tr>
+          <td>维生素 D</td>
+          <td>日照少可考虑<br>1000–2000 IU/天</td>
+          <td>久坐室内、很少晒太阳的人普遍偏低。可以先体检看血清 25-(OH)D 再决定。</td>
+          <td class="rowtools"></td>
+        </tr>
+        <tr>
+          <td>咖啡因</td>
+          <td>训练前 30–60 分钟<br>100–150 mg</td>
+          <td>约 1–2 mg/kg 能提升训练表现。对咖啡因敏感、容易心慌的人别用 —— <b>尤其你目前有胸部不适，先跳过这条</b>。</td>
+          <td class="rowtools"></td>
+        </tr>
+        <tr>
+          <td>BCAA / 氮泵 / 左旋肉碱 / "促睾"</td>
+          <td><b>不用买</b></td>
+          <td>在蛋白质摄入充足的前提下，BCAA 基本无效（完整蛋白质里已经有了）。其余几个没有可靠证据支持，纯属浪费钱。</td>
+          <td class="rowtools"></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+    </div>
+  </details>
+
+<!-- ============ 生活方式 ============ -->
+  <details class="fold" id="lifestyle">
+    <summary>
+      <span>🌙 和生活方式的配合</span>
+      <span class="fold-hint"></span>
+    </summary>
+    <div class="fold-body">
+  <div class="card">
+    <ul style="margin:0;padding-left:20px">
+      <li><b>睡眠 7–9 小时。</b>这是最被低估的一项 —— 睡眠不足会直接降低肌肉合成率、提高饥饿感，效果比任何补剂都大。跟训练计划里是同一条。</li>
+      <li><b>水 2.5–3.5 L/天。</b>训练日再多喝 500ml。脱水的状态下力量表现会明显下降。</li>
+      <li><b>纤维 25–38 g/天。</b>靠蔬菜、燕麦、杂粮饭、豆类拿到。纤维够，饱腹感稳，减脂期少受罪。</li>
+      <li><b>酒精尽量少。</b>会抑制肌肉蛋白合成、影响睡眠质量，而且热量还不低。</li>
+      <li><b>别追求"完美饮食"。</b>一周吃对 85% 就够了，剩下 15% 是社交和生活。能坚持三年的 80 分方案，远胜坚持三周的 100 分方案。</li>
+    </ul>
+  </div>
+    </div>
+  </details>
+
+<!-- ============ 追踪 ============ -->
+  <h2 id="log">每日营养记录</h2>
+  <div class="tplbar">
+    <span>显示</span>
+    <button class="mini seg" data-logmode="week" onclick="setLogMode('week')">周</button>
+    <button class="mini seg on" data-logmode="biweek" onclick="setLogMode('biweek')">双周</button>
+    <button class="mini seg" data-logmode="month" onclick="setLogMonth()">按月</button>
+    <button class="mini seg" data-logmode="all" onclick="setLogMode('all')">全部</button>
+    <button class="mini" onclick="shiftLog(-1)" title="往前一段">◀</button>
+    <span class="logmonth" id="logMonthLabel">10/10 – 10/23</span>
+    <button class="mini" onclick="shiftLog(1)" title="往后一段">▶</button>
+    <button class="mini" onclick="jumpToday()">📍 跳到今天</button>
+    <button class="mini" onclick="recordToday()">📥 记下今天餐表的合计</button>
+    <span class="logcount">共 <b id="logCount">14 / 30</b> 条</span>
+    <button class="mini" onclick="appendLogDays(30)">➕ 再排 30 天</button>
+  </div>
+  <div class="tw">
+    <table id="logTable">
+      <thead><tr>
+        <th style="width:16%">日期</th><th>体重 (kg)</th><th>腰围 (cm)</th>
+        <th>热量</th><th>蛋白</th><th>碳水</th><th>脂肪</th>
+        <th style="width:20%">备注</th><th class="thtools">操作</th>
+      </tr></thead>
+      <tbody></tbody>
+    </table>
+  </div>
+  <p class="muted">
+    每天一行。点「📥 记下今天餐表的合计」会把「我的一天」里算出来的热量和三大营养素填进今天那一行 ——
+    再补上体重和腰围就行。<b>腰围是「薄肌」这个目标最诚实的指标</b>：体重可以因为水分完全不动，但腰围两周内就会给你反馈。
+  </p>
+
+  <div class="box warn" style="margin-top:30px">
+    <h3>免责声明</h3>
+    <p style="margin:0">以上内容基于公开的运动营养学文献与常识整理，供参考，<b>不构成医疗或营养处方</b>。食物热量与宏量为估算值，请以包装营养成分表为准。若有糖尿病、甲状腺疾病、肾脏疾病、消化道疾病，或正在服用任何药物，请在调整饮食前咨询医生或注册营养师。</p>
+  </div>
+
+  <!-- ================= 食物库 ================= -->
+  <details class="fold" id="foodlib">
+    <summary>
+      <span>📖 食物库 · 每 100 克营养</span>
+      <span class="fold-hint">63 种常见食物，含"怎么吃"的关键点</span>
+    </summary>
+    <div class="fold-body">
+      <div id="foodLibBody"></div>
+    </div>
+  </details>
+<!-- 依据 -->
+  <details class="fold" id="refs">
+    <summary>
+      <span>📚 主要依据</span>
+      <span class="fold-hint"></span>
+    </summary>
+    <div class="fold-body">
+  <div class="card" style="font-size:13px;color:#374151">
+    <ul style="margin:0;padding-left:20px">
+      <li>Morton RW, et al. <i>A systematic review, meta-analysis and meta-regression of the effect of protein supplementation on resistance training-induced gains in muscle mass and strength in healthy adults.</i> <b>British Journal of Sports Medicine</b>, 2018;52(6):376–384.</li>
+      <li>Schoenfeld BJ, Aragon AA. <i>How much protein can the body use in a single meal for muscle-building? Implications for daily protein distribution.</i> <b>Journal of the International Society of Sports Nutrition</b>, 2018;15:10.</li>
+      <li>慢性肌肉骨骼性胸壁疼痛（含肋软骨炎）处理原则：以止痛、避免诱发动作、自然病程观察为主，缺乏高质量证据支持特定疗法。</li>
+    </ul>
+  </div>
+    </div>
+  </details>
+
+
+</div>
+</div>
+
+<script>
+/* ---------- 计算器 ---------- */
+function calc(){
+  const w = parseFloat(document.getElementById('iw').value) || 0;
+  const h = parseFloat(document.getElementById('ih').value) || 0;
+  const a = parseFloat(document.getElementById('ia').value) || 0;
+  const af = parseFloat(document.getElementById('iaf').value) || 1.5;
+  if(w < 30 || h < 100) { document.getElementById('out').innerHTML = ''; return; }
+
+  const bmr  = 10*w + 6.25*h - 5*a + 5;
+  const tdee = bmr * af;
+  const cut  = tdee * 0.82;
+  const bulk = tdee * 1.12;
+
+  const macros = (kcal, pk) => {
+    const p = w * pk;
+    const f = w * (pk > 1.9 ? 0.85 : 1.0);
+    const c = Math.max(0, (kcal - p*4 - f*9) / 4);
+    return `<div class="macro">
+      <span class="p" style="background:#dbeafe;color:#1e40af">蛋白 ${Math.round(p)}g</span>
+      <span style="background:#fef3c7;color:#92400e">碳水 ${Math.round(c)}g</span>
+      <span style="background:#fce7f3;color:#9d174d">脂肪 ${Math.round(f)}g</span>
+    </div>`;
+  };
+
+  document.getElementById('out').innerHTML = `
+    <div class="ocell"><div class="k">基础代谢 BMR</div><div class="n">${Math.round(bmr)} <span class="u">kcal</span></div></div>
+    <div class="ocell"><div class="k">每日总消耗 TDEE</div><div class="n">${Math.round(tdee)} <span class="u">kcal</span></div></div>
+    <div class="ocell hi"><div class="k">塑形 / 重组</div><div class="n">${Math.round(tdee)} <span class="u">kcal</span></div>${macros(tdee, 2.0)}</div>
+    <div class="ocell"><div class="k">增肌优先 +12%</div><div class="n">${Math.round(bulk)} <span class="u">kcal</span></div>${macros(bulk, 2.0)}</div>
+    <div class="ocell"><div class="k">减脂优先 −18%</div><div class="n">${Math.round(cut)} <span class="u">kcal</span></div>${macros(cut, 2.1)}</div>
+  `;
+  // 把目标传给餐表，好显示差距
+  MEAL_TARGET = { kcal: Math.round(tdee), p: Math.round(w * 2.0) };
+  calcMeals();
+}
+
+/* ---------- 行操作按钮注入 ---------- */
+function injectRowTools(){
+  document.querySelectorAll('table').forEach(t=>{
+    if(!t.querySelector('.thtools')) return;
+    t.querySelectorAll('tbody tr').forEach(tr=>{
+      const td = tr.querySelector('.rowtools');
+      // 每次都重新注入，而不是「只注入一次」：
+      // 内容会被写回文件，留标记会让旧文件永远冻结着当时那版按钮。
+      if(td) td.innerHTML = '<button class="mini" onclick="dupRow(this)">复制</button> '+
+                            '<button class="mini" onclick="delRow(this)">删除</button>';
+    });
+  });
+}
+function dupRow(btn){
+  const tr = btn.closest('tr');
+  const clone = tr.cloneNode(true);
+  clone.querySelectorAll('input[type=checkbox]').forEach(c=>c.checked=false);
+  tr.parentNode.insertBefore(clone, tr.nextSibling);
+  injectRowTools();
+}
+function delRow(btn){
+  const tr = btn.closest('tr');
+  if(tr.parentNode.rows.length > 1) tr.remove();
+  else alert('至少保留一行');
+}
+function addRows(){
+  document.querySelectorAll('table').forEach(t=>{
+    const tb = t.querySelector('tbody');
+    if(!tb || !t.querySelector('.thtools')) return;
+    const clone = tb.rows[tb.rows.length-1].cloneNode(true);
+    clone.querySelectorAll('input[type=checkbox]').forEach(c=>c.checked=false);
+    tb.appendChild(clone);
+  });
+  injectRowTools();
+}
+
+/* ---------- 编辑模式 ---------- */
+let editing = false;
+function setAllEditable(on){
+  document.querySelectorAll('table tbody td:not(.rowtools)').forEach(td=>td.contentEditable = on ? 'true':'false');
+  document.querySelectorAll('table thead th:not(.thtools)').forEach(th=>th.contentEditable = on ? 'true':'false');
+  document.querySelectorAll('h1,h2,h3,p,.sub,.muted,.box,.box *,.card,.card *,.ocell,.ocell *,summary,summary *').forEach(el=>{
+    if(el.tagName==='BUTTON' || el.closest('.bar') || el.closest('.calc') || el.closest('#out') || el.closest('.tw')) return;
+    el.contentEditable = on ? 'true':'false';
+  });
+}
+function toggleEdit(){
+  editing = !editing;
+  document.body.classList.toggle('editing', editing);
+  setAllEditable(editing);
+  document.getElementById('btnEdit').textContent = editing ? '✅ 完成编辑（并保存）' : '✏️ 进入编辑模式';
+  if(!editing) saveLocal();
+}
+
+/* ---------- 本地保存 ---------- */
+/* ==================== 存储 · 本地服务 · 导出导入 ====================
+   和训练计划同一套：改了自动存；走「启动.bat」打开时还会写回文件本身；
+   文件被别处改过就拒写，避免把新改动覆盖掉。 */
+/* v2：餐表由「一个方案」改成「可以有好几个」，旧的单表存档结构已经不兼容，
+   所以换键 —— 免得旧存档被还原出来，把新结构冲掉。 */
+const KEY = 'diet_plan_v2';
+const docEl = document.getElementById("doc");
+
+/* 页面刚解析完，#doc 就是文件里的原始内容 —— 这时算一次指纹 */
+const FILE_PRINT = (()=>{
+  const str = docEl.innerHTML;
+  let h = 5381;
+  for(let i=0;i<str.length;i++) h = ((h*33) ^ str.charCodeAt(i)) >>> 0;
+  return h.toString(36) + '-' + str.length;
+})();
+
+/* innerHTML 只序列化 HTML 属性，而你打字改的是 property。
+   不先同步，保存和导出都会丢掉输入框里的编辑。 */
+function syncInputs(root){
+  root.querySelectorAll('input').forEach(el=>{
+    if(el.type === 'checkbox' || el.type === 'radio'){
+      if(el.checked) el.setAttribute('checked', ''); else el.removeAttribute('checked');
+    } else if(el.getAttribute('value') !== el.value){
+      el.setAttribute('value', el.value);
+    }
+  });
+  /* select 选中的是哪一项，只体现在 option 的 selected 属性上。
+     不同步的话，保存再打开就退回第一项了。 */
+  root.querySelectorAll('select').forEach(el=>{
+    Array.prototype.forEach.call(el.options, o=>{
+      if(o.value === el.value) o.setAttribute('selected', '');
+      else o.removeAttribute('selected');
+    });
+  });
+}
+
+/* 写文件用的页面骨架：#doc 挖空做占位，其余原样。
+   写回时不会把运行时生成的东西（提示气泡、插件注入的元素）烘进文件。 */
+/* ==================== 左侧目录 ==================== */
+/* ==================== 左侧目录 · 单屏切换 ==================== */
+let SECS = [];          // 每一屏：{ el, label, members[] }
+let CUR = 0;
+
+function buildTOC(){
+  const toc = document.getElementById('toc');
+  const doc = document.getElementById('doc');
+  if(!toc || !doc || toc.dataset.built) return;
+  toc.dataset.built = '1';
+
+  const stripEmoji = t => (t || '').replace(/^[^\p{L}\p{N}]+/u, '').trim();
+  const short = t => stripEmoji((t || '').trim().split(/ · |：|: |（|\(/)[0]) || stripEmoji(t);
+  const SKIP = { days: 1 };      // 训练日模板是个大容器，不单独成屏
+
+  const kids = [...doc.children];
+  const starts = [];
+  kids.forEach((el, i)=>{
+    if(SKIP[el.id]) return;
+    if(el.tagName === 'H2' || (el.tagName === 'DETAILS' && el.classList.contains('fold'))) starts.push(i);
+  });
+  if(!starts.length){ toc.style.display = 'none'; return; }
+
+  SECS = starts.map((idx, k)=>{
+    const end = k + 1 < starts.length ? starts[k + 1] : kids.length;
+    const el = kids[idx];
+    let raw;
+    if(el.tagName === 'H2') raw = el.textContent;
+    else {
+      const sm = el.querySelector(':scope > summary');
+      const first = sm && sm.querySelector('span');
+      raw = first ? first.textContent : (sm ? sm.textContent : '');
+    }
+    return { el: el, label: short(raw), members: kids.slice(idx, end) };
+  });
+
+  // 底部 3D 探索区在 #doc 外面，单独当最后一屏
+  const an = document.getElementById('anatomy-explorer');
+  if(an) SECS.push({ el: an, label: '人体肌肉 · 3D', members: [], virtual: true });
+
+  toc.innerHTML = '<div class="toc-t">目录</div>' + SECS.map((s, i)=>
+    '<a href="#" data-i="' + i + '">' + esc(s.label) + '</a>').join('');
+  toc.querySelectorAll('a').forEach((a, i)=>{
+    a.addEventListener('click', e=>{ e.preventDefault(); showSection(i); });
+  });
+  showSection(0);
+}
+
+function showSection(i){
+  const doc = document.getElementById('doc');
+  if(!SECS.length) return;
+  if(i < 0 || i >= SECS.length) i = 0;
+  CUR = i;
+  const sec = SECS[i];
+  const an = document.getElementById('anatomy-explorer');
+
+  doc.dataset.view = 'single';
+  SECS.forEach((s, k)=>{
+    const on = (k === i) && !s.virtual;
+    s.members.forEach(el=>el.classList.toggle('sec-on', on));
+    if(on && s.el.tagName === 'DETAILS') s.el.open = true;
+  });
+  if(an) an.style.display = sec.virtual ? '' : 'none';
+  document.querySelectorAll('#toc a').forEach((a, k)=>a.classList.toggle('on', k === i));
+  window.scrollTo(0, 0);
+}
+
+/* 内容被整体替换（找回备份 / 导入 / 撤回）后，目录要重建 */
+function rebuildTOC(){
+  const toc = document.getElementById('toc');
+  if(!toc) return;
+  delete toc.dataset.built;
+  SECS = [];
+  buildTOC();
+}
+
+/* 「更多」菜单：点外面就收起来 */
+document.addEventListener('click', e=>{
+  document.querySelectorAll('details.more[open]').forEach(d=>{
+    if(!d.contains(e.target)) d.open = false;
+  });
+  document.querySelectorAll('details.tplmenu[open]').forEach(d=>{
+    if(!d.contains(e.target) || e.target.closest('.tplmenu-pop button')) d.open = false;
+  });
+});
+
+/* ==================== 配色主题 ==================== */
+const THEMES = ['orig', 'paper', 'eye', 'dark'];
+function setTheme(t){
+  if(THEMES.indexOf(t) < 0) t = 'orig';
+  if(t === 'orig') delete document.body.dataset.theme;
+  else document.body.dataset.theme = t;
+  try{ localStorage.setItem('theme_v2', t); }catch(e){}
+  refreshThemeBtns();
+}
+function refreshThemeBtns(){
+  const cur = document.body.dataset.theme || 'orig';
+  document.querySelectorAll('.themepick button').forEach(b=>{
+    b.classList.toggle('on', b.dataset.theme === cur);
+  });
+}
+
+const SHELL = (()=>{
+  const clone = document.documentElement.cloneNode(true);
+  const wrap = clone.querySelector('#doc');
+  if(wrap) wrap.innerHTML = '@@DOC@@';
+  const ss = clone.querySelector('#saveState');
+  const bd = clone.querySelector('body');
+  if(bd) bd.removeAttribute('data-theme');      // 配色是浏览器的状态，不该写进文件
+  if(ss){ ss.textContent = ''; ss.removeAttribute('title'); ss.className = 'savestate'; }
+  clone.querySelectorAll('style:not(#app-style),[id^="immersive"],[class^="_th_"],[class*=" _th_"]')
+       .forEach(el=>el.remove());
+  [...clone.attributes].forEach(a=>{ if(a.name !== 'lang') clone.removeAttribute(a.name); });
+  return '<!DOCTYPE html>\n' + clone.outerHTML;
+})();
+
+/* ==================== 食物库（每 100g 可食部）====================
+   kcal 千卡　p 蛋白(g)　cb 碳水(g)　fat 脂肪(g)
+   数值取自常见食物成分表，不同品牌/部位会有出入，当参考值用。 */
+const FOOD = {
+  "鸡胸肉（生）": {cat:"蛋白质", kcal:120, p:24, cb:0, fat:2.5, tip:"最划算的蛋白来源。切片冷水下锅，水开关火焖 8 分钟，不柴"},
+  "鸡腿肉（去皮）": {cat:"蛋白质", kcal:145, p:19, cb:0, fat:7, tip:"比鸡胸香，脂肪也高一档。去皮能省掉大半脂肪"},
+  "鸡蛋": {cat:"蛋白质", kcal:143, p:12.6, cb:0.7, fat:9.5, tip:"一个约 50g，即 72kcal / 蛋白 6.3g。蛋黄别扔，营养大半在里面"},
+  "鸡蛋白": {cat:"蛋白质", kcal:52, p:11, cb:0.7, fat:0.2, tip:"想加蛋白又不想加脂肪和热量时用"},
+  "鲜虾 / 虾仁": {cat:"蛋白质", kcal:90, p:18, cb:1, fat:1.2, tip:"蛋白密度最高又最省事。水开下锅 3–4 分钟，变红就捞"},
+  "瘦牛肉（生）": {cat:"蛋白质", kcal:130, p:21, cb:0, fat:4.5, tip:"牛腱、牛里脊都行。薄片涮 20–30 秒变色就捞"},
+  "猪里脊": {cat:"蛋白质", kcal:143, p:20, cb:0, fat:6, tip:"猪肉里最瘦的部位。切薄片涮或煮汤"},
+  "金枪鱼罐头（水浸）": {cat:"蛋白质", kcal:116, p:26, cb:0, fat:1, tip:"完全免开火。一定选「水浸」不选「油浸」，热量差一倍"},
+  "三文鱼": {cat:"蛋白质", kcal:208, p:20, cb:0, fat:13, tip:"优质脂肪高，一周一两次就够，热量别忽略"},
+  "龙利鱼 / 巴沙鱼": {cat:"蛋白质", kcal:90, p:15, cb:0, fat:3, tip:"便宜好熟，无刺。水煮或蒸都行"},
+  "北豆腐（老）": {cat:"蛋白质", kcal:116, p:12, cb:3, fat:7, tip:"植物蛋白主力。煮汤、涮火锅都合适"},
+  "南豆腐（嫩）": {cat:"蛋白质", kcal:76, p:8, cb:2, fat:4.5, tip:"更嫩，适合做汤。蛋白密度比老豆腐低"},
+  "毛豆": {cat:"蛋白质", kcal:131, p:13, cb:10, fat:5, tip:"蛋白和纤维都高，当加餐比零食好得多"},
+  "乳清蛋白粉": {cat:"蛋白质", kcal:380, p:80, cb:6, fat:4, tip:"一勺约 30g = 24g 蛋白。它只是\"方便的食物\"，不是必需品"},
+  '杂粮饭（生）':      { cat:'主食 · 碳水', kcal:350, p:8, cb:74, fat:2.5, tip:'糙米/燕麦米/藜麦混着煮。杂粮比例从 1/3 起步，全杂粮口感会很硬' },
+  "燕麦（生）": {cat:"主食 · 碳水", kcal:389, p:17, cb:66, fat:7, tip:"40g 燕麦约 155kcal。煮粥 3 分钟就行，纤维高、饱腹强"},
+  "糙米（生）": {cat:"主食 · 碳水", kcal:370, p:8, cb:77, fat:3, tip:"米:水 1:1.2，泡 1 小时后煮 25 分钟。冷藏后抗性淀粉增加，升糖更平缓"},
+  "大米（生）": {cat:"主食 · 碳水", kcal:346, p:7, cb:77, fat:0.9, tip:"煮出来大约是生重的 2.3 倍"},
+  "藜麦（生）": {cat:"主食 · 碳水", kcal:368, p:14, cb:64, fat:6, tip:"蛋白在谷物里算高的，氨基酸也全"},
+  "红薯": {cat:"主食 · 碳水", kcal:90, p:1.6, cb:21, fat:0.2, tip:"蒸 20–25 分钟。冷藏后抗性淀粉增加，减脂期好碳水"},
+  "土豆": {cat:"主食 · 碳水", kcal:77, p:2, cb:17, fat:0.1, tip:"蒸或煮，别炸。饱腹感在所有食物里排前列"},
+  "玉米（鲜）": {cat:"主食 · 碳水", kcal:86, p:3.2, cb:19, fat:1.2, tip:"蒸 15 分钟。一根中等约 200g"},
+  "荞麦面（生）": {cat:"主食 · 碳水", kcal:340, p:12, cb:66, fat:2.5, tip:"比普通挂面蛋白略高、饱腹更强"},
+  "挂面 / 米粉（生）": {cat:"主食 · 碳水", kcal:346, p:10, cb:75, fat:1, tip:"下锅 2–3 分钟即可"},
+  "全麦面包": {cat:"主食 · 碳水", kcal:247, p:13, cb:41, fat:4.2, tip:"看配料表，第一位要是「全麦粉」才算数"},
+  "意大利面（生）": {cat:"主食 · 碳水", kcal:350, p:12, cb:71, fat:1.5, tip:"煮 8–10 分钟，别煮太软"},
+  "西兰花": {cat:"蔬菜", kcal:34, p:2.8, cb:7, fat:0.4, tip:"水开 2–3 分钟，捞出立刻过凉水，颜色和脆度都保住"},
+  "菠菜": {cat:"蔬菜", kcal:23, p:2.9, cb:3.6, fat:0.4, tip:"水开 1 分钟就够，久了发黄"},
+  "番茄": {cat:"蔬菜", kcal:18, p:0.9, cb:3.9, fat:0.2, tip:"先煮出沙再加水，汤底会浓很多"},
+  "黄瓜": {cat:"蔬菜", kcal:15, p:0.7, cb:3.6, fat:0.1, tip:"免开火，拍碎拌蒜最省事"},
+  "生菜": {cat:"蔬菜", kcal:15, p:1.4, cb:2.9, fat:0.2, tip:"免开火"},
+  "冬瓜": {cat:"蔬菜", kcal:13, p:0.4, cb:3, fat:0.2, tip:"热量极低、饱腹强，减脂期汤的主力"},
+  "菌菇（香菇/平菇）": {cat:"蔬菜", kcal:25, p:3, cb:5, fat:0.3, tip:"煮汤提鲜，几乎不贡献热量"},
+  "洋葱": {cat:"蔬菜", kcal:40, p:1.1, cb:9, fat:0.1, tip:"拌金枪鱼、做汤都好"},
+  "胡萝卜": {cat:"蔬菜", kcal:41, p:0.9, cb:10, fat:0.2, tip:"和肉一起煮，胡萝卜素吸收更好"},
+  "秋葵": {cat:"蔬菜", kcal:33, p:2, cb:7, fat:0.2, tip:"水开 3 分钟，过凉水"},
+  "白菜": {cat:"蔬菜", kcal:13, p:1.5, cb:2.2, fat:0.2, tip:"煮汤、涮都行"},
+  "青椒": {cat:"蔬菜", kcal:20, p:0.9, cb:4.6, fat:0.2, tip:"维 C 比橙子还高"},
+  "茄子": {cat:"蔬菜", kcal:25, p:1, cb:6, fat:0.2, tip:"很吸油，蒸比炒好"},
+  "绿豆芽": {cat:"蔬菜", kcal:18, p:2, cb:3, fat:0.1, tip:"水开 1 分钟"},
+  "芦笋": {cat:"蔬菜", kcal:20, p:2.2, cb:4, fat:0.1, tip:"水开 2 分钟"},
+  "香蕉": {cat:"水果", kcal:89, p:1.1, cb:23, fat:0.3, tip:"一根中等约 120g。训练前后补碳水方便"},
+  "苹果": {cat:"水果", kcal:52, p:0.3, cb:14, fat:0.2, tip:"一个中等约 200g"},
+  "蓝莓": {cat:"水果", kcal:57, p:0.7, cb:14, fat:0.3, tip:"抗氧化好，配燕麦或酸奶"},
+  "橙子": {cat:"水果", kcal:47, p:0.9, cb:12, fat:0.1, tip:"一个约 200g"},
+  "猕猴桃": {cat:"水果", kcal:61, p:1.1, cb:15, fat:0.5, tip:"维 C 很高"},
+  "草莓": {cat:"水果", kcal:32, p:0.7, cb:7.7, fat:0.3, tip:"热量很低，减脂期解馋用"},
+  "圣女果": {cat:"水果", kcal:18, p:0.9, cb:3.9, fat:0.2, tip:"当零食比薯片好太多"},
+  "西瓜": {cat:"水果", kcal:30, p:0.6, cb:7.6, fat:0.2, tip:"水分大，饱腹但升糖快"},
+  "无糖希腊酸奶": {cat:"乳制品", kcal:88, p:10, cb:4, fat:3.5, tip:"蛋白密度是普通酸奶的两倍。也可以替代蛋黄酱拌沙拉"},
+  "希腊酸奶（0 脂）": {cat:"乳制品", kcal:59, p:10, cb:3.6, fat:0.4, tip:"减脂期首选，口感偏酸"},
+  "无糖酸奶（普通）": {cat:"乳制品", kcal:60, p:3.5, cb:5, fat:3, tip:"一定选「无糖」，风味酸奶含糖量能到 10% 以上"},
+  "低脂牛奶": {cat:"乳制品", kcal:43, p:3.4, cb:5, fat:1.5, tip:"按 100ml 算"},
+  "全脂牛奶": {cat:"乳制品", kcal:65, p:3.2, cb:5, fat:3.5, tip:"按 100ml 算。饱腹感比低脂强"},
+  "混合坚果": {cat:"坚果 · 油脂", kcal:600, p:18, cb:20, fat:52, tip:"热量极高 —— 一定要按 25g 一包分好，别抓一把"},
+  "核桃": {cat:"坚果 · 油脂", kcal:654, p:15, cb:14, fat:65, tip:"两个核桃约 20g"},
+  "杏仁": {cat:"坚果 · 油脂", kcal:579, p:21, cb:22, fat:50, tip:"约 20 粒 = 25g"},
+  "花生酱（无糖）": {cat:"坚果 · 油脂", kcal:588, p:25, cb:20, fat:50, tip:"看配料表只能有「花生」，很多加了糖和氢化油"},
+  "橄榄油": {cat:"坚果 · 油脂", kcal:884, p:0, cb:0, fat:100, tip:"一勺约 10g = 88kcal。炒菜和拌菜都算进去"},
+  "牛油果": {cat:"坚果 · 油脂", kcal:160, p:2, cb:9, fat:15, tip:"一个中等的约 200g，半个就够"},
+  "无糖豆浆": {cat:"其他", kcal:31, p:3, cb:1.2, fat:1.6, tip:"按 100ml 算"},
+  "蜂蜜": {cat:"其他", kcal:304, p:0.3, cb:82, fat:0, tip:"本质就是糖，热量和白糖差不多"},
+  "生抽": {cat:"其他", kcal:60, p:6, cb:8, fat:0, tip:"有钠，别放太多"}
+};
+
+function buildDocument(){
+  syncInputs(docEl);
+  const clone = docEl.cloneNode(true);
+  clone.querySelectorAll('[contenteditable]').forEach(el=>el.removeAttribute('contenteditable'));
+  clone.querySelectorAll('td.rowtools').forEach(td=>{ td.innerHTML = ''; delete td.dataset.init; });
+  clone.querySelectorAll('tr.alt').forEach(tr=>tr.classList.remove('alt'));
+  clone.querySelectorAll('tr.hid').forEach(tr=>tr.classList.remove('hid'));
+  clone.querySelectorAll('tr.hit').forEach(tr=>tr.classList.remove('hit'));
+  clone.querySelectorAll('.fold-hint.stat').forEach(el=>{ el.textContent = ''; });   // 只清运行时的折叠栏统计
+  clone.querySelectorAll('.total.stat').forEach(el=>{ el.textContent = ''; });      // 合计框也是运行时算的
+  clone.querySelectorAll('.mac').forEach(el=>{ el.textContent = '—'; });
+  clone.querySelectorAll('.meal-kcal').forEach(el=>{ el.textContent = '—'; });
+  const fb = clone.querySelector('#foodLibBody');
+  clone.removeAttribute('data-view');                    // 单屏浏览状态是运行时的
+  clone.querySelectorAll('.sec-on').forEach(el=>el.classList.remove('sec-on'));
+  if(fb) fb.innerHTML = '';
+  return SHELL.replace('@@DOC@@', clone.innerHTML);
+}
+
+const saveStateEl = document.getElementById('saveState');
+let saveTimer = null, storageOK = true, userTouched = false;
+// 主动丢弃本机存档后要重载时置真 —— 否则 beforeunload 会把内容又写回去
+let noSaveOnUnload = false;
+function markSaved(ok, msg){
+  if(!saveStateEl) return;
+  saveStateEl.className = 'savestate ' + (ok ? 'ok' : 'err');
+  saveStateEl.textContent = msg;
+}
+function probeStorage(){
+  try{ localStorage.setItem('__probe__','1'); localStorage.removeItem('__probe__'); return {ok:true,err:''}; }
+  catch(e){ return {ok:false, err:(e && e.name) || 'Error'}; }
+}
+function saveLocal(silent){
+  if(!storageOK || noSaveOnUnload) return;
+  try{
+    syncInputs(docEl);
+    localStorage.setItem(KEY, JSON.stringify({f: FILE_PRINT, html: docEl.innerHTML}));
+    // 没连上本地服务时，改动只落在浏览器里 —— 这一句必须说实话。
+    // 写「已保存」会让人以为已经进了文件，而实际上换个浏览器就什么都没有。
+    if(!SERVER_OK)
+      markSaved(false, '⚠️ 只存在浏览器里 · 未写回文件 · ' + new Date().toTimeString().slice(0,5));
+    if(!silent) flash('已保存到本机浏览器');
+  }catch(e){ markSaved(false, '⚠️ 保存失败'); }
+}
+/* ---------- 被丢弃的编辑：丢之前先留底，事后能一键找回 ----------
+   指纹对不上时弹的那个框，【取消】和 ESC 走的都是「改用文件里的新内容」，
+   本机那份当场就没了。所以在走那条分支之前，先原样存一份到 BAK。
+   这两个键都只活在浏览器里，丢了就是真丢了。 */
+const BAK = KEY + '_bak';
+const NL = '\n';
+function stashLocal(raw, why){
+  try{ localStorage.setItem(BAK, JSON.stringify({t: Date.now(), why: why, raw: raw})); }catch(e){}
+  refreshRestoreBtn();
+}
+function refreshRestoreBtn(){
+  const b = document.getElementById('restoreBtn');
+  if(!b) return;
+  let has = false;
+  try{ has = !!localStorage.getItem(BAK); }catch(e){}
+  b.style.display = has ? '' : 'none';
+}
+/* ---------- 撤回：动手之前先拍一张快照 ----------
+   方案 / 餐次 / 食物行都是直接改 DOM，删完就没了。每次破坏性操作前把 #doc
+   存一份，工具栏的「↩ 撤回」可以一步步退回去。快照只在内存里，刷新会清空。 */
+const UNDO = { stack: [], max: 20 };
+function pushUndo(label){
+  try{
+    UNDO.stack.push({ html: docEl.innerHTML, label: label, t: Date.now() });
+    if(UNDO.stack.length > UNDO.max) UNDO.stack.shift();
+    refreshUndoBtn();
+  }catch(e){}
+}
+function refreshUndoBtn(){
+  const b = document.getElementById('undoBtn');
+  if(!b) return;
+  const top = UNDO.stack[UNDO.stack.length - 1];
+  b.style.display = top ? '' : 'none';
+  if(top) b.title = '撤回上一步：' + top.label + NL + '（还能退 ' + UNDO.stack.length + ' 步）';
+}
+function undoLast(){
+  const snap = UNDO.stack.pop();
+  if(!snap){ flash('没有可撤回的操作'); return; }
+  docEl.innerHTML = snap.html;
+  injectRowTools(); rebalanceAll(); renderFoodLib(); ensureLogRows(); calc(); filterLog();
+  rebuildTOC();
+  markTouched();
+  refreshUndoBtn();
+  flash('已撤回「' + snap.label + '」');
+}
+function restoreBackup(){
+  let o = null, inner = null;
+  try{ o = JSON.parse(localStorage.getItem(BAK) || 'null'); }catch(e){}
+  if(o && o.raw){ try{ inner = JSON.parse(o.raw); }catch(e){} }
+  if(!inner || typeof inner.html !== 'string'){ flash('备份读不出来，可能已经损坏'); return; }
+  // 备份本来就该是整份 #doc。不是的话（存坏了、或者被别的东西占了键）就别拿上来，
+  // 否则一恢复就把页面清空了。
+  const probe = new DOMParser().parseFromString(inner.html, 'text/html');
+  if(!probe.body.querySelector('table')){ flash('这份备份里没有饮食计划内容，已跳过'); return; }
+
+  const when = new Date(o.t).toLocaleString();
+  const msg = '把 ' + when + ' 那份本机编辑拿回来？' + NL + NL +
+              '（它是在「' + (o.why || '未知原因') + '」的时候被放到一边的）' + NL + NL +
+              '当前页面上的内容会被它覆盖。';
+  if(!confirm(msg)) return;
+  docEl.innerHTML = inner.html;
+  try{ localStorage.removeItem(BAK); }catch(e){}
+  refreshRestoreBtn();
+  injectRowTools(); rebalanceAll(); renderFoodLib(); ensureLogRows(); calc(); filterLog();
+  rebuildTOC();
+  markTouched();              // 触发一次保存，把找回的内容写回文件
+  flash('已找回 ' + when + ' 那份编辑');
+}
+function loadLocal(){
+  try{
+    const raw = localStorage.getItem(KEY);
+    if(!raw) return false;
+    let o = null;
+    try{ o = JSON.parse(raw); }catch(e){}
+    if(!o || typeof o.html !== 'string') return false;
+    if(o.f === FILE_PRINT){ docEl.innerHTML = o.html; return true; }
+    const msg = '这个文件已经更新过（可能是新版本），' + NL +
+                '但本机还存着一份你之前的编辑。' + NL + NL +
+                '【确定】保留你之前的编辑' + NL +
+                '【取消】改用文件里的新内容' + NL + NL +
+                '不管选哪个，本机那份都会先备份一份；' + NL +
+                '选错了可以用工具栏的「找回上次丢弃的编辑」拿回来。';
+    if(confirm(msg)){ docEl.innerHTML = o.html; return true; }
+    stashLocal(raw, '改用文件里的新内容');    // 丢弃之前先留底
+    return false;
+  }catch(e){}
+  return false;
+}
+function scheduleSave(){
+  if(!userTouched) return;
+  clearTimeout(saveTimer);
+  saveTimer = setTimeout(()=>saveLocal(true), 600);
+  scheduleServerPush();
+}
+
+/* ---------- 本地服务：把内容写回文件本身 ----------
+   双击「启动.bat」时才有。直接双击 HTML 时自动退回浏览器本地保存。 */
+let SERVER_OK = false, pushTimer = null, SERVER_HASH = "";
+function isLocalHost(){
+  return /^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname) &&
+         /^https?:$/.test(location.protocol);
+}
+async function detectServer(){
+  if(!isLocalHost()) return false;
+  try{
+    const r = await fetch('/__ping?path=' + encodeURIComponent(decodeURIComponent(location.pathname)), {cache:'no-store'});
+    const j = await r.json();
+    if(j && j.hash) SERVER_HASH = j.hash;
+    return !!(j && j.ok);
+  }catch(e){ return false; }
+}
+function scheduleServerPush(){
+  if(!SERVER_OK) return;
+  clearTimeout(pushTimer);
+  pushTimer = setTimeout(pushToServer, 1200);
+}
+async function pushToServer(){
+  if(!SERVER_OK) return;
+  try{
+    const html = buildDocument();
+    const r = await fetch('/__save', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({path: location.pathname, html, base: SERVER_HASH})
+    });
+    const j = await r.json();
+    if(j && j.ok){
+      if(j.hash) SERVER_HASH = j.hash;
+      markSaved(true, '已写回文件 ' + new Date().toTimeString().slice(0,5));
+    }else if(j && j.conflict){
+      SERVER_OK = false;
+      markSaved(false, '⚠️ 文件已被别处改过 · 刷新页面再改');
+      if(saveStateEl) saveStateEl.title =
+        '这个页面打开之后，磁盘上的 饮食计划.html 又被改过一次。\n' +
+        '这次保存被拦下了，以免覆盖掉新的改动。\n' +
+        '处理办法：刷新页面（F5）重新打开，再继续改。';
+      flash('文件被别处改过了，这次没有写回去 —— 按 F5 刷新后接着改');
+    }else{
+      markSaved(false, '⚠️ 写回失败：' + ((j && j.error) || '未知错误'));
+    }
+  }catch(e){
+    SERVER_OK = false;
+    markSaved(false, '⚠️ 本地服务已断开 · 已退回浏览器本地保存');
+  }
+}
+
+/* 用文件里的内容重载：把浏览器里那份旧存档放到一边（可找回），再从文件读一遍。 */
+function reloadFromFile(){
+  if(!confirm('用文件里的内容重新加载？\n\n' +
+      '浏览器里存的那份会先放进备份（之后可以用「↩ 找回」拿回来），' +
+      '然后页面从文件重新读取。')) return;
+  try{
+    const raw = localStorage.getItem(KEY);
+    if(raw) stashLocal(raw, '用文件内容重载');
+    localStorage.removeItem(KEY);
+  }catch(e){}
+  noSaveOnUnload = true;
+  location.reload();
+}
+function resetAll(){
+  if(!confirm('恢复到初始版本？你所有编辑都会丢失。')) return;
+  stashLocal(JSON.stringify({f: FILE_PRINT, html: docEl.innerHTML}), '恢复初始');
+  noSaveOnUnload = true;
+  try{ localStorage.removeItem(KEY); }catch(e){}
+  location.reload();
+}
+/* ---------- 导出 / 导入：把"自己的一份"拿出来和放回去 ---------- */
+function exportHTML(){
+  const html = buildDocument();
+  const blob = new Blob([html], {type:'text/html;charset=utf-8'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = '饮食计划_' + new Date().toISOString().slice(0,10) + '.html';
+  a.click();
+  setTimeout(()=>URL.revokeObjectURL(a.href), 3000);
+  flash('已导出到「下载」文件夹，拷到别的电脑用「导入」读回来');
+}
+document.getElementById('importFile').addEventListener('change', e=>{
+  const f = e.target.files && e.target.files[0];
+  if(f) importHTML(f);
+});
+function pickImport(){
+  const f = document.getElementById('importFile');
+  f.value = '';
+  f.click();
+}
+function importHTML(file){
+  const reader = new FileReader();
+  reader.onload = ()=>{
+    try{
+      const parsed = new DOMParser().parseFromString(String(reader.result), 'text/html');
+      const src = parsed.getElementById('doc');
+      if(!src || !src.querySelector('table')){ flash('这个文件里没有饮食计划内容'); return; }
+      if(!confirm('导入会覆盖当前页面上的内容。继续？')) return;
+      pushUndo('导入文件');
+      docEl.innerHTML = src.innerHTML;
+      injectRowTools();
+      calc();
+      saveLocal(true);
+      flash('已导入');
+    }catch(err){ flash('导入失败：' + (err && err.message || err)); }
+  };
+  reader.readAsText(file);
+}
+
+/* ==================== 我的一天：食物下拉 + 自动算营养 ==================== */
+const pop = document.createElement('div');
+pop.className = 'combo-pop';
+pop.hidden = true;
+document.body.appendChild(pop);
+const cb = { input:null, idx:-1, list:[], cat:'' };
+
+function esc(s){ return String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+function foodNames(){ return Object.keys(FOOD); }
+function foodCat(name){ return FOOD[name] ? FOOD[name].cat : ''; }
+function isBuiltinFood(n){ return !!FOOD[n]; }
+
+/* 自建食物：手输的名字会累积到这里，跨会话保留 */
+const UKEY = 'diet_userfood_v1';
+let userFood = {};
+try { userFood = JSON.parse(localStorage.getItem(UKEY) || '{}') || {}; } catch(e){ userFood = {}; }
+function saveUserFood(){
+  try{ localStorage.setItem(UKEY, JSON.stringify(userFood)); }catch(e){}
+}
+
+function foodOptions(){
+  const seen = new Set(), out = [];
+  for(const v of [...foodNames(), ...Object.keys(userFood)]){
+    if(!v || seen.has(v)) continue;
+    seen.add(v); out.push(v);
+  }
+  return out;
+}
+/* 自建食物没有类型，归到「自建」一档，否则在下拉里选不到 */
+function foodCatOf(v){ return foodCat(v) || '自建'; }
+/* 左栏的类型表：按食物库里的先后顺序，带上各类型的种数 */
+function foodCatList(){
+  const cats = [];
+  foodOptions().forEach(v=>{
+    const c = foodCatOf(v);
+    if(cats.indexOf(c) < 0) cats.push(c);
+  });
+  return cats;
+}
+function renderCombo(filter){
+  const all = foodOptions();
+  const f = (filter || '').trim().toLowerCase();
+  const hit = v => !f || v.toLowerCase().includes(f);
+  /* 左栏：全部 + 各类型。计数跟着当前搜索走，免得显示的数字和右栏对不上 */
+  let left = '<div class="cat' + (cb.cat ? '' : ' on') + '" data-c="">' +
+             '<span class="cat-n">全部类型</span>' +
+             '<span class="n">' + all.filter(hit).length + '</span></div>';
+  foodCatList().forEach(c=>{
+    const k = all.filter(v => foodCatOf(v) === c && hit(v)).length;
+    left += '<div class="cat' + (cb.cat === c ? ' on' : '') + '" data-c="' + esc(c) + '">' +
+            '<span class="cat-n">' + esc(c) + '</span>' +
+            '<span class="n">' + k + '</span></div>';
+  });
+  /* 右栏：当前类型（没选就是全部）里，匹配搜索的那些 */
+  cb.list = all.filter(v => (!cb.cat || foodCatOf(v) === cb.cat) && hit(v));
+  cb.idx = cb.list.findIndex(v => v === cb.input.value.trim());
+  let html = cb.list.map((v,i)=>{
+    let label = esc(v);
+    const p = f ? v.toLowerCase().indexOf(f) : -1;
+    if(p >= 0) label = esc(v.slice(0,p)) + '<mark>' + esc(v.slice(p, p+f.length)) + '</mark>' + esc(v.slice(p+f.length));
+    const cat = foodCat(v) ? '<span class="eq">' + esc(foodCat(v)) + '</span>' : '';
+    const mine = isBuiltinFood(v) ? '' : '<span class="mine">自建</span>';
+    return '<div class="opt' + (i === cb.idx ? ' on' : '') + '" data-v="' + esc(v) + '">' +
+             '<span class="opt-t">' + label + '</span>' + cat + mine + '</div>';
+  }).join('');
+  if(!cb.list.length) html = '<div class="empty">没有匹配的食物</div>';
+  pop.innerHTML = '<div class="cwrap"><div class="ccats">' + left + '</div>' +
+    '<div class="cfoods">' + html + '</div></div>' +
+    '<div class="foot">共 ' + all.length + ' 种　·　也可以直接输入，营养自己补</div>';
+}
+function positionCombo(){
+  if(pop.hidden || !cb.input) return;
+  if(!cb.input.isConnected){ closeCombo(); return; }
+  const wrap = cb.input.closest('.combo');
+  if(!wrap) return;
+  const r = wrap.getBoundingClientRect();
+  pop.style.width = Math.max(300, Math.min(432, innerWidth - 24)) + 'px';
+  const h = pop.offsetHeight;
+  let top = r.bottom + 5;
+  if(top + h > innerHeight - 8) top = r.top - h - 5;
+  top = Math.max(8, Math.min(top, innerHeight - h - 8));
+  pop.style.left = Math.max(8, Math.min(r.left, innerWidth - pop.offsetWidth - 8)) + 'px';
+  pop.style.top = top + 'px';
+}
+/* 打开时如果格子里已经是个认识的食物，就顺手在左栏选中它所属的类型 */
+function openCombo(input){
+  cb.input = input;
+  const v = input.value.trim();
+  const known = foodOptions().includes(v);
+  cb.cat = known ? foodCatOf(v) : '';
+  renderCombo(known ? '' : input.value);
+  pop.hidden = false;
+  positionCombo();
+}
+function closeCombo(){ pop.hidden = true; cb.input = null; cb.idx = -1; cb.cat = ''; }
+function pickCombo(v){
+  const inp = cb.input;
+  if(!inp) return;
+  inp.value = v;
+  closeCombo();
+  calcMeals();
+  markTouched();
+}
+/* 点左栏的类型：只换右栏，面板不关。格子里正在打的字继续当搜索词用 */
+function selectComboCat(c){
+  cb.cat = c || '';
+  const v = cb.input ? cb.input.value.trim() : '';
+  renderCombo(foodOptions().includes(v) ? '' : v);
+  positionCombo();
+}
+document.addEventListener('focusin', e=>{
+  const inp = e.target.closest && e.target.closest('input.fname');
+  if(inp) openCombo(inp);
+});
+document.addEventListener('input', e=>{
+  const inp = e.target.closest && e.target.closest('input.fname');
+  if(!inp) return;
+  cb.input = inp;
+  renderCombo(inp.value);
+  pop.hidden = false;
+  positionCombo();
+  calcMeals();
+});
+document.addEventListener('keydown', e=>{
+  const inp = e.target.closest && e.target.closest('input.fname');
+  if(!inp) return;
+  const list = cb.list;
+  if(e.key === 'ArrowDown' || e.key === 'ArrowUp'){
+    if(pop.hidden){ openCombo(inp); return; }
+    e.preventDefault();
+    cb.idx = e.key === 'ArrowDown' ? Math.min(list.length-1, cb.idx+1) : Math.max(0, cb.idx-1);
+    [...pop.querySelectorAll('.opt')].forEach((el,i)=>el.classList.toggle('on', i === cb.idx));
+    const on = pop.querySelector('.opt.on');
+    if(on) on.scrollIntoView({block:'nearest'});
+    return;
+  }
+  if(e.key === 'Enter'){
+    if(!pop.hidden && cb.idx >= 0 && list[cb.idx]){ e.preventDefault(); pickCombo(list[cb.idx]); }
+    else { closeCombo(); rememberFood(inp); }
+    return;
+  }
+  if(e.key === 'Escape'){ closeCombo(); inp.blur(); return; }
+  if(e.key === 'Tab') closeCombo();
+});
+pop.addEventListener('mousedown', e=>{
+  const cat = e.target.closest('.cat');
+  if(cat){ e.preventDefault(); selectComboCat(cat.dataset.c); return; }
+  const opt = e.target.closest('.opt');
+  if(opt){ e.preventDefault(); pickCombo(opt.dataset.v); }
+});
+document.addEventListener('mousedown', e=>{
+  const btn = e.target.closest && e.target.closest('.combo-caret');
+  if(!btn) return;
+  e.preventDefault();
+  const inp = btn.closest('.combo').querySelector('.fname');
+  if(cb.input === inp && !pop.hidden){ closeCombo(); }
+  else { if(document.activeElement !== inp) inp.focus(); openCombo(inp); }
+});
+document.addEventListener('click', e=>{
+  if(pop.hidden) return;
+  if(e.target.closest && (e.target.closest('.combo') || e.target.closest('.combo-pop'))) return;
+  closeCombo();
+});
+window.addEventListener('scroll', positionCombo, true);
+window.addEventListener('resize', positionCombo);
+
+/* 自建食物入库（失焦时）*/
+function rememberFood(input){
+  const v = input.value.trim();
+  if(!v || isBuiltinFood(v) || userFood[v]) return false;
+  userFood[v] = { cat:'', kcal:0, p:0, cb:0, fat:0, tip:'' };
+  saveUserFood();
+  flash('已把「' + v + '」加进候选 —— 营养数据需要你自己补');
+  return true;
+}
+document.addEventListener('change', e=>{
+  const inp = e.target.closest && e.target.closest('input.fname');
+  if(inp) rememberFood(inp);
+});
+
+/* ---------- 餐表：增删 ---------- */
+function mealRowsOf(row){
+  const out = [row];
+  let r = row.nextElementSibling;
+  while(r && !r.querySelector('td.meal-cell')){ out.push(r); r = r.nextElementSibling; }
+  return out;
+}
+function ownerMealRow(tr){
+  if(tr.querySelector('td.meal-cell')) return tr;
+  let r = tr.previousElementSibling;
+  while(r){ if(r.querySelector('td.meal-cell')) return r; r = r.previousElementSibling; }
+  return null;
+}
+function rebalance(table){
+  const tb = table.querySelector('tbody');
+  if(!tb) return;
+  const rows = Array.from(tb.rows);
+  let i = 0;
+  while(i < rows.length){
+    const cell = rows[i].querySelector('td.meal-cell');
+    if(!cell){ i++; continue; }
+    let n = 1;
+    while(i + n < rows.length && !rows[i+n].querySelector('td.meal-cell')) n++;
+    if(cell.rowSpan !== n) cell.rowSpan = n;
+    for(let k = 0; k < n; k++) rows[i+k].classList.toggle('alt', k % 2 === 1);
+    i += n;
+  }
+}
+function rebalanceAll(){ document.querySelectorAll('table[data-key="MEALS"]').forEach(rebalance); }
+
+function foodRow(){
+  const tr = document.createElement('tr');
+  tr.innerHTML =
+    '<td class="nm"><div class="combo"><input class="fname" type="text" autocomplete="off" value="" placeholder="食物名">' +
+    '<button type="button" class="combo-caret" tabindex="-1"></button></div></td>' +
+    '<td class="calc"><input class="qty" type="number" min="0" step="1" value="" placeholder="g" oninput="calcMeals();markTouched()"></td>' +
+    '<td class="mac kcal">—</td><td class="mac p">—</td><td class="mac c">—</td><td class="mac f">—</td>' +
+    '<td class="tools"><button class="mini" onclick="dupRow(this)" title="复制">⧉</button>' +
+    '<button class="mini" onclick="delRow(this)" title="删除">✕</button></td>';
+  return tr;
+}
+const MEAL_NAMES = ['早餐', '午餐', '加餐', '晚餐', '睡前'];
+function mealCell(name){
+  const td = document.createElement('td');
+  td.className = 'meal-cell';
+  td.rowSpan = 1;
+  td.innerHTML = '<select class="mealname">' +
+    '<option value=""' + (name ? '' : ' selected') + '>餐次</option>' +
+    MEAL_NAMES.map(n=>'<option' + (n === name ? ' selected' : '') + '>' + n + '</option>').join('') +
+    '</select>' +
+    '<div class="meal-kcal">—</div>' +
+    '<div class="meal-btns"><button class="mini" onclick="addFood(this)" title="加食物">＋</button>' +
+    '<button class="mini" onclick="delMeal(this)" title="删餐次">✕</button></div>';
+  return td;
+}
+function addMeal(btn){
+  const tb = btn.closest('table').querySelector('tbody');
+  const row = foodRow();
+  row.insertBefore(mealCell(), row.firstChild);
+  tb.appendChild(row);
+  rebalanceAll(); calcMeals(); markTouched();
+  row.querySelector('.mealname').focus();
+}
+function delMeal(btn){
+  const catRow = btn.closest('tr');
+  const rows = mealRowsOf(catRow);
+  const nm = catRow.querySelector('.mealname').value || '这个餐次';
+  if(!confirm('删掉「' + nm + '」和它下面的 ' + (rows.length-1) + ' 条食物？')) return;
+  pushUndo('删掉餐次「' + nm + '」');
+  const table = catRow.closest('table');
+  rows.forEach(r=>r.remove());
+  rebalance(table); calcMeals(); markTouched();
+}
+function addFood(btn){
+  const catRow = btn.closest('tr');
+  const rows = mealRowsOf(catRow);
+  const anchor = rows[rows.length-1];
+  const nr = foodRow();
+  anchor.parentNode.insertBefore(nr, anchor.nextSibling);
+  rebalanceAll(); calcMeals(); markTouched();
+  nr.querySelector('.fname').focus();
+}
+function dupRow(btn){
+  const tr = btn.closest('tr');
+  const clone = tr.cloneNode(true);
+  clone.querySelectorAll('input[type=checkbox]').forEach(c=>c.checked=false);
+  tr.parentNode.insertBefore(clone, tr.nextSibling);
+  rebalanceAll(); calcMeals(); markTouched();
+}
+function delRow(btn){
+  const tr = btn.closest('tr');
+  const cat = ownerMealRow(tr);
+  if(cat && mealRowsOf(cat).length <= 1){
+    pushUndo('清空食物行');
+    tr.querySelector('.fname').value = '';
+    tr.querySelector('.qty').value = '';
+    calcMeals(); markTouched();
+    flash('这是该餐次最后一条 —— 已清空（要删整个餐次用左边的 ✕）');
+    return;
+  }
+  pushUndo('删除食物行');
+  const table = tr.closest('table');
+  tr.remove();
+  rebalance(table); calcMeals(); markTouched();
+}
+
+/* ---------- 方案块：「我的一天」里可以有好几个，各自独立 ---------- */
+const MEAL_BLOCK_HTML =
+  '<div class="tplbar"><details class="tplmenu"><summary>从模板填充</summary><div class="tplmenu-pop"><button class="mini" onclick="fillMealTemplate(\'A\',this)">塑形 / 重组</button><button class="mini" onclick="fillMealTemplate(\'B\',this)">减脂</button><button class="mini" onclick="fillMealTemplate(\'C\',this)">增肌</button><button class="mini" onclick="fillMealTemplate(\'D\',this)">训练日 · 高碳</button><button class="mini" onclick="fillMealTemplate(\'E\',this)">休息日 · 低碳</button><button class="mini" onclick="fillMealTemplate(\'F\',this)">16:8 轻断食</button><button class="mini" onclick="fillMealTemplate(\'G\',this)">电煮锅一锅出</button></div></details><button class="mini" onclick="clearMeals(this)">清空</button><button class="mini" onclick="recordToday(this)">📥 记下今天</button></div>' +
+  '<div class="tw"><table data-key="MEALS">' +
+    '<thead><tr>' +
+      '<th style="width:1%" class="catcol thops">餐次</th>' +
+      '<th style="width:26%">食物</th>' +
+      '<th class="ctr" style="width:9%">份量<span class="thsub">克</span></th>' +
+      '<th class="ctr" style="width:10%">热量<span class="thsub">kcal</span></th>' +
+      '<th class="ctr" style="width:9%">蛋白<span class="thsub">克</span></th>' +
+      '<th class="ctr" style="width:9%">碳水<span class="thsub">克</span></th>' +
+      '<th class="ctr" style="width:9%">脂肪<span class="thsub">克</span></th>' +
+      '<th class="thops" style="width:8%">操作</th>' +
+    '</tr></thead><tbody></tbody>' +
+    '<tfoot><tr><td colspan="8"><button class="mini" onclick="addMeal(this)">＋ 添加餐次</button></td></tr></tfoot>' +
+  '</table></div>' +
+  '<div class="total stat"></div>';
+
+/* 名字输入框和删除按钮都在 <summary> 里，点它们不能顺带把块折叠了，
+   所以都要 stopPropagation。 */
+function mealPlanBlock(name){
+  const d = document.createElement('details');
+  d.className = 'fold plan-block';
+  d.open = true;
+  d.innerHTML =
+    '<summary>' +
+      '<input class="planname" type="text" value="' + esc(name || '新方案') + '"' +
+        ' onclick="event.stopPropagation()">' +
+      '<span class="fold-hint stat"></span>' +
+      '<button class="mini plan-del" onclick="delMealPlan(event,this)" title="删除方案">✕</button>' +
+    '</summary>' +
+    '<div class="fold-body">' + MEAL_BLOCK_HTML + '</div>';
+  const row = foodRow();                       // 先放一条空白餐次行，和文件里那份一致
+  row.insertBefore(mealCell(), row.firstChild);
+  d.querySelector('tbody').appendChild(row);
+  return d;
+}
+function addMealPlan(){
+  const wrap = document.getElementById('mealPlans');
+  if(!wrap) return;
+  const n = wrap.querySelectorAll('.plan-block').length;
+  const d = mealPlanBlock('方案 ' + (n < 26 ? String.fromCharCode(65 + n) : String(n + 1)));
+  wrap.appendChild(d);
+  rebalanceAll(); calcMeals(); markTouched();
+  d.open = true;
+  const inp = d.querySelector('.planname');
+  inp.focus(); inp.select();
+}
+function delMealPlan(e, btn){
+  e.stopPropagation(); e.preventDefault();
+  const d = btn.closest('.plan-block');
+  if(!d) return;
+  const nm = d.querySelector('.planname').value || '这个方案';
+  const rows = d.querySelectorAll('table[data-key="MEALS"] tbody tr').length;
+  if(!confirm('删掉方案「' + nm + '」和它里面的 ' + rows + ' 条记录？')) return;
+  pushUndo('删掉方案「' + nm + '」');
+  d.remove();
+  rebalanceAll(); calcMeals(); markTouched();
+}
+
+/* ---------- 自动算营养 ---------- */
+let MEAL_TARGET = null;
+function calcMeals(){
+  document.querySelectorAll('table[data-key="MEALS"]').forEach(calcOneMealTable);
+  const outer = document.getElementById('myday');
+  const oh = outer && outer.querySelector('summary .fold-hint');
+  if(oh){
+    const n = document.querySelectorAll('#mealPlans .plan-block').length;
+    oh.textContent = n + ' 个方案';
+  }
+  scheduleSave();
+}
+/* 每张餐表各算各的。合计框和折叠栏统计都从这个方案块里现找，不用 id
+   —— 多个方案时 id 不能重复。 */
+function calcOneMealTable(t){
+  let total = { kcal:0, p:0, cb:0, fat:0 };
+  t.querySelectorAll('tbody tr').forEach(tr=>{
+    const cell = tr.querySelector('td.meal-cell');
+    if(!cell) return;
+    let sub = { kcal:0, p:0, cb:0, fat:0 };
+    // 注意：餐次行 tr 同时装着'第一个食物'那几个格子，不能跳过它
+    mealRowsOf(tr).forEach(x=>{
+      const nm = x.querySelector('.fname');
+      if(!nm) return;
+      const q = parseFloat(x.querySelector('.qty').value) || 0;
+      const f = FOOD[nm.value.trim()];
+      const mac = [x.querySelector('.mac.kcal'), x.querySelector('.mac.p'), x.querySelector('.mac.c'), x.querySelector('.mac.f')];
+      if(!f || q <= 0){ mac.forEach(m=>m.textContent = '—'); return; }
+      const k = f.kcal * q / 100, p = f.p * q / 100, c = f.cb * q / 100, ft = f.fat * q / 100;
+      mac[0].textContent = Math.round(k);
+      mac[1].textContent = p.toFixed(1).replace(/\.0$/,'');
+      mac[2].textContent = c.toFixed(1).replace(/\.0$/,'');
+      mac[3].textContent = ft.toFixed(1).replace(/\.0$/,'');
+      sub.kcal += k; sub.p += p; sub.cb += c; sub.fat += ft;
+    });
+    const ks = cell.querySelector('.meal-kcal');
+    ks.textContent = sub.kcal > 0 ? Math.round(sub.kcal) + ' kcal' : '—';
+    total.kcal += sub.kcal; total.p += sub.p; total.cb += sub.cb; total.fat += sub.fat;
+  });
+  const block = t.closest('.plan-block');
+  const box = block && block.querySelector('.total');
+  if(box){
+    const r = n => Math.round(n);
+    let html = '全天 <b>' + r(total.kcal) + ' kcal</b>　｜　蛋白 <b>' + r(total.p) + ' g</b>' +
+      '　｜　碳水 <b>' + r(total.cb) + ' g</b>　｜　脂肪 <b>' + r(total.fat) + ' g</b>';
+    if(MEAL_TARGET){
+      const d = r(total.kcal) - MEAL_TARGET.kcal;
+      const dp = r(total.p) - MEAL_TARGET.p;
+      html += '<br>目标 <b>' + MEAL_TARGET.kcal + ' kcal</b>　蛋白 <b>' + MEAL_TARGET.p + ' g</b>' +
+        '　→　差 <b style="color:' + (Math.abs(d) <= 150 ? '#047857' : '#c2410c') + '">' +
+        (d >= 0 ? '+' : '') + d + ' kcal</b>　蛋白 ' + (dp >= 0 ? '+' : '') + dp + ' g';
+    }else{
+      html += '<br><span style="color:#6b7280">先在上面「第一步」把体重填上，这里就会显示和目标的差距</span>';
+    }
+    box.innerHTML = html;
+  }
+  const hint = block && block.querySelector('summary .fold-hint');
+  if(hint){
+    let n = 0;
+    t.querySelectorAll('input.fname').forEach(i=>{ if(i.value.trim()) n++; });
+    hint.textContent = n + ' 样食物 · ' + Math.round(total.kcal) + ' kcal';
+  }
+}
+
+/* ---------- 三个模板 ---------- */
+const MEAL_TPL = {
+  A: { name:'塑形 / 重组（约 2600 kcal）', meals:[
+    ['早餐', [['燕麦（生）',60],['全脂牛奶',300],['鸡蛋',100],['蓝莓',100]]],
+    ['午餐', [['鸡胸肉（生）',150],['杂粮饭（生）',100],['西兰花',200],['橄榄油',8]]],
+    ['加餐', [['无糖希腊酸奶',200],['混合坚果',25]]],
+    ['晚餐', [['鲜虾 / 虾仁',150],['红薯',250],['菠菜',200],['杂粮饭（生）',60],['橄榄油',8]]],
+    ['睡前', [['全脂牛奶',250]]],
+  ]},
+  B: { name:'减脂（约 2100 kcal）', meals:[
+    ['早餐', [['燕麦（生）',40],['低脂牛奶',250],['鸡蛋',100],['鸡蛋白',60],['蓝莓',100]]],
+    ['午餐', [['鸡胸肉（生）',180],['杂粮饭（生）',80],['西兰花',250],['橄榄油',5]]],
+    ['加餐', [['无糖希腊酸奶',150],['苹果',200]]],
+    ['晚餐', [['鲜虾 / 虾仁',200],['红薯',250],['菠菜',250],['橄榄油',8]]],
+    ['睡前', [['低脂牛奶',200]]],
+  ]},
+  C: { name:'增肌（约 3000 kcal）', meals:[
+    ['早餐', [['燕麦（生）',80],['全脂牛奶',300],['鸡蛋',100],['香蕉',120]]],
+    ['午餐', [['鸡胸肉（生）',200],['杂粮饭（生）',130],['西兰花',200],['橄榄油',10]]],
+    ['加餐', [['无糖希腊酸奶',200],['混合坚果',30],['香蕉',120]]],
+    ['晚餐', [['瘦牛肉（生）',150],['红薯',300],['菠菜',200],['杂粮饭（生）',80]]],
+    ['睡前', [['全脂牛奶',300],['乳清蛋白粉',30]]],
+  ]},
+  D: { name:'训练日 · 高碳水（约 2680 kcal）', meals:[
+    ['早餐', [['燕麦（生）',80],['全脂牛奶',300],['鸡蛋',100],['蓝莓',100]]],
+    ['午餐', [['鸡胸肉（生）',150],['杂粮饭（生）',130],['西兰花',200],['橄榄油',6]]],
+    ['加餐', [['全麦面包',60],['香蕉',120],['蜂蜜',10]]],
+    ['晚餐', [['鲜虾 / 虾仁',150],['红薯',250],['菠菜',200],['杂粮饭（生）',80],['橄榄油',8]]],
+    ['睡前', [['无糖希腊酸奶',200]]],
+  ]},
+  E: { name:'休息日 · 低碳高蛋白（约 1941 kcal）', meals:[
+    ['早餐', [['鸡蛋',150],['菠菜',150],['牛油果',100],['全麦面包',40]]],
+    ['午餐', [['鸡胸肉（生）',180],['西兰花',250],['北豆腐（老）',100],['杂粮饭（生）',40],['橄榄油',10]]],
+    ['加餐', [['无糖希腊酸奶',200],['核桃',20]]],
+    ['晚餐', [['瘦牛肉（生）',150],['冬瓜',300],['菌菇（香菇/平菇）',150],['白菜',200],['橄榄油',6]]],
+    ['睡前', [['全脂牛奶',200]]],
+  ]},
+  F: { name:'16:8 轻断食（约 1867 kcal）', meals:[
+    ['早餐', [['鸡胸肉（生）',200],['杂粮饭（生）',100],['西兰花',200],['牛油果',50],['橄榄油',5]]],
+    ['加餐', [['无糖希腊酸奶',200],['蓝莓',100],['混合坚果',30]]],
+    ['晚餐', [['三文鱼',120],['红薯',250],['菠菜',200],['菌菇（香菇/平菇）',150]]],
+    ['睡前', [['乳清蛋白粉',30]]],
+  ]},
+  G: { name:'电煮锅一锅出（约 2164 kcal）', meals:[
+    ['早餐', [['燕麦（生）',60],['鸡蛋',100],['蓝莓',100],['全脂牛奶',250]]],
+    ['午餐', [['鸡胸肉（生）',150],['番茄',200],['北豆腐（老）',100],['杂粮饭（生）',90],['白菜',200],['橄榄油',5]]],
+    ['加餐', [['无糖希腊酸奶',200],['苹果',150]]],
+    ['晚餐', [['龙利鱼 / 巴沙鱼',180],['冬瓜',300],['菌菇（香菇/平菇）',150],['红薯',220],['橄榄油',6]]],
+    ['睡前', [['低脂牛奶',250]]],
+  ]},
+};
+function fillMealTemplate(key, btn){
+  const tpl = MEAL_TPL[key];
+  if(!tpl) return;
+  const t = btn && btn.closest('.plan-block').querySelector('table[data-key="MEALS"]');
+  if(!t) return;
+  const tb = t.querySelector('tbody');
+  if(tb.querySelectorAll('tr').length && !confirm('把「' + tpl.name + '」填进这个方案？\n\n（会覆盖它现在的内容）')) return;
+  tb.innerHTML = '';
+  tpl.meals.forEach(([name, items])=>{
+    items.forEach((it, i)=>{
+      const row = foodRow();
+      if(i === 0) row.insertBefore(mealCell(name), row.firstChild);
+      row.querySelector('.fname').value = it[0];
+      row.querySelector('.qty').value = it[1];
+      tb.appendChild(row);
+    });
+  });
+  rebalanceAll(); calcMeals(); markTouched();
+  flash('已填入「' + tpl.name + '」');
+}
+function clearMeals(btn){
+  const t = btn && btn.closest('.plan-block').querySelector('table[data-key="MEALS"]');
+  if(!t) return;
+  if(!confirm('清空这个方案里的全部食物？')) return;
+  t.querySelector('tbody').innerHTML = '';
+  calcMeals(); markTouched();
+}
+
+/* ---------- 食物库面板 ---------- */
+function renderFoodLib(){
+  const box = document.getElementById('foodLibBody');
+  if(!box) return;
+  const cats = {};
+  Object.entries(FOOD).forEach(([n,v])=>{ (cats[v.cat] = cats[v.cat] || []).push(n); });
+  let html = '';
+  Object.entries(cats).forEach(([cat, names])=>{
+    html += '<h3 class="libcat">' + esc(cat) + '</h3><div class="libgrid">';
+    names.forEach(n=>{
+      const f = FOOD[n];
+      html += '<div class="libcard"><div class="libname">' + esc(n) + '</div>' +
+        '<div class="libmacro"><span class="k">' + f.kcal + ' kcal</span>' +
+        '<span class="p">蛋白 ' + f.p + '</span>' +
+        '<span class="c">碳水 ' + f.cb + '</span>' +
+        '<span class="f">脂肪 ' + f.fat + '</span></div>' +
+        '<p>' + esc(f.tip) + '</p></div>';
+    });
+    html += '</div>';
+  });
+  box.innerHTML = html;
+}
+
+/* ==================== 每日营养记录：日期排布 + 周/双周/按月/全部 ====================
+   和训练计划的「身体数据记录」同一套：日期从起始日按天排，翻页、筛选、调到今天。 */
+function logISO(d){
+  return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+}
+function logRow(iso){
+  const tr = document.createElement('tr');
+  tr.innerHTML =
+    '<td><input type="date" class="dt"' + (iso ? ' value="' + iso + '"' : '') + '></td>' +
+    '<td><input type="number" step="0.1" class="numv" placeholder="kg" oninput="markTouched()"></td>' +
+    '<td><input type="number" step="0.1" class="numv" placeholder="cm" oninput="markTouched()"></td>' +
+    '<td><input type="number" step="1" class="numv" placeholder="kcal" oninput="markTouched()"></td>' +
+    '<td><input type="number" step="1" class="numv" placeholder="g" oninput="markTouched()"></td>' +
+    '<td><input type="number" step="1" class="numv" placeholder="g" oninput="markTouched()"></td>' +
+    '<td><input type="number" step="1" class="numv" placeholder="g" oninput="markTouched()"></td>' +
+    '<td>&nbsp;</td><td class="rowtools"></td>';
+  return tr;
+}
+function ensureLogRows(){
+  const t = document.getElementById('logTable');
+  if(!t) return;
+  const tb = t.querySelector('tbody');
+  if(tb.querySelectorAll('tr').length){ filterLog(); return; }
+  const now = new Date();
+  logAnchor = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  for(let i = 0; i < 30; i++){
+    tb.appendChild(logRow(logISO(new Date(now.getFullYear(), now.getMonth(), now.getDate() + i))));
+  }
+  injectRowTools();
+  filterLog();
+}
+function appendLogDays(n){
+  const t = document.getElementById('logTable');
+  const tb = t && t.querySelector('tbody');
+  if(!tb) return;
+  const rows = [...tb.querySelectorAll('tr')];
+  const last = rows.length ? rows[rows.length-1].querySelector('input.dt').value : '';
+  const base = last ? new Date(last + 'T00:00:00') : new Date();
+  for(let i = 1; i <= n; i++){
+    tb.appendChild(logRow(logISO(new Date(base.getFullYear(), base.getMonth(), base.getDate() + i))));
+  }
+  injectRowTools(); userTouched = true; filterLog(); scheduleSave();
+  flash('又排了 ' + n + ' 天');
+}
+
+let logMode = 'biweek';
+let logAnchor = new Date();
+function logRange(){
+  if(logMode === 'all') return null;
+  const a = logAnchor;
+  if(logMode === 'week' || logMode === 'biweek'){
+    const span = (logMode === 'week') ? 6 : 13;
+    return [logISO(a), logISO(new Date(a.getFullYear(), a.getMonth(), a.getDate() + span))];
+  }
+  return [logISO(new Date(a.getFullYear(), a.getMonth(), 1)),
+          logISO(new Date(a.getFullYear(), a.getMonth() + 1, 0))];
+}
+function filterLog(){
+  const t = document.getElementById('logTable');
+  if(!t) return;
+  const r = logRange();
+  let shown = 0, total = 0;
+  t.querySelectorAll('tbody tr').forEach(tr=>{
+    const v = tr.querySelector('input.dt').value || '';
+    total++;
+    const ok = !r || (v && v >= r[0] && v <= r[1]);
+    tr.classList.toggle('hid', !ok);
+    if(ok) shown++;
+  });
+  const lbl = document.getElementById('logMonthLabel');
+  if(lbl){
+    if(!r) lbl.textContent = '全部';
+    else if(logMode === 'week' || logMode === 'biweek')
+      lbl.textContent = r[0].slice(5).replace('-', '/') + ' – ' + r[1].slice(5).replace('-', '/');
+    else lbl.textContent = r[0].slice(0,4) + ' 年 ' + (+r[0].slice(5,7)) + ' 月';
+  }
+  const cnt = document.getElementById('logCount');
+  if(cnt) cnt.textContent = r ? (shown + ' / ' + total) : total;
+  document.querySelectorAll('[data-logmode]').forEach(b=>{
+    b.classList.toggle('on', b.dataset.logmode === logMode);
+  });
+}
+function setLogMode(m){ logMode = m; filterLog(); }
+function setLogMonth(){ logMode = 'month'; filterLog(); }
+function shiftLog(step){
+  if(logMode === 'all') logMode = 'biweek';
+  const a = logAnchor;
+  if(logMode === 'week' || logMode === 'biweek'){
+    const span = (logMode === 'week') ? 7 : 14;
+    logAnchor = new Date(a.getFullYear(), a.getMonth(), a.getDate() + span * step);
+  }else{
+    logAnchor = new Date(a.getFullYear(), a.getMonth() + step, 1);
+  }
+  filterLog();
+}
+function todayRow(){
+  const t = document.getElementById('logTable');
+  if(!t) return null;
+  const iso = logISO(new Date());
+  return [...t.querySelectorAll('tbody tr')].find(tr => tr.querySelector('input.dt').value === iso) || null;
+}
+function jumpToday(){
+  const t = document.getElementById('logTable');
+  if(!t) return;
+  logMode = 'biweek'; logAnchor = new Date(); filterLog();
+  const row = todayRow();
+  if(!row){ flash('这一段里没有今天 —— 点「➕ 再排 30 天」往后加'); return; }
+  row.scrollIntoView({block:'center'});
+  row.classList.add('hit');
+  setTimeout(()=>row.classList.remove('hit'), 1200);
+}
+/* 把这个方案算出来的合计，填进今天那一行 */
+function recordToday(btn){
+  const block = btn && btn.closest('.plan-block');
+  const t = block && block.querySelector('table[data-key="MEALS"]');
+  if(!t){ flash('找不到餐表'); return; }
+  const row = todayRow();
+  if(!row){ flash('记录里没有今天 —— 点「➕ 再排 30 天」往后加'); return; }
+  let kcal = 0, p = 0, cb = 0, fat = 0;
+  t.querySelectorAll('tbody tr').forEach(tr=>{
+    // 只从餐次行起算，否则 mealRowsOf 会把同一批食物重复累加
+    if(!tr.querySelector('td.meal-cell')) return;
+    mealRowsOf(tr).forEach(x=>{
+      const nm = x.querySelector('.fname');
+      if(!nm) return;
+      const q = parseFloat(x.querySelector('.qty').value) || 0;
+      const f = FOOD[nm.value.trim()];
+      if(!f || q <= 0) return;
+      kcal += f.kcal * q / 100; p += f.p * q / 100; cb += f.cb * q / 100; fat += f.fat * q / 100;
+    });
+  });
+  /* 列序：体重、腰围、热量、蛋白、碳水、脂肪 —— 前两列留给你手填 */
+  const nums = row.querySelectorAll('input.numv');
+  nums[2].value = Math.round(kcal);
+  nums[3].value = Math.round(p);
+  nums[4].value = Math.round(cb);
+  nums[5].value = Math.round(fat);
+  logMode = 'biweek'; logAnchor = new Date(); filterLog();
+  row.scrollIntoView({block:'center'});
+  row.classList.add('hit'); setTimeout(()=>row.classList.remove('hit'), 1200);
+  markTouched();
+  const nm = block.querySelector('.planname').value || '方案';
+  flash('已记下「' + nm + '」：' + Math.round(kcal) + ' kcal / 蛋白 ' + Math.round(p) + ' g —— 再补体重和腰围');
+}
+
+function markTouched(){ userTouched = true; scheduleSave(); }
+/* ---------- 折叠 ---------- */
+function toggleAllFold(){
+  const ds = document.querySelectorAll('details.fold');
+  const anyClosed = Array.from(ds).some(d => !d.open);
+  ds.forEach(d => d.open = anyClosed);
+}
+function flash(msg){
+  const d = document.createElement('div');
+  d.textContent = msg;
+  d.style.cssText = 'position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#111827;'+
+    'color:#fff;padding:9px 18px;border-radius:10px;font-size:13px;z-index:999;opacity:.95';
+  document.body.appendChild(d);
+  setTimeout(()=>d.remove(), 1800);
+}
+
+/* ---------- 初始化 ---------- */
+/* 先把文件里的内容渲染出来，页面立刻可见；
+   恢复存档放到首屏渲染之后（loadLocal 可能会弹确认框，同步弹框会白屏）。*/
+injectRowTools();
+calc();
+
+function doRestore(){
+  if(doRestore.done) return;
+  doRestore.done = true;
+  if(loadLocal()){ injectRowTools(); calc(); }
+  rebalanceAll();
+  renderFoodLib();
+  ensureLogRows();
+  calc();
+  filterLog();
+  refreshUndoBtn();
+}
+requestAnimationFrame(()=>requestAnimationFrame(doRestore));
+requestAnimationFrame(()=>requestAnimationFrame(buildTOC));
+setTimeout(refreshThemeBtns, 60);
+setTimeout(buildTOC, 500);      // 兜底：后台标签页里 rAF 不触发
+setTimeout(doRestore, 400);
+refreshRestoreBtn();     // 兜底：后台标签页里 rAF 不触发
+
+/* ---------- 自动保存 ---------- */
+const st = probeStorage();
+storageOK = st.ok;
+if(storageOK){
+  docEl.addEventListener('input',  ()=>{ userTouched = true; scheduleSave(); });
+  docEl.addEventListener('change', ()=>{ userTouched = true; scheduleSave(); });
+  docEl.addEventListener('click',  ()=>{ userTouched = true; });
+  document.addEventListener('focusout', e=>{
+    if(e.target && e.target.closest && e.target.closest('#doc')){ userTouched = true; scheduleSave(); }
+  });
+  markSaved(true, '自动保存已开启');
+}else{
+  markSaved(false, '⚠️ 当前环境不能保存 · 用 Chrome / Edge 打开，或双击「启动.bat」');
+  if(saveStateEl) saveStateEl.title =
+    '浏览器报错：' + st.err + '\n\n' +
+    '常见原因：在编辑器或预览面板里查看时，网页存储被禁用了。\n\n' +
+    '解决办法：\n  1. 双击「启动.bat」—— 走本地服务，改动直接写回文件\n  2. 把 饮食计划.html 用 Chrome / Edge 直接打开';
+}
+/* 连不上的时候一定要说出来 —— 原来这里直接 return，页面右上角照样写着
+   「自动保存已开启」，看着像存进文件了，其实只进了浏览器本地存储。 */
+detectServer().then(ok=>{
+  SERVER_OK = ok;
+  if(ok){
+    markSaved(true, '本地服务已连接 · 改动会写回文件');
+    if(saveStateEl) saveStateEl.title =
+      '当前通过本地服务运行。\n每处改动都会自动写回 饮食计划.html 文件本身。\n' +
+      '把这个文件夹放进同步盘（坚果云 / OneDrive），两台电脑就自动同步了。';
+    return;
+  }
+  markSaved(false, isLocalHost() ? '⚠️ 本地服务未连接 · 改动不会写回文件'
+                                 : '⚠️ 没走本地服务 · 改动不会写回文件');
+  if(saveStateEl) saveStateEl.title =
+    '这个页面没有连上本地服务，所以改动只保存在浏览器里，\n' +
+    '饮食计划.html 文件本身不会更新 —— 换台电脑、换个浏览器就看不到，\n' +
+    '清一次浏览数据也会没。\n\n' +
+    '要写回文件：关掉这个页面，双击文件夹里的「启动.bat」，\n' +
+    '用它新开出来的页面改东西。';
+});
+
+/* 回到顶部按钮 */
+window.addEventListener('scroll', ()=>{
+  const b = document.getElementById('toTop');
+  if(b) b.classList.toggle('show', scrollY > 600);
+}, {passive:true});
+
+/* 打印时展开全部折叠块 */
+let _foldState = [];
+window.addEventListener('beforeprint', ()=>{
+  const ds = document.querySelectorAll('details.fold');
+  _foldState = Array.from(ds).map(d => d.open);
+  ds.forEach(d => d.open = true);
+});
+window.addEventListener('afterprint', ()=>{
+  document.querySelectorAll('details.fold').forEach((d,i)=>{ d.open = _foldState[i]; });
+});
+
+window.addEventListener('beforeunload', ()=>saveLocal(true));
+</script></body></html>
